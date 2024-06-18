@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchLogOut } from "./thunkActions";
+import { fetchLogOut } from "../thunkActions/thunkActions";
 
 const logOutSlice = createSlice({
     name: 'logOut',

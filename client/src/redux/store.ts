@@ -2,8 +2,8 @@
 
 import { configureStore } from '@reduxjs/toolkit';
 //! import ваших слайсов
-import regSlice from './regSlice';
-import logSlice from './logSlice';
+import regSlice from '../store/slices/regSlice';
+import logSlice from '../store/slices/logSlice';
 
 const storeOptions = {
     reducer: {
