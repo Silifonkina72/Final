@@ -49,32 +49,51 @@ export default function Registration() {
       <form onSubmit={submitHandler} className={styles.regForm}>
         {!!errMsg.length && <h4 className="errMsg">{errMsg}</h4>}
         <div className="mb-3">
-          <label htmlFor="exampleInputLogin" className="form-label">
-            Придумайте логин
-          </label>
           <input
+            placeholder="Придумай login"
             required
             onChange={changeHandler}
             value={input.login}
             name="login"
             type="text"
-            style={{ width: "300px" }}
-            className="form-control"
+            className={`${styles.inputField} form-control`}
             id="exampleInputLogin1"
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="exampleInputPassword1" className="form-label">
-            Придумайте пароль
-          </label>
           <input
+            placeholder="введите EMAIL(необязательно)"
+            required
+            onChange={changeHandler}
+            value={input.email}
+            name="email"
+            type="text"
+            className={`${styles.inputField} form-control`}
+            id="exampleInputLogin1"
+          />
+        </div>
+        <div className="mb-3">
+          <input
+            placeholder="введите номер телефона"
+            required
+            onChange={changeHandler}
+            value={input.phone}
+            name="phone"
+            type="text"
+            className={`${styles.inputField} form-control`}
+            id="exampleInputLogin1"
+          />
+        </div>
+        <div className="mb-3">
+          <input
+            placeholder="придумай password"
+
             required
             onChange={changeHandler}
             value={input.password}
             name="password"
             type="password"
-            style={{ width: "300px" }}
-            className="form-control"
+            className={`${styles.inputField} form-control`}
             id="exampleInputPassword1"
           />
           {/* <div id="passwordHelp" className="form-text">Мы никому не передадим ваш пароль и сами не увидим</div> */}
