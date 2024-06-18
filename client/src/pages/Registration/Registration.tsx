@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./Registration.module.css";
 
 export default function Registration() {
-  const [input, setInput] = useState({ login: "", password: "" });
+  const [input, setInput] = useState({ login: "", password: "", email: "", phone: "" });
   const [errMsg, setErrMsg] = useState("");
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -14,12 +14,31 @@ export default function Registration() {
     setInput((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const submitHandler = async (
-    e: FormEvent<HTMLFormElement>
-  ): Promise<void> => {
+  const normalizePhoneNumber = (number: string): string | false => {
+    const phoneRegex = /^(\+7|8)\D?\d{3}\D?\d{3}\D?\d{2}\D?\d{2}$/;
+    if (!phoneRegex.test(number)) {
+      return false;
+    }
+    number = number.replace(/[()\s-]/g, "");
+    if (number.startsWith("8")) {
+      number = number.replace(/^8/, "+7");
+    }
+    if (number.startsWith("+7")) {
+      return number;
+    }
+    return false;
+  };
+
+  const submitHandler = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
+    const normalizedPhone = normalizePhoneNumber(input.phone);
+    if (!normalizedPhone) {
+      setErrMsg('Input correct your phone number');
+      return;
+    }
+
     try {
-      const resultAction = await dispatch(fetchReg(input));
+      const resultAction = await dispatch(fetchReg({ ...input, phone: normalizedPhone }));
 
       if (fetchReg.fulfilled.match(resultAction)) {
         if (resultAction.payload.regErr) {
@@ -27,7 +46,7 @@ export default function Registration() {
         }
         if (resultAction.payload.regDone) {
           localStorage.setItem("login", resultAction.payload.login || "");
-          setInput({ login: "", password: "" });
+          setInput({ login: "", password: "", email: "", phone: "" });
           navigate("/");
         }
       } else {
@@ -63,13 +82,12 @@ export default function Registration() {
         <div className="mb-3">
           <input
             placeholder="введите EMAIL(необязательно)"
-            required
             onChange={changeHandler}
             value={input.email}
             name="email"
             type="text"
             className={`${styles.inputField} form-control`}
-            id="exampleInputLogin1"
+            id="exampleInputEmail1"
           />
         </div>
         <div className="mb-3">
@@ -81,13 +99,12 @@ export default function Registration() {
             name="phone"
             type="text"
             className={`${styles.inputField} form-control`}
-            id="exampleInputLogin1"
+            id="exampleInputPhone1"
           />
         </div>
         <div className="mb-3">
           <input
             placeholder="придумай password"
-
             required
             onChange={changeHandler}
             value={input.password}
@@ -96,7 +113,6 @@ export default function Registration() {
             className={`${styles.inputField} form-control`}
             id="exampleInputPassword1"
           />
-          {/* <div id="passwordHelp" className="form-text">Мы никому не передадим ваш пароль и сами не увидим</div> */}
         </div>
         <br />
         <button type="submit" className="btn btn-outline-dark">
@@ -106,3 +122,4 @@ export default function Registration() {
     </>
   );
 }
+
