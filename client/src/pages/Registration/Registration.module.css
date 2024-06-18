@@ -1,0 +1,35 @@
+.regForm {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.inputField {
+    width: 300px;
+    padding: 10px;
+    margin: 5px 0;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .inputField:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    outline: none;
+  }
+  
+  .inputField:hover {
+    border-color: #007bff;
+  }
+  
+  .inputField::placeholder {
+    color: #aaa;
+    font-style: italic;
+  }
+  
+  .errMsg {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
