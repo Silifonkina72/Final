@@ -36,6 +36,7 @@
 // * npx sequelize-cli model:generate --name Computer --attributes model:string,owner_id:integer
 //?  npx sequelize-cli model:generate --name User --attributes login:string,password:string
 //? npx sequelize-cli model:generate --name Food --attributes url:string,user_id:integer
+//? npx sequelize-cli model:generate --name PrimerInsulator --attributes priceArea:integer,priceVolume:integer,name:string,number:integer,img:string
 
 
 // ! СВЯЗИ:
