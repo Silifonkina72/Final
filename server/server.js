@@ -43,7 +43,7 @@ app.use(session(sessionConfig));
 // // app.use('/entries', entriesRouter);
 // app.use('/', indexRouter);
 app.listen(PORT, () => {
-  console.log(`Сервер запущен на ${PORT} порту`);
+  console.log(`Сервер запущен на ${PORT} порту`); 
 });
 
 
