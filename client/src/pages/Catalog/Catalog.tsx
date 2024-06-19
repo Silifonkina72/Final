@@ -1,9 +1,11 @@
-import React from 'react';
+import React from "react";
 
 const Catalog = () => {
-    return (
-        <div>Catalog</div>
-    )
-}
+  return (
+    <>
+      <div>Catalog</div>
+    </>
+  );
+};
 
 export default Catalog;

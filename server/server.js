@@ -5,7 +5,7 @@ const path = require('path');
 const cors = require('cors');
 const logger = require('morgan');
 const app = express();
-// const apiRouter = require('./routers/api.router.js');
+const apiRouter = require('./routes/apiRouter');
 // const loginRouter = require('./routers/login.router');
 // const indexRouter = require('./routers/index');
 // const regRouter = require('./routers/reg.router');
@@ -39,7 +39,7 @@ app.use(session(sessionConfig));
 // app.use('/login', loginRouter);
 // app.use('/register', regRouter);//Создание Юзера с одной игрой
 // // app.use('/client', clientRouter);
-// app.use('/api', apiRouter);//Игра
+ app.use('/api', apiRouter);//для сущностей
 // // app.use('/entries', entriesRouter);
 // app.use('/', indexRouter);
 app.listen(PORT, () => {

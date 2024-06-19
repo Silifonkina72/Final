@@ -1,13 +1,12 @@
 
 import { configureStore } from '@reduxjs/toolkit';
+import stainSlice from './slices/StainSlice'
 
-
-//import answerSlice from './ answerSlice'
 ////! import ваших слайсов
 
 const storeOptions = {
   reducer: {
-    //answerSlice, //! слайс под сущность
+    stainSlice, //! слайс под сущность
     // userSlice, //! слайс под сущность
     // someSlice, //! слайс под сущность
     // basketSlice, //! слайс под сущность

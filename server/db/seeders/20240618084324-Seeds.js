@@ -213,21 +213,21 @@ module.exports = {
           priceVolume: 1100,
           name: 'GLR510',
           number: 20,
-          img: null,
+          img: 'https://www.renner.ru/upload/resize_cache/iblock/481/450_450_140cd750bba9870f18aada2478b24840a/YC-M408.jpg',
         },
         {
           priceArea: 600,
           priceVolume: 1000,
           name: 'GLR530',
           number: 10,
-          img: null,
+          img: 'https://www.renner.ru/upload/iblock/58e/YC-M407.jpg',
         },
         {
           priceArea: 700,
           priceVolume: 1500,
           name: 'GLR590',
           number: 10,
-          img: null,
+          img: 'https://www.renner.ru/upload/iblock/17e/YC-M401.jpg',
         },
       ],
       {}
@@ -242,7 +242,7 @@ module.exports = {
           intensity: null,
           name: 'TM009',
           number: 145,
-          img: null,
+          img: 'https://mk-altera.ru/wp-content/uploads/2018/09/shpon-temnyj-oreh.jpg',
         },
         {
           priceArea: 200,
@@ -250,7 +250,7 @@ module.exports = {
           intensity: null,
           name: 'TM008',
           number: 111,
-          img: null,
+          img: 'https://mk-altera.ru/wp-content/uploads/2018/09/shpon-vishnja.jpg',
         },
         {
           priceArea: 210,
@@ -258,7 +258,7 @@ module.exports = {
           intensity: null,
           name: 'TM006',
           number: 200,
-          img: null,
+          img: 'https://mk-altera.ru/wp-content/uploads/2018/09/shpon-naturalnyj-dub.jpg',
         },
       ],
       {}

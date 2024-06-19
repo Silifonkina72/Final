@@ -1,0 +1,11 @@
+.carousel .slide img {
+  height: 600px; /* Автоматическая установка высоты для сохранения пропорций */
+}
+
+/* button {
+  width: 0px;
+} */
+
+.legendp {
+    padding-top: 100px;
+}
