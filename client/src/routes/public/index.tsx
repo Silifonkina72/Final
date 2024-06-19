@@ -6,6 +6,7 @@ import  Catalog  from '../../pages/Catalog/Catalog';
 import Basket from '../../pages/Basket/Basket';
 import Massiv from '../../pages/Massiv/Massiv';
 
+
 const PublicRouteObject: RouteObject[] = [
   {
     element: <Navbar />,

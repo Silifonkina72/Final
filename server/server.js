@@ -8,7 +8,7 @@ const app = express();
 const apiRouter = require('./routes/apiRouter');
 // const loginRouter = require('./routers/login.router');
 // const indexRouter = require('./routers/index');
-// const regRouter = require('./routers/reg.router');
+const regRouter = require('./routes/registration.router');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const { PORT } = process.env;
@@ -42,21 +42,8 @@ app.use(session(sessionConfig));
  app.use('/api', apiRouter);//для сущностей
 // // app.use('/entries', entriesRouter);
 // app.use('/', indexRouter);
-app.listen(PORT, () => {
-  console.log(`Сервер запущен на ${PORT} порту`); 
+app.use('/registration', regRouter);
+
+app.listen(3000, () => {
+  console.log(`Сервер запущен на ${PORT} порту`);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

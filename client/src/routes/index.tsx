@@ -8,5 +8,6 @@ interface AppRoutesProps {
 }
 
 export function AppRoutes() {
+    
     return <RouterProvider router={publicRouter}></RouterProvider>;
   }

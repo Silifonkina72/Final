@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     isForm: DataTypes.BOOLEAN,
     isSent: DataTypes.BOOLEAN,
     isAccept: DataTypes.BOOLEAN,
-    address: DataTypes.STRING
+    address: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Order',

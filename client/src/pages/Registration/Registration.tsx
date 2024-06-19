@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState, FormEvent } from "react";
-import { fetchReg } from "../../redux/thunkActions";
-import { useAppDispatch } from "../../redux/hooks";
+import { fetchReg } from "../../store/thunkActions/thunkActions";
+import { useAppDispatch } from "../../hooks";
 import { useNavigate } from "react-router-dom";
 import styles from "./Registration.module.css";
 
@@ -46,7 +46,7 @@ export default function Registration() {
         }
         if (resultAction.payload.regDone) {
           localStorage.setItem("login", resultAction.payload.login || "");
-          setInput({ login: "", password: "", email: "", phone: "" });
+          setInput({ login: "", email: "", phone: "" , password: ""});
           navigate("/");
         }
       } else {
