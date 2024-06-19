@@ -41,7 +41,7 @@ export const Navbar = () => {
         ) : (
           <>
             <Link className={styles.link} to='/login'>
-              Войти
+              Войти!
             </Link>
             <Link className={styles.link} to='/registration'>
               Зарегистрироваться

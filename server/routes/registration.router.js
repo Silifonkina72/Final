@@ -9,14 +9,17 @@ regRouter.get('/', (req, res) => {
 });
 
 regRouter.post('/', async (req, res) => {
+  console.log('POST=====>>>');
+
   try {
-    const { login, password } = req.body;
+    const { login, email, phone, password } = req.body;
     const user = await User.findOne({ where: { login } });
     if (user) {
       res.json({ regErr: `Пользователь ${login} уже существует` });
     } else {
+      console.log('ELSE=====>>>');
       const hash = await bcrypt.hash(password, 10);
-      const newUser = await User.create({ login, password: hash });
+      const newUser = await User.create({ login, email, phone, password: hash });
       req.session.login = newUser.login;
       req.session.save(() => {
         res.json({ regDone: `Registration succes ${login}` });
