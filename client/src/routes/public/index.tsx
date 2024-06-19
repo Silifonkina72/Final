@@ -1,8 +1,7 @@
-import React from 'react';
-import { RouteObject, useRoutes, createBrowserRouter } from 'react-router-dom';
+import { RouteObject, createBrowserRouter } from 'react-router-dom';
 import { Navbar } from '../../components/Navbar/Navbar';
 import { ErrorBoundary } from '../../components/ErrorBoundary';
-import  Catalog  from '../../pages/Catalog/Catalog';
+import Catalog from '../../pages/Catalog/Catalog';
 import Basket from '../../pages/Basket/Basket';
 import Registration from '../../pages/Registration/Registration';
 
