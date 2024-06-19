@@ -1,5 +1,8 @@
 
 import { configureStore } from '@reduxjs/toolkit';
+import regSlice from './slices/regSlice';
+import logSlice from './slices/logSlice';
+import logOutSlice from './slices/logOutSlice';
 
 
 //import answerSlice from './ answerSlice'
@@ -7,6 +10,9 @@ import { configureStore } from '@reduxjs/toolkit';
 
 const storeOptions = {
   reducer: {
+    regSlice,
+    logSlice,
+    logOutSlice
     //answerSlice, //! слайс под сущность
     // userSlice, //! слайс под сущность
     // someSlice, //! слайс под сущность

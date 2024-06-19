@@ -2,14 +2,14 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import type { AxiosResponse } from 'axios';
-import type { IInputData} from '../types/registrationTypes';
+import type { IInputData} from '../../types/registrationTypes';
 
 
 export const fetchReg = createAsyncThunk('reg/fetchReg', async (inputs: IInputData) => {
     try {
         axios.defaults.withCredentials = true;
         const response = await axios.post<IInputData, AxiosResponse<any>>(
-            'http://localhost:3001/api/registration',
+            'http://localhost:3000/registration',
             inputs,
         ); 
         return response.data;   
@@ -23,7 +23,7 @@ export const fetchLogOut = createAsyncThunk('logout/fetchLogOut', async() => {
     try {
         axios.defaults.withCredentials = true;
         const response = await axios.get(
-            'http://localhost:3001/api/logout',
+            'http://localhost:3000/logout',
        
         );
         
@@ -38,7 +38,7 @@ export const fetchLogin = createAsyncThunk(
     'auth/loginUser',
     async (credentials, { rejectWithValue }) => {
       try {
-        const response = await axios.post('http://localhost:3001/api/login', credentials, {
+        const response = await axios.post('http://localhost:3000/login', credentials, {
           withCredentials: true,
         });
         return response.data;
@@ -51,7 +51,7 @@ export const fetchLogin = createAsyncThunk(
   export const fetchGetLogin = createAsyncThunk( 'login/getLogin',
   async () => {
     axios.defaults.withCredentials = true;
-    const response = await axios.get('http://localhost:3001/api/login' )
+    const response = await axios.get('http://localhost:3000/login' )
     return response.data
     
   })

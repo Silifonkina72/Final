@@ -43,7 +43,7 @@ export const Navbar = () => {
             <Link className={styles.link} to='/login'>
               Войти!
             </Link>
-            <Link className={styles.link} to='/reg'>
+            <Link className={styles.link} to='/registration'>
               Зарегистрироваться
             </Link>
           </>
