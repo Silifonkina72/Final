@@ -6,9 +6,6 @@ import { Product } from '../../types/basketTypes';
 const Basket = () => {
    const dispatch = useAppDispatch();
 
-//    const [product, setProduct] = useState<Product>({
-//     id: 0,
-//    })
 
    const handleAddToBasket = () => {
     dispatch(addItem());
