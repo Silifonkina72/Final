@@ -4,6 +4,7 @@ import { Navbar } from '../../components/Navbar/Navbar';
 import { ErrorBoundary } from '../../components/ErrorBoundary';
 import  Catalog  from '../../pages/Catalog/Catalog';
 import Basket from '../../pages/Basket/Basket';
+import Registration from '../../pages/Registration/Registration';
 
 const PublicRouteObject: RouteObject[] = [
   {
@@ -14,6 +15,12 @@ const PublicRouteObject: RouteObject[] = [
         path: '/',
         index: true,
         element: <Catalog />,
+        errorElement: <ErrorBoundary />,
+      },
+      {
+        path: '/registration',
+        index: true,
+        element: <Registration />,
         errorElement: <ErrorBoundary />,
       },
       {

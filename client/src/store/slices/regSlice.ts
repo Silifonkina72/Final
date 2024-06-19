@@ -1,6 +1,6 @@
 //! #3 => go hooks.ts
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchReg} from './thunkActions';
+import { fetchReg} from '../thunkActions/thunkActions';
 
 const regSlice = createSlice({
     name: 'reg',
