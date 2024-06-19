@@ -2,22 +2,22 @@ export type Lak {
     id: number;
     priceArea: number;
     priceVolume: number;
-    intensity: number;
+    onlyMdf: boolean;
     name: string;
     number: number;
     img: string;
   }
 
-  export type Grounds = Array<Ground>;
+  export type Laks = Array<Lak>;
 
 
-  export type GroundSlice {
-    stains: Ground[];
+  export type LakSlice {
+    stains: Lak[];
     error: string | null;
   }
 
   export type ListPropsTypeStain = {
-    stains: Grounds
+    stains: Laks
   }
 
   
