@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useAppDispatch } from "../../redux/hooks";
-import { fetchLogOut, fetchLogin } from "../../redux/thunkActions";
+import { useAppDispatch } from "../../hooks";
+import { fetchLogOut, fetchLogin } from "../../store/thunkActions/thunkActions";
 import styles from "./RegBar.module.css";
 import { Link } from "react-router-dom";
 
-export default function Navbar({ user }) {
+export default function Login({ user }) {
   console.log(user);
 
   const dispatch = useAppDispatch();

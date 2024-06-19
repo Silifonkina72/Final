@@ -8,8 +8,8 @@ export const Navbar = () => {
 
   // тут надо добавить функции проверки
 
-  const isAdmin = () => true;
-  const isAuth = () => true;
+  const isAdmin = () => false;
+  const isAuth = () => false;
 
   return (
     <>

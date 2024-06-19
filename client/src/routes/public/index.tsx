@@ -5,6 +5,7 @@ import { ErrorBoundary } from '../../components/ErrorBoundary';
 import  Catalog  from '../../pages/Catalog/Catalog';
 import Basket from '../../pages/Basket/Basket';
 import Registration from '../../pages/Registration/Registration';
+import Login from '../../components/RegBar/RegBar';
 
 const PublicRouteObject: RouteObject[] = [
   {
@@ -15,6 +16,12 @@ const PublicRouteObject: RouteObject[] = [
         path: '/',
         index: true,
         element: <Catalog />,
+        errorElement: <ErrorBoundary />,
+      },
+      {
+        path: '/login',
+        index: true,
+        element: <Login user={false} />,
         errorElement: <ErrorBoundary />,
       },
       {
