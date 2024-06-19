@@ -6,8 +6,9 @@ const cors = require('cors');
 const logger = require('morgan');
 const app = express();
 const apiRouter = require('./routes/apiRouter');
-// const loginRouter = require('./routers/login.router');
+const loginRouter = require('./routes/login.router');
 // const indexRouter = require('./routers/index');
+const logOutRouter = require('./routes/logout.router');
 const regRouter = require('./routes/registration.router');
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
@@ -43,6 +44,8 @@ app.use(session(sessionConfig));
 // // app.use('/entries', entriesRouter);
 // app.use('/', indexRouter);
 app.use('/registration', regRouter);
+app.use('/logout', logOutRouter);
+app.use('/login', loginRouter);
 
 app.listen(3000, () => {
   console.log(`Сервер запущен на ${PORT} порту`);

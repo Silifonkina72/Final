@@ -7,14 +7,15 @@ import type { IInputData} from '../../types/registrationTypes';
 
 export const fetchReg = createAsyncThunk('reg/fetchReg', async (inputs: IInputData) => {
     try {
-        axios.defaults.withCredentials = true;
+        // axios.defaults.withCredentials = true;
         const response = await axios.post<IInputData, AxiosResponse<any>>(
             'http://localhost:3000/registration',
             inputs,
         ); 
-        return response.data;   
+        return response.data; 
+          
     } catch (error) {
-        console.log('Ошибка регистрации', error);  
+        console.log('Ошибка регистрации in Thanks', error);  
     }
 });
 

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./Registration.module.css";
 
 export default function Registration() {
-  const [input, setInput] = useState({ login: "", password: "", email: "", phone: "" });
+  const [input, setInput] = useState({ login: "", password: "", email: "", phone: "", isAdmin: false });
   const [errMsg, setErrMsg] = useState("");
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ export default function Registration() {
     }
 
     try {
-      const resultAction = await dispatch(fetchReg({ ...input, phone: normalizedPhone }));
+      const resultAction = await dispatch(fetchReg({ ...input, phone: normalizedPhone , isAdmin: false}));
 
       if (fetchReg.fulfilled.match(resultAction)) {
         if (resultAction.payload.regErr) {
@@ -46,19 +46,20 @@ export default function Registration() {
         }
         if (resultAction.payload.regDone) {
           localStorage.setItem("login", resultAction.payload.login || "");
-          setInput({ login: "", email: "", phone: "" , password: ""});
+          setInput({ login: "", email: "", phone: "" , password: "", isAdmin: false});
           navigate("/");
         }
       } else {
         console.log(resultAction.payload);
         setErrMsg(
-          "Произошла ошибка при отправке данных. Пожалуйста, попробуйте еще раз."
+          "Произошла ошибка при отправке данных. Пожалуйста, еще раз."
         );
       }
     } catch (error) {
+      console.log('======>>>>');
       console.log(error);
       setErrMsg(
-        "Произошла ошибка при отправке данных. Пожалуйста, попробуйте еще раз."
+        "Произошла ошибка при отправке данных. Пожалуйста раз."
       );
     }
   };
