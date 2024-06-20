@@ -11,7 +11,7 @@ function Karusel({stains} :ListPropsTypeStain):JSX.Element {
   return (
     <>
       <Carousel width={800} 
-      showThumbs={true}
+      showThumbs={false}
       infiniteLoop={true}
       showStatus={false} 
       >
