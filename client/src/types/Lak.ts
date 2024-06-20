@@ -1,4 +1,4 @@
-export type Lak {
+export type Lak = {
     id: number;
     priceArea: number;
     priceVolume: number;
@@ -8,10 +8,11 @@ export type Lak {
     img: string;
   }
 
+  
   export type Laks = Array<Lak>;
 
 
-  export type LakSlice {
+  export type LakSlice = {
     stains: Lak[];
     error: string | null;
   }
