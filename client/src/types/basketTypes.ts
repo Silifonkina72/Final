@@ -12,7 +12,12 @@ export type Product = {
   // intensity?: number | null;
 };
 
+export type Price = {
+  allPrice: number
+}
+
 export type BasketState = {
   items: Product[];
+  allPrice: Price[]
   status: "idle" | "loading" | "failed";
 };

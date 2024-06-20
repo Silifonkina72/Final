@@ -11,8 +11,6 @@ const Basket = () => {
     dispatch(addItem());
    }
 
-
-
   return (
   <div>
     <button onClick={handleAddToBasket}>

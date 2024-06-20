@@ -22,7 +22,7 @@ const lakSlice = createSlice({
         state.error = null;
       })
       .addCase(LakThunk.fulfilled, (state, action: PayloadAction<Lak[]>) => {
-        state.stains = action.payload;
+        state.laks = action.payload;
       })
       .addCase(LakThunk.rejected, (state, action: PayloadAction<string>) => {
         state.error = action.payload;
