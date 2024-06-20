@@ -1,4 +1,4 @@
-export type Stain {
+export type Stain = {
     id: number;
     priceArea: number;
     priceVolume: number;
@@ -11,7 +11,7 @@ export type Stain {
   export type Stains = Array<Stain>;
 
 
-  export type StainSlice {
+  export type StainSlice = {
     stains: Stain[];
     error: string | null;
   }

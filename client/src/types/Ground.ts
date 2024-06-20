@@ -1,4 +1,4 @@
-export type Ground {
+export type Ground = {
     id: number;
     priceArea: number;
     priceVolume: number;
@@ -10,8 +10,8 @@ export type Ground {
   export type Grounds = Array<Ground>;
 
 
-  export type GroundSlice {
-    stains: Ground[];
+  export type GroundSlice = {
+    grounds: Ground[];
     error: string | null;
   }
 

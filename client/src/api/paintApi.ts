@@ -1,14 +1,14 @@
 import axios, { AxiosError } from 'axios';
 import { logError } from '../utils/logger';
 import {
-  Ground,
-} from '../types/Ground';
+    Paint
+} from '../types/Paint';
 
-const API_URL = 'http://localhost:3000/api/ground';
+const API_URL = 'http://localhost:3000/api/paint';
 
-export const fetchAllGround = async (): Promise<Ground[]> => {
+export const fetchAllPaint = async (): Promise<Paint[]> => {
     try {
-      const response = await axios.get<Ground[]>(API_URL);
+      const response = await axios.get<Paint[]>(API_URL);
       return response.data;
     } catch (error) {
       logError(error);

@@ -1,16 +1,29 @@
 
 import { Stain } from '../../types/stainTypes';
+import { useAppDispatch } from '../../hooks';
+import { addItem } from '../../store/slices/basketSlice';
+
 
 //! определить нужен ли стейт и типизировать пропсы
-export default function OneComponentKarusel ({ stain }: Stain): JSX.Element {
-  
+export default function OneComponentKarusel ({ el, model }: Stain): JSX.Element {
+  console.log('model', model);
+
+  const dispatch = useAppDispatch();
+
+
+  const handleAddToBasket = () => {
+   dispatch(addItem({'model': model, 'id': el.id, 'name': el.name}));
+  }
+
+
   return (
+
     <div>
           <img
-            src={stain.img}
-            alt="Slide 1"
+            src={el.img}
+            alt="Slide"
           />
-          <button className="legend">{stain.name}</button> 
+          <button onClick={handleAddToBasket} className="legend">{el.name}</button> 
         </div>
   );
 }

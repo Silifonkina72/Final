@@ -73,14 +73,14 @@ module.exports = {
           priceVolume: 620,
           name: 'FIR800TR',
           number: 100,
-          img: null,
+          img: 'https://autokrasok.net/upload/iblock/d28/q0j2m7t7k33vpezjrxwd95ma0iee9qd6.jpeg',
         },
         {
           priceArea: 950,
           priceVolume: 920,
           name: 'FIR900TR',
           number: 20,
-          img: null,
+          img: 'https://servicesmart.ru/upload/iblock/759/759c97a00d0d178e0c52a958ac377336.jpeg',
         },
       ],
       {}
@@ -95,7 +95,7 @@ module.exports = {
           highGrade: false,
           name: 'Ral1013',
           number: 250,
-          img: null,
+          img: 'https://content.nebo.by/photos/stroymaterialy/big/RAL-4008-Signalnii-fioletovii.png',
         },
         {
           priceArea: 625,
@@ -103,7 +103,7 @@ module.exports = {
           highGrade: false,
           name: 'Ral10130',
           number: 150,
-          img: null,
+          img: 'https://content.nebo.by/photos/stroymaterialy/big/RAL-6004-Sine-zelyonii.png',
         },
         {
           priceArea: 800,
@@ -111,7 +111,7 @@ module.exports = {
           highGrade: true,
           name: 'Ral222',
           number: 100,
-          img: null,
+          img: 'https://content.nebo.by/photos/stroymaterialy/big/RAL-1003-Signalnii-zhyoltii.png',
         },
       ],
       {}
@@ -183,7 +183,7 @@ module.exports = {
           onlyMdf: false,
           name: 'FO20R865',
           number: 220,
-          img: null,
+          img: 'https://images.prom.ua/4569140216_w640_h640_lak-dlya-dereva.jpg',
         },
         {
           priceArea: 2000,
@@ -191,7 +191,7 @@ module.exports = {
           onlyMdf: true,
           name: 'FO20R865',
           number: 200,
-          img: null,
+          img: 'https://woodneva.ru/wp-content/uploads/2021/04/zashita-1024x683.jpg',
         },
         {
           priceArea: 1400,
@@ -199,7 +199,7 @@ module.exports = {
           onlyMdf: true,
           name: 'FO20R865',
           number: 300,
-          img: null,
+          img: 'https://www.parquetsale.ru/images/uploads/originals/501/bezcvetnuj_lak_glja_dereva.jpg',
         },
       ],
       {}

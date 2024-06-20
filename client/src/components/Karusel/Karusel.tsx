@@ -6,7 +6,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // импорт 
 import { Carousel } from "react-responsive-carousel";
 import { ListPropsTypeStain } from '../../types'
 
-function Karusel({stains} :ListPropsTypeStain):JSX.Element {
+function Karusel({arr, model} :ListPropsTypeStain):JSX.Element {
   
   return (
     <>
@@ -15,8 +15,8 @@ function Karusel({stains} :ListPropsTypeStain):JSX.Element {
       infiniteLoop={true}
       showStatus={false} 
       >
-        {stains.map((stain) => (
-          <OneComponentKarusel key={stain.id} stain={stain} />
+        {arr.map((el) => (
+          <OneComponentKarusel key={el.id} el={el} model={model} />
         ))}
       </Carousel>
     </>
