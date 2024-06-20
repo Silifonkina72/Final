@@ -1,14 +1,14 @@
 import axios, { AxiosError } from 'axios';
 import { logError } from '../utils/logger';
 import {
-  Ground,
-} from '../types/Ground';
+    Patina
+} from '../types/Patina';
 
-const API_URL = 'http://localhost:3000/api/ground';
+const API_URL = 'http://localhost:3000/api/patina';
 
-export const fetchAllGround = async (): Promise<Ground[]> => {
+export const fetchAllPatina = async (): Promise<Patina[]> => {
     try {
-      const response = await axios.get<Ground[]>(API_URL);
+      const response = await axios.get<Patina[]>(API_URL);
       return response.data;
     } catch (error) {
       logError(error);

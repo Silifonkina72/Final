@@ -6,6 +6,8 @@ import  Catalog  from '../../pages/Catalog/Catalog';
 import Basket from '../../pages/Basket/Basket';
 import Massiv from '../../pages/Massiv/Massiv';
 import Login from '../../components/RegBar/RegBar';
+import Registration from '../../pages/Registration/Registration';
+import Mdf from '../../pages/Mdf/Mdf';
 
 
 const PublicRouteObject: RouteObject[] = [
@@ -39,6 +41,11 @@ const PublicRouteObject: RouteObject[] = [
       {
         path: 'massiv',
         element: <Massiv />,
+        errorElement: <ErrorBoundary />,
+      },
+      {
+        path: 'mdf',
+        element: <Mdf />,
         errorElement: <ErrorBoundary />,
       },
       {
