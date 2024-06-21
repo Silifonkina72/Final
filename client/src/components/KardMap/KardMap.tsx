@@ -12,6 +12,8 @@ import {
     addItemsVolume,
     addItemPrice,
     resetBasket,
+    countPriceAdd,
+    countPriceRem,
   } from "../../store/slices/basketSlice";
 
   
@@ -32,18 +34,14 @@ const [count, setCount] = useState(0);
 
 const handleIncrement = () => {
     setCount(count + 1);
-//     dispatch(resetBasket());
-//     localStorage.removeItem("basketItemsPrice");
-    const obj = {'count': count, 'model':{model}, 'name': {name}}
-    const res = []
-     res.push(obj)
-    dispatch(addItemPrice(obj));
+    dispatch (countPriceAdd({id: Number(id), model: model}))
 
 }
 
 const handleDecrement = () => {
     if (count > 0) {
       setCount(count - 1);
+      dispatch (countPriceRem({id: Number(id), model: model}))
     }
   };
 
@@ -59,7 +57,8 @@ const handleDecrement = () => {
             overflow="hidden"
             mb="4"
           >
-            <Flex>
+
+             <Flex>
               <Image
                 src={img}
                 alt="Card image"
@@ -73,6 +72,8 @@ const handleDecrement = () => {
                     {model}
                   </Badge>
                 </Box>
+
+
 
                 <Box
                   mt="1"
@@ -97,7 +98,10 @@ const handleDecrement = () => {
                 >
                   Объем: {count}
                 </Box>
-
+                <Box>
+                  {priceVolume*count} руб/л
+                  <Box as="span" color="gray.600" fontSize="sm"></Box>
+                </Box>
                 <Button
                   size="sm"
                   minWidth="32px"
@@ -118,8 +122,14 @@ const handleDecrement = () => {
                 </Button>
 
                 <Box d="flex" mt="2" alignItems="center"></Box>
+
+
+
               </Box>
-            </Flex>
+            </Flex> 
+
+
+
           </Box>
         </>
     )
