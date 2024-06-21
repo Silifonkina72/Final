@@ -1,22 +1,30 @@
-import { Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react';
-import { useAppSelector } from '../../hooks';
+import {
+  Text,
+  IconButton,
+} from '@chakra-ui/react';
+import { DeleteIcon } from '@chakra-ui/icons'
+import { AddIcon, MinusIcon, ChevronDownIcon } from '@chakra-ui/icons';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { removeItem } from '../../store/slices/basketSlice';
 
-export const OneProduct = () => {
-  const Cart = () => {
-    // Извлечение содержимого корзины из Redux store
-    // const cartItems = useAppSelector((state) => state.basket.items);
+export const OneProduct = ({ item }): JSX.Element => {
+  const dispatch = useAppDispatch();
 
-    return (
-      <div>
-        <h2>Cart</h2>
-        {cartItems.map((item) => (
-          <div key={item.id}>
-            <span>{item.name}</span>
+  const { model, id, name } = item;
 
-          </div>
-        ))}
-        
-      </div>
-    );
+  const handleRemoveToBasket = () => {
+    dispatch(removeItem({ model: model, id: id }));
   };
+
+  return (
+    <div className='card'>
+      <p>{name}</p>
+      <div className='box'>
+        <IconButton aria-label='+' icon={<AddIcon />} />
+        <Text>количество</Text>
+        <IconButton aria-label='-' icon={<MinusIcon />} />
+        <DeleteIcon onClick={handleRemoveToBasket}/>
+      </div>
+    </div>
+  );
 };
