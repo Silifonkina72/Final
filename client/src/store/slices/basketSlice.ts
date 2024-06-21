@@ -1,22 +1,22 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Product, Price } from '../../types/basketTypes';
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Product, Price } from "../../types/basketTypes";
 
 export type BasketState = {
   itemsSquare: Product[];
   itemsVolume: Product[];
   allPrice: Price[];
-  status: 'idle' | 'loading' | 'failed';
+  status: "idle" | "loading" | "failed";
 };
 
 const initialState: BasketState = {
   itemsSquare: [],
   itemsVolume: [],
   allPrice: [],
-  status: 'idle',
+  status: "idle",
 };
 
 const basketSlice = createSlice({
-  name: 'basket',
+  name: "basket",
   initialState,
   reducers: {
     setItemsVolume: (state, action: PayloadAction<Product[]>) => {
@@ -59,6 +59,56 @@ const basketSlice = createSlice({
     resetBasket: (state) => {
       state.allPrice = [];
     },
+
+    countPriceAdd: (state, action: PayloadAction<Price>) => {
+      console.log("action.payload ", action.payload);
+      console.log("state.allPrice ", state.allPrice);
+
+      const countEl = state.allPrice.find(
+        (el) => el.id === action.payload.id && el.model === action.payload.model
+      );
+      console.log(countEl);
+
+      const newState = (state.allPrice = state.allPrice.map((el) => {
+        if (el.id === countEl.id && el.model === countEl.model) {
+          if (el.count) {
+            el.count += 1;
+          } else {
+            el.count = 1;
+          }
+        }
+        return el;
+      }));
+
+      state.allPrice = newState;
+    },
+
+    countPriceRem: (state, action: PayloadAction<Price>) => {
+      console.log("action.payload ", action.payload);
+      console.log("state.allPrice ", state.allPrice);
+
+      const countEl = state.allPrice.find(
+        (el) => el.id === action.payload.id && el.model === action.payload.model
+      );
+      console.log(countEl);
+
+      const newState = (state.allPrice = state.allPrice.map((el) => {
+        if (el.id === countEl.id && el.model === countEl.model) {
+          if (el.count) {
+            el.count -= 1;
+          } else {
+            el.count = 0;
+          }
+        }
+        return el;
+      }));
+
+      state.allPrice = newState;
+    },
+
+
+
+
   },
 });
 
@@ -74,6 +124,8 @@ export const {
   addItemPrice,
   setItemPrice,
   resetBasket,
+  countPriceAdd,
+  countPriceRem
 } = basketSlice.actions;
 
 export default basketSlice.reducer;

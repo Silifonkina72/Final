@@ -99,8 +99,10 @@ const Massiv = () => {
 
   //? отправка в корзину (передача данных в itemsSquare, itemsVolume), очищаем allPrice
   const submitHandler = () => {
-    console.log("******", itemPrice);
+    //console.log("******", itemPrice);
+    const objSquare = {'square': input}
     dispatch(addItemsSquare(itemPrice));
+    dispatch(addItemsSquare(objSquare));
 
     setBoxVisible(false);
     dispatch(resetBasket());
@@ -109,8 +111,9 @@ const Massiv = () => {
 
   //? отправка в корзину (передача данных в itemsSquare, itemsVolume), очищаем allPrice
   const submitHandler2 = () => {
-   // dispatch(addItemsVolume(itemPrice));
-
+   
+   //console.log("******", itemPrice);
+   dispatch(addItemsVolume(itemPrice));
     setBoxVisible2(false);
     dispatch(resetBasket());
     localStorage.removeItem("basketItemsPrice");
