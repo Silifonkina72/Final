@@ -12,6 +12,8 @@ import {
     addItemsVolume,
     addItemPrice,
     resetBasket,
+    countPriceAdd,
+    countPriceRem,
   } from "../../store/slices/basketSlice";
 
   
@@ -32,18 +34,14 @@ const [count, setCount] = useState(0);
 
 const handleIncrement = () => {
     setCount(count + 1);
-    // dispatch(resetBasket());
-    // localStorage.removeItem("basketItemsPrice");
-   // const obj = {'count': count, {model}, {name}}
-    //const res = []
-    //res.push(obj)
-   //dispatch(addItemsVolume(itemPrice));
+    dispatch (countPriceAdd({id: Number(id), model: model}))
 
 }
 
 const handleDecrement = () => {
     if (count > 0) {
       setCount(count - 1);
+      dispatch (countPriceRem({id: Number(id), model: model}))
     }
   };
 
@@ -100,7 +98,10 @@ const handleDecrement = () => {
                 >
                   Объем: {count}
                 </Box>
-
+                <Box>
+                  {priceVolume*count} руб/л
+                  <Box as="span" color="gray.600" fontSize="sm"></Box>
+                </Box>
                 <Button
                   size="sm"
                   minWidth="32px"
