@@ -4,7 +4,7 @@ import OneComponentKarusel from "../OneKomponentKarusel/OneKomponentKarusel";
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // импорт стилей
 import { Carousel } from "react-responsive-carousel";
-import { ListPropsTypeStain } from '../../types'
+// import { ListPropsTypeStain } from '../../types/'
 
 function Karusel({arr, model} :ListPropsTypeStain):JSX.Element {
   

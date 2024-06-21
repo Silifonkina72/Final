@@ -1,26 +1,30 @@
-import { Box, Heading, Text, Stack, Image, IconButton } from '@chakra-ui/react';
+import {
+  Text,
+  IconButton,
+} from '@chakra-ui/react';
+import { DeleteIcon } from '@chakra-ui/icons'
 import { AddIcon, MinusIcon, ChevronDownIcon } from '@chakra-ui/icons';
-import { useAppSelector } from '../../hooks';
-import { Product } from '../../types/basketTypes';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { removeItem } from '../../store/slices/basketSlice';
 
-export const OneProduct = ({item}: Product): JSX.Element  => {
+export const OneProduct = ({ item }): JSX.Element => {
+  const dispatch = useAppDispatch();
 
-  
+  const { model, id, name } = item;
+
+  const handleRemoveToBasket = () => {
+    dispatch(removeItem({ model: model, id: id }));
+  };
+
   return (
-    <div>
-        <Box key={item.id} maxW="sm" borderWidth="1px" borderColor="black" shadow="md" overflow="hidden">
-          <Stack direction="row" spacing={4} align="center">
-            <Box>
-              <Heading size="md">{item.name}</Heading>
-              {/* <Text>{item.price}</Text> */}
-            </Box>
-            <Box>
-              <IconButton aria-label="+" icon={<AddIcon />} />
-              <IconButton aria-label="-" icon={<MinusIcon />} />
-              <IconButton aria-label="корзина" icon={<ChevronDownIcon />} />
-            </Box>
-          </Stack>
-        </Box>
+    <div className='card'>
+      <p>{name}</p>
+      <div className='box'>
+        <IconButton aria-label='+' icon={<AddIcon />} />
+        <Text>количество</Text>
+        <IconButton aria-label='-' icon={<MinusIcon />} />
+        <DeleteIcon onClick={handleRemoveToBasket}/>
+      </div>
     </div>
   );
 };

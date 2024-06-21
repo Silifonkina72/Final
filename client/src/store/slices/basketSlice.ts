@@ -16,8 +16,8 @@ const basketSlice = createSlice({
     addItem: (state, action: PayloadAction<Product>) => {
       state.items.push(action.payload);
     },
-    removeItem: (state, action: PayloadAction<{ id: number }>) => {
-      state.items = state.items.filter((item) => item.id !== action.payload.id);
+    removeItem: (state, action: PayloadAction<{ model: string, id: number }>) => {
+      state.items = state.items.filter((item) => (item.model !== action.payload.model || item.id !== action.payload.id));
     },
   },
 });

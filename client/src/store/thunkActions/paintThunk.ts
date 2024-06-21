@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchAllPaint } from '../../api/PaintApi'
+import { fetchAllPaint } from '../../api/paintApi';
 
 
 export const paintThunk = createAsyncThunk(

@@ -5,8 +5,6 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 
 const useBasketLocalStorage = () => {
   const dispatch = useAppDispatch();
-  // const { state } = useAppSelector();
-  // console.log('state', state);
   
   const { items } = useAppSelector((state) => state.basketSlice);
 
