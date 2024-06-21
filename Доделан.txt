@@ -1,0 +1,798 @@
+- ВСЕГО НУЖНО!!!! НИЖЕ НАПИСАНО НУЖНОЕ КОЛЛИЧЕСТВО, НЕОБХОДИМО ТОЛЬКО ВСТАВИТЬ ЗНАЧЕНИЯ!!!!
+- url должен быть в таком формате!!!! "https://via.placeholder.com/300x200"
+- Если не сложно, добавь пожалуйста поле колличество, где на твое усмотрение будет прописано к-во объема,
+ которое имееться на складе (это чисто выдуманные данные)
+
+ 
+1. Морилка 15 шт
+2. Растворитель 1 шт
+3. Грунт 4 шт
+4. Лак 15 шт
+- 5. Грунтовка-изолятор 2 шт
+- 6. Краска 50 шт, самые основные
+7. Акриловый грунт 1 шт
+8. Патина 15 шт
+
+
+
+1. Морилка 15 шт
+1.1 
+- priceArea  (написать приблизительную стоим-ть на 1 м.кв) 90р
+- priceVolume  (написать приблизительную стоим-ть на 1 л) 3600р
+- name (наименование) Renner TM M006\T01 (Черная)
+- img (ссылка, заходишь на страниуц, нажимаешь на картинку пкм - открыть изображение в новой вкладке - в новую вкладку заходишь - ПКМ копировать URL страницы (вот эта ссылка мне нужна) ) https://renner.ru/paint-material/morilki/tm-m006-xx-morilka-organika-tm-m006-xx/?oid=26834#gallery-1
+
+1.2 
+- priceArea  95р
+- priceVolume 3793р 
+- name Renner TM M006\T02 (белая)
+- img https://renner.ru/paint-material/morilki/tm-m006-xx-morilka-organika-tm-m006-xx/?oid=26836#gallery-1
+
+1.3
+- priceArea  138р
+- priceVolume  5507р
+- name Renner TM M006\T03 (красная)
+- img https://renner.ru/paint-material/morilki/tm-m006-xx-morilka-organika-tm-m006-xx/?oid=26838#gallery-1
+
+1.4
+- priceArea  86р
+- priceVolume  3444р
+- name Renner TM M006\T07 (желтая)
+- img https://renner.ru/paint-material/morilki/tm-m006-xx-morilka-organika-tm-m006-xx/?oid=26842#gallery-1
+
+1.5
+- priceArea 79р 
+- priceVolume  
+- name Renner TM M006\T15 (красное дерево)
+- img https://renner.ru/paint-material/morilki/tm-m006-xx-morilka-organika-tm-m006-xx/?oid=26850#gallery-1
+
+1.6
+- priceArea 95р
+- priceVolume 3793р 
+- name Renner TM M006\T16 (коричневый орех)
+- img https://renner.ru/paint-material/morilki/tm-m006-xx-morilka-organika-tm-m006-xx/?oid=26851#gallery-1
+
+1.7
+- priceArea 60р  
+- priceVolume 2384р 
+- name Renner TM M006\T19 (старинный орех)
+- img https://renner.ru/paint-material/morilki/tm-m006-xx-morilka-organika-tm-m006-xx/?oid=26853#gallery-1
+
+1.8
+- priceArea  83р
+- priceVolume  3296р
+- name Renner TM M006\T20 (светлый орех)
+- img https://renner.ru/paint-material/morilki/tm-m006-xx-morilka-organika-tm-m006-xx/?oid=26855#gallery-1
+
+1.9
+- priceArea 95р  
+- priceVolume 3793р 
+- name Renner TM M006\T21 (бренерский орех)
+- img https://renner.ru/paint-material/morilki/tm-m006-xx-morilka-organika-tm-m006-xx/?oid=26857#gallery-1
+
+1.10
+- priceArea 77р 
+- priceVolume 3084р  
+- name Renner TM M006\T22 (орех)
+- img https://renner.ru/paint-material/morilki/tm-m006-xx-morilka-organika-tm-m006-xx/?oid=26859#gallery-1
+
+1.11
+- priceArea 87р 
+- priceVolume 3459р 
+- name Renner TM M006\T24 (розовое дерево)
+- img https://renner.ru/paint-material/morilki/tm-m006-xx-morilka-organika-tm-m006-xx/?oid=30618#gallery-1 
+
+1.12
+- priceArea 68р 
+- priceVolume 2735р
+- name Renner TM M006\T10 (вишня)
+- img https://renner.ru/paint-material/morilki/tm-m006-xx-morilka-organika-tm-m006-xx/?oid=26846#gallery-1
+
+1.13
+- priceArea 94р 
+- priceVolume 3745р  
+- name Renner TM M006\T34 (венге)
+- img https://renner.ru/paint-material/morilki/tm-m006-xx-morilka-organika-tm-m006-xx/?oid=26863#gallery-1
+
+1.14
+- priceArea 108р 
+- priceVolume  4300р
+- name Renner TM M006\T04 (синий)
+- img https://renner.ru/paint-material/morilki/tm-m006-xx-morilka-organika-tm-m006-xx/?oid=30617#gallery-1
+
+1.15 
+- priceArea 108р 
+- priceVolume 4300р 
+- name Renner TM M006\M09 (зеленый)
+- img https://renner.ru/paint-material/morilki/tm-m006-xx-morilka-organika-tm-m006-xx/?oid=30608#gallery-1
+
+
+
+2. Растворитель 1 шт
+- priceArea  92р
+- priceVolume  604р
+- name Renner DF R801 (органический растворитель универсальный)
+- img https://renner.ru/paint-material/razbaviteli-pu-i-akrilovykh-lkm/df-r801-razbavitel-organika-df-r801/?oid=26092#gallery
+
+
+3. Грунт 4 шт
+- priceArea  153р
+- priceVolume 653р 
+- name Грунт ПУ Тиксотропный FL R829 
+- img https://renner25.ru/static/img/0000/0004/3917/43917041.1128rushv7.jpg?1
+
+3.1
+- priceArea  196р
+- priceVolume 782р
+- name Грунт Нитро NL M001
+- img https://renner25.ru/static/img/0000/0004/3917/43917041.1128rushv7.jpg?1
+!
+3.2
+- priceArea  140р
+- priceVolume 558р 
+- name Грунт FL R809
+- img https://renner25.ru/static/img/0000/0004/3917/43917037.jv40e7bccw.jpg?1
+
+3.3
+- priceArea  213р
+- priceVolume  850р
+- name Грунт ПУ Прмиум FL M006
+- img https://www.renner.ru/paint-material/pu-prozrachnye-grunty/fl-m006-grunt-pu-fl-m006/?oid=26297#gallery
+
+3.4
+- priceArea  327р
+- priceVolume  1307р
+- name Грунт Акриловый JL R510
+- img https://www.renner.ru/paint-material/akrilovye-prozrachnye-grunty/jl-r510-grunt-akrilovyy-jl-r510/?oid=26600#gallery
+
+4. Лак 15 шт
+1.1 
+- priceArea  (написать приблизительную стоим-ть на 1 м.кв) 227р
+- priceVolume  (написать приблизительную стоим-ть на 1 л) 907р
+- onlyMdf false (написать true если только для мдф, и false в противном случае)
+- name (наименование) Лак ПУ Тиксотропный FO20R829 20% блеска
+- img (ссылка, заходишь на страниуц, нажимаешь на картинку пкм - открыть изображение в новой вкладке - в новую вкладку заходишь - ПКМ копировать URL страницы (вот эта ссылка мне нужна) ) https://www.renner.ru/upload/iblock/dee/FO-XXR829.jpg
+
+1.2 
+- priceArea 227р 
+- priceVolume 907р
+- onlyMdf false
+- name Лак ПУ Тиксотропный FO40R829 40% блеска
+- img https://www.renner.ru/upload/iblock/dee/FO-XXR829.jpg
+
+1.3
+- priceArea 248р 
+- priceVolume 992р 
+- onlyMdf false
+- name Лак ПУ самогрунтующийся FL25M306 25% блеска
+- img https://www.renner.ru/upload/iblock/a6d/FL-XXM306.jpg
+
+1.4
+- priceArea 248р 
+- priceVolume 992р
+- onlyMdf false
+- name Лак ПУ самогрунтующийся FL10M306 10% блеска
+- img https://www.renner.ru/upload/iblock/a6d/FL-XXM306.jpg
+
+1.5
+- priceArea 248р 
+- priceVolume 992р
+- onlyMdf false
+- name Лак ПУ самогрунтующийся FL35M306 35% блеска
+- img https://www.renner.ru/upload/iblock/a6d/FL-XXM306.jpg
+
+1.6
+- priceArea 284р 
+- priceVolume 1137р 
+- onlyMdf true
+- name Лак акриловый JO10R553
+- img https://www.renner.ru/upload/iblock/bf4/JO-XXR553.jpg
+
+1.7
+- priceArea 284р 
+- priceVolume  1137р
+- onlyMdf true 
+- name Лак акриловый JO25R553
+- img https://www.renner.ru/upload/iblock/bf4/JO-XXR553.jpg
+
+1.8
+- priceArea  408р
+- priceVolume 1634р 
+- onlyMdf false
+- name Лак паркетный ПУ FO20M050 20% блеска
+- img https://www.renner.ru/upload/iblock/196/FO-XXM050.jpg
+
+1.9
+- priceArea 408р 
+- priceVolume 1634р 
+- onlyMdf false
+- name Лак паркетный ПУ FO40M050 40% блеска
+- img https://www.renner.ru/upload/iblock/196/FO-XXM050.jpg
+
+1.10
+- priceArea 380р 
+- priceVolume 1520р 
+- onlyMdf true 
+- name Акриловый лак JO15M072 15% блеска
+- img https://www.renner.ru/upload/iblock/48c/JO-XXM072.jpg
+
+1.11
+- priceArea 380р 
+- priceVolume 1520р 
+- onlyMdf true 
+- name Акриловый лак JO50M072 50% блеска
+- img https://www.renner.ru/upload/iblock/48c/JO-XXM072.jpg
+
+
+1.12
+- priceArea 255р 
+- priceVolume 1020р 
+- onlyMdf false
+- name Полиакриловый лак самогрунтующий JO20S700 20% блеска
+- img https://www.renner.ru/upload/iblock/db4/JO-XXS700.jpg
+
+1.13
+- priceArea 255р 
+- priceVolume 1020р 
+- onlyMdf false
+- name Полиакриловый лак самогрунтующий JO10S700 10% блеска
+- img https://www.renner.ru/upload/iblock/db4/JO-XXS700.jpg
+
+
+1.14
+- priceArea 494р  
+- priceVolume 1974р 
+- onlyMdf true
+- name Акриловый лак JO03M077 3% блеска.
+- img https://www.renner.ru/upload/iblock/b18/JO-03M077.jpg
+
+1.15 
+- priceArea 704р 
+- priceVolume 2815р 
+- onlyMdf true
+- name Глянцевый Лак JB M671 100% глянца
+- img 
+
+
+- 5. Грунтовка-изолятор 2 шт
+- 5.1
+- priceArea  155р
+- priceVolume  1030р
+- name Грунт изолятор FI R800\NTR
+- img https://www.renner.ru/upload/iblock/610/FI-R800_NTR.jpg
+
+- 5.2
+- priceArea  285р
+- priceVolume 1900р
+- name Грунт изолятор FI M199\NTR
+- img https://www.renner.ru/upload/iblock/8f0/FI-M199_NTR.jpg
+
+- 6. Краска 50 шт, самые основные
+
+-6.1
+- priceArea  (написать приблизительную стоим-ть на 1 м.кв)450Р
+- priceVolume  (написать приблизительную стоим-ть на 1 л)1800р
+- highGrade (написать true если высокопробная, и false в противном случае)false
+- name (наименование) Эмаль FO25R810\RaL1013
+- img (ссылка, заходишь на страниуц, нажимаешь на картинку пкм - открыть изображение в новой вкладке - в новую вкладку заходишь - ПКМ копировать URL страницы (вот эта ссылка мне нужна) )https://akkras.ru/upload/iblock/1e0/1e0d5ccfde64017796277aa80a365c22.jpg
+
+6.2
+- priceArea 450Р
+- priceVolume 1800р 
+- highGrade false
+- name Эмаль FO25R810\RaL1015
+- img https://akkras.ru/upload/iblock/479/4791fe41f50dd95eabdd8aab6cc05b8c.jpg
+
+6.3
+- priceArea 450р
+- priceVolume 1800р 
+- highGrade false
+- name Эмаль FO25R810\RaL9001
+- img https://akkras.ru/upload/iblock/69a/69af4ad213e9e548c6902750a024753c.jpg 
+
+6.4
+- priceArea 450р
+- priceVolume 1800р 
+- highGrade false
+- name Эмаль FO25R810\RaL9002
+- img https://akkras.ru/upload/iblock/eca/eca153b3d2eacb8010ab9ad1eadfbcaa.jpg
+
+6.5
+- priceArea 450р
+- priceVolume 1800р 
+- highGrade false 
+- name Эмаль FO25R810\RaL9003
+- img https://akkras.ru/upload/iblock/0a8/0a88215dd90d93c32ea28fbc819b3cb6.jpg
+
+
+6.6
+- priceArea 450р
+- priceVolume 1800р  
+- highGrade false
+- name Эмаль FO25R810\RaL9010
+- img https://akkras.ru/upload/iblock/6f5/6f50287927e294f850618a5b6c686996.jpg
+
+
+6.7
+- priceArea 450р
+- priceVolume  1800р  
+- highGrade false
+- name Эмаль FO25R810\RaL9016
+- img https://akkras.ru/upload/iblock/d2d/d2dc474db143c7debdb58149d09ff462.jpg
+
+
+6.8
+- priceArea 625р
+- priceVolume 2500р 
+- highGrade false
+- name Эмаль FO25M060\RaL1000
+- img https://akkras.ru/upload/iblock/9d1/9d190796a1faf5c19c0b62823c7e29d9.jpg
+
+
+6.9
+- priceArea 625р
+- priceVolume 2500р 
+- highGrade false
+- name Эмаль FO25M060\RaL1001
+- img https://akkras.ru/upload/iblock/669/66978b745fad4c4a4787545d0f41896d.jpg
+
+
+6.10
+- priceArea 625р
+- priceVolume 2500р  
+- highGrade false
+- name Эмаль FO25M060\RaL1002
+- img https://akkras.ru/upload/iblock/b8d/b8d49a6e23ab4cc7cc6e7e27fbc8929e.jpg
+
+
+6.11
+- priceArea 1000р
+- priceVolume 4000р 
+- highGrade false
+- name Эмаль FO25M060\RaL1003
+- img https://akkras.ru/upload/iblock/850/850fdcda5493729c11718c41a6cf2eab.jpg
+
+
+6.12
+- priceArea 1000р
+- priceVolume 4000р 
+- highGrade false
+- name Эмаль FO25M060\RaL1004
+- img https://akkras.ru/upload/iblock/477/477a4a3cbe9a58a3270bd053b87c1cd1.jpg
+
+
+6.13
+- priceArea 1000р
+- priceVolume 4000р 
+- highGrade false
+- name Эмаль FO25M060\RaL1005
+- img https://akkras.ru/upload/iblock/b91/b917e9b65986a8c2e31e819aa18fbbb5.jpg
+
+
+6.14
+- priceArea 1000р
+- priceVolume 4000р  
+- highGrade false
+- name Эмаль FO25M060\RaL1006
+- img https://akkras.ru/upload/iblock/986/986719ea26b0f394d4ce1bbe4809ee8b.jpg
+
+
+6.15
+- priceArea 1000р
+- priceVolume 4000р 
+- highGrade false
+- name Эмаль FO25M060\RaL1007
+- img https://akkras.ru/upload/iblock/fb0/fb0de56b859336d3a85822d8034857c5.jpg
+
+
+6.16
+- priceArea 1000р
+- priceVolume  4000р 
+- highGrade false
+- name Эмаль FO25M060\RaL1011
+- img https://akkras.ru/upload/iblock/9bb/9bba52fb67d2de5d9ff012a091b3dddc.jpg
+
+
+6.17
+- priceArea 1000р
+- priceVolume 4000р 
+- highGrade false
+- name Эмаль FO25M060\RaL1012
+- img https://akkras.ru/upload/iblock/9dd/9dd5e9ac4c4d736c1514875e6ada01cc.jpg
+
+
+6.18
+- priceArea 625р
+- priceVolume 2500р 
+- highGrade false
+- name Эмаль FO25M060\RaL1014 
+- img https://akkras.ru/upload/iblock/abc/abcdc30270f2c4eac9420a07d4ecc66e.jpg
+
+
+6.19
+- priceArea 1000р
+- priceVolume 4000р 
+- highGrade false
+- name Эмаль FO25M060\RaL1016
+- img https://akkras.ru/upload/iblock/83c/83c256c26a6c1ddfb483539253e478c3.jpg
+
+
+6.20
+- priceArea 1000р
+- priceVolume 4000р 
+- highGrade false
+- name Эмаль FO25M060\RaL1017
+- img https://akkras.ru/upload/iblock/b32/b320d5d72065b7cc7ba0b8103772b1e0.jpg
+
+
+6.21
+- priceArea 1000р
+- priceVolume 4000р 
+- highGrade false
+- name Эмаль FO25M060\RaL1018
+- img https://akkras.ru/upload/iblock/73b/73b2b5f8f1521aa27f80d297952ffba2.jpg
+
+
+6.22
+- priceArea 625р
+- priceVolume 2500р  
+- highGrade false
+- name Эмаль FO25M060\RaL1019
+- img https://akkras.ru/upload/iblock/ee0/ee074f8acfed5b0ec4d7cec4e76b4f2b.jpg
+
+
+6.23
+- priceArea 625р
+- priceVolume 2500р  
+- highGrade false
+- name FO25M060\RaL1020
+- img https://akkras.ru/upload/iblock/770/770055cdc52c5ae31748f9635cc5255c.jpg
+
+
+6.24
+- priceArea 1000р
+- priceVolume 4000р 
+- highGrade false
+- name Эмаль FO25M060\RaL1021
+- img https://akkras.ru/upload/iblock/4f0/4f09c15d3806b8a3ab76777710721c72.jpg
+
+
+6.25
+- priceArea 1000р 
+- priceVolume 4000р 
+- highGrade false
+- name Эмаль FO25M060\RaL1023
+- img https://akkras.ru/upload/iblock/b7d/b7d783b54fccfbd488d6dad5fbe5d6cb.jpg
+
+
+6.26
+- priceArea 625р
+- priceVolume 2500р 
+- highGrade false
+- name Эмаль FO25M060\RaL1024
+- img https://akkras.ru/upload/iblock/6d7/6d7b9bad49c97ee6ccc9241afcc2c520.jpg
+
+
+6.27
+- priceArea 1000р
+- priceVolume 4000р 
+- highGrade false
+- name Эмаль FO25M060\RaL2001
+- img https://akkras.ru/upload/iblock/25e/25ef9cb46e76268ccc745620e29117b8.jpg
+
+
+6.28
+- priceArea 1000р
+- priceVolume 4000р 
+- highGrade false
+- name Эмаль FO25M060\RaL2002
+- img https://akkras.ru/upload/iblock/b5e/b5e03f8ba3fca6d77fd4075f5bab0781.jpg
+
+
+6.29
+- priceArea 1000р
+- priceVolume 4000р 
+- highGrade false
+- name Эмаль FO25M060\RaL2003
+- img https://akkras.ru/upload/iblock/c32/c326e7ff0d4aefdcb1f44458c548ee7c.jpg
+
+
+6.30
+- priceArea 1000р
+- priceVolume 4000р 
+- highGrade false
+- name Эмаль FO25M060\RaL2004
+- img https://akkras.ru/upload/iblock/a65/a65987bc3ef23011e0449113f5791fed.jpg
+
+
+6.31
+- priceArea 1000р
+- priceVolume 4000р 
+- highGrade false
+- name Эмаль FO25M060\RaL2008
+- img https://akkras.ru/upload/iblock/0f3/0f33799ed015607f69975b79f5d7f75f.jpg
+
+
+6.32
+- priceArea 1000р
+- priceVolume 4000р 
+- highGrade false
+- name Эмаль FO25M060\RaL2009
+- img https://akkras.ru/upload/iblock/c99/c99a207e0e09e3dd427da720f56ffb4b.jpg
+
+
+6.33
+- priceArea 1000р
+- priceVolume 4000р 
+- highGrade false
+- name Эмаль FO25M060\RaL2010
+- img https://akkras.ru/upload/iblock/859/85920aad10919c4ff5c8c6776e752e64.jpg
+
+
+6.34
+- priceArea 1000р
+- priceVolume 4000р 
+- highGrade false
+- name Эмаль FO25M060\RaL2011
+- img https://akkras.ru/upload/iblock/08b/08bce57c3a29a82b2523a93039a6ad3b.jpg
+
+
+6.35
+- priceArea 1000р
+- priceVolume 4000р 
+- highGrade false
+- name Эмаль FO25M060\RaL2011
+- img https://akkras.ru/upload/iblock/4c8/4c838334640c476dce988598d4f0db88.jpg
+
+
+6.36
+- priceArea 1000р
+- priceVolume 4000р 
+- highGrade false
+- name Эмаль FO25M060\RaL3000
+- img https://akkras.ru/upload/iblock/666/6663478e72309720d7be929217224447.jpg 
+
+
+6.37
+- priceArea 1000р
+- priceVolume 4000р 
+- highGrade false
+- name Эмаль FO25M060\RaL3001
+- img https://akkras.ru/upload/iblock/b04/b046312a2fa183626104c110897af93e.jpg
+
+
+6.38
+- priceArea 1000р
+- priceVolume 4000р 
+- highGrade false
+- name Эмаль FO25M060\RaL3002 
+- img https://akkras.ru/upload/iblock/910/910ad07dde365f0181f00041d22b97b6.jpg
+
+
+6.39
+- priceArea 1000р
+- priceVolume 4000р 
+- highGrade false
+- name Эмаль FO25M060\RaL3003
+- img https://akkras.ru/upload/iblock/ffd/ffdcf60f0944e165ec5a6159a9bbdeb7.jpg
+
+
+6.40
+- priceArea 1000р
+- priceVolume 4000р 
+- highGrade false
+- name Эмаль FO25M060\RaL3004
+- img https://akkras.ru/upload/iblock/8a2/8a2d6e2559bfef6eca8b4896125c3b99.jpg
+
+
+6.41
+- priceArea 1000р
+- priceVolume 4000р 
+- highGrade false
+- name Эмаль FO25M060\RaL3005
+- img https://akkras.ru/upload/iblock/8df/8df28a2ab1d6e1b1b79afda0c846141a.jpg
+
+
+6.42
+- priceArea 1000р
+- priceVolume 4000р 
+- highGrade false
+- name Эмаль FO25M060\RaL3007
+- img https://akkras.ru/upload/iblock/365/365a6deb7af9d9de495e13164dd7381a.jpg
+
+
+6.43
+- priceArea 1000р
+- priceVolume 4000р 
+- highGrade false
+- name Эмаль FO25M060\RaL3009
+- img https://akkras.ru/upload/iblock/9fe/9fe4e1f39ac25782dc3f00ddd44d97bb.jpg
+
+
+6.44
+- priceArea 1000р
+- priceVolume 4000р 
+- highGrade false
+- name Эмаль FO25M060\RaL3011
+- img https://akkras.ru/upload/iblock/e6e/e6e10008d3f0bf237b8fa9a49160c9aa.jpg
+
+
+6.45
+- priceArea 625р
+- priceVolume 2500р 
+- highGrade false
+- name Эмаль FO25M060\RaL3012
+- img https://akkras.ru/upload/iblock/344/344ca585c2362bd7dbaa25f38edb99ec.jpg
+
+
+6.46
+- priceArea 625р
+- priceVolume 2500р 
+- highGrade false
+- name Эмаль FO25M060\RaL4005
+- img https://akkras.ru/upload/iblock/355/3550017a56e5dd5c0d387c5d8245f5de.jpg
+
+
+6.47
+- priceArea 625р
+- priceVolume 2500р 
+- highGrade false
+- name Эмаль FO25M060\RaL5000
+- img https://akkras.ru/upload/iblock/355/355a4bf71e71b8287493e8dc176ae445.jpg
+
+
+6.48
+- priceArea 625р
+- priceVolume 2500р 
+- highGrade false
+- name Эмаль FO25M060\RaL5001
+- img https://akkras.ru/upload/iblock/426/426acb5ff873d2effbb696c6301b131f.jpg
+
+
+6.49
+- priceArea 625р
+- priceVolume 2500р 
+- highGrade false
+- name Эмаль FO25M060\RaL6002
+- img https://akkras.ru/upload/iblock/d03/d030862f7240d5888d2a223e0333be9a.jpg
+
+
+6.50
+- priceArea 625р
+- priceVolume 2500р 
+- highGrade false
+- name Эмаль FO25M060\RaL6022
+- img https://akkras.ru/upload/iblock/010/010393d93ce0d22032392960a8ea2610.jpg
+
+
+
+
+
+7. Акриловый грунт 1 шт
+- priceArea 327р
+- priceVolume 1307р 
+- highGrade 
+- name Акриловый грунт JL R510
+- img https://www.renner.ru/upload/iblock/e2d/JL-R510.jpg 
+
+
+8. Патина 15 шт
+8.1
+- priceArea 257р
+- priceVolume 2568р 
+- highGrade 
+- name Патина Нитро GM M048\C01 (черная)
+- img https://www.renner.ru/upload/iblock/cc3/GM_M048_C_01.png
+
+
+8.2
+- priceArea 257р
+- priceVolume 2568р 
+- highGrade 
+- name Патина Нитро GM M048\C02 (белая)
+- img https://www.renner.ru/upload/iblock/c00/GM_M048_C_02.png
+
+
+8.3
+- priceArea 318р
+- priceVolume 3178р 
+- highGrade 
+- name Патина Нитро GM M048\C03 (красная)
+- img https://www.renner.ru/upload/iblock/ad4/GM_M048_C_03.png
+
+
+8.4
+- priceArea 257р
+- priceVolume 2568р 
+- highGrade 
+- name Патина Нитро GM M048\C04 (синяя)
+- img https://www.renner.ru/upload/iblock/3d6/GM_M048_C_04.png
+
+
+8.5
+- priceArea 280р
+- priceVolume 2792р 
+- highGrade 
+- name Патина Нитро GM M048\C07 (желтая)
+- img https://www.renner.ru/upload/iblock/d9a/GM_M048_C_07.png
+
+
+8.6
+- priceArea 267р
+- priceVolume 2666р 
+- highGrade 
+- name Патина Нитро GM M048\С10 (вишня)
+- img https://www.renner.ru/upload/iblock/ac4/GM_M048_C_10.png
+
+
+8.7
+- priceArea 238р
+- priceVolume 2378р 
+- highGrade 
+- name Патина Нитро GM M048\С20 (светлый орех)
+- img https://www.renner.ru/upload/iblock/fd8/GM_M048_C_20.png
+
+
+8.8
+- priceArea 238р
+- priceVolume 2378р 
+- highGrade 
+- name Патина Нитро GM M048\С23 (орех)
+- img https://www.renner.ru/upload/iblock/49b/GM_M048_C_23.png
+
+
+8.9
+- priceArea 257р
+- priceVolume 2568р 
+- highGrade 
+- name Патина Нитро GM M048\С34 (коричневый)
+- img https://www.renner.ru/upload/iblock/fb1/GM_M048_C_34.png
+
+
+8.10
+- priceArea 
+- priceVolume  
+- highGrade 
+- name 
+- img 
+
+
+8.11
+- priceArea 
+- priceVolume  
+- highGrade 
+- name 
+- img 
+
+
+8.12
+- priceArea 
+- priceVolume  
+- highGrade 
+- name 
+- img 
+
+
+8.13
+- priceArea 
+- priceVolume  
+- highGrade 
+- name 
+- img 
+
+
+8.14
+- priceArea 
+- priceVolume  
+- highGrade 
+- name 
+- img 
+
+
+8.15- priceArea 
+- priceVolume  
+- highGrade 
+- name 
+- img 
+
+

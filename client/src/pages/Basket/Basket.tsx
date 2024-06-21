@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAppDispatch } from '../../hooks';
-import { addItem } from '../../store/slices/basketSlice';
+// import { addItem } from '../../store/slices/basketSlice';
 import { Product } from '../../types/basketTypes';
 
 const Basket = () => {
@@ -8,10 +8,8 @@ const Basket = () => {
 
 
    const handleAddToBasket = () => {
-    dispatch(addItem());
+    // dispatch(addItem());
    }
-
-
 
   return (
   <div>
