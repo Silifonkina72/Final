@@ -34,7 +34,12 @@ const [count, setCount] = useState(0);
 
 const handleIncrement = () => {
     setCount(count + 1);
-    dispatch (countPriceAdd({id: Number(id), model: model}))
+//     dispatch(resetBasket());
+//     localStorage.removeItem("basketItemsPrice");
+    const obj = {'count': count, 'model':{model}, 'name': {name}}
+    const res = []
+     res.push(obj)
+    dispatch(addItemPrice(obj));
 
 }
 
