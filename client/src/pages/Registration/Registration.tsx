@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState, FormEvent } from "react";
-import { fetchReg } from "../../store/thunkActions/thunkActions";
+import { fetchLogin, fetchReg } from "../../store/thunkActions/thunkActions";
 import { useAppDispatch } from "../../hooks";
 import { useNavigate } from "react-router-dom";
 import styles from "./Registration.module.css";
@@ -45,9 +45,14 @@ export default function Registration() {
           setErrMsg(resultAction.payload.regErr);
         }
         if (resultAction.payload.regDone) {
-          localStorage.setItem("login", resultAction.payload.login || "");
-          setInput({ login: "", email: "", phone: "" , password: "", isAdmin: false});
-          navigate("/");
+          // Автоматический логин после успешной регистрации
+          const loginResult = await dispatch(fetchLogin({ login: input.login, password: input.password })).unwrap();
+
+          if (loginResult) {
+            localStorage.setItem("login", resultAction.payload.login || "");
+            setInput({ login: "", email: "", phone: "", password: "", isAdmin: false });
+            navigate("/");
+          }
         }
       } else {
         console.log(resultAction.payload);

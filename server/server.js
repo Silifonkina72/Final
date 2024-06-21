@@ -14,9 +14,9 @@ const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const { PORT } = process.env;
 const corsOptions = {
-  origin: ['http://localhost:5173', 'http://127.0.0.1:5173'],
+  origin: 'http://localhost:5173',
   credentials: true,
-  methods: ['GET', 'POST', 'DELETE'],
+  methods: ['GET', 'POST', 'DELETE', 'PUT', 'PATCH'],
 };
 app.use(cors(corsOptions));
 const sessionConfig = {
@@ -30,11 +30,11 @@ const sessionConfig = {
     httpOnly: true, // секьюрность, оставляем true
   },
 };
+// app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(logger('dev'));
 app.use(express.static(path.join(process.cwd(), 'public/')));
-app.use(cors());
 app.use(session(sessionConfig));
 // app.use('/api/v1', apiRouter);
 // app.use('/login', loginRouter);

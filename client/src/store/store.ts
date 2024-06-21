@@ -1,18 +1,23 @@
 
 import { configureStore } from '@reduxjs/toolkit';
 import stainSlice from './slices/StainSlice'
+import basketSlice from './slices/basketSlice';
+import logOutSlice from './slices/logOutSlice';
+import logSlice from './slices/logSlice';
+import regSlice from './slices/regSlice';
 
 
 ////! import ваших слайсов
 
 const storeOptions = {
   reducer: {
-    stainSlice, //! слайс под сущность
+    stainSlice, 
+    basketSlice,
+    logOutSlice,
+    logSlice,
+    regSlice,
     
-    // userSlice, //! слайс под сущность
-    // someSlice, //! слайс под сущность
-    // basketSlice, //! слайс под сущность
-    // postSlice, //! слайс под сущность
+   
   },
 };
 
