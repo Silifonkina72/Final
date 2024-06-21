@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
   class Order extends Model {
     static associate(models) {
       this.belongsTo(models.User, { foreignKey: 'user_id' });
-      this.hasMany(models.Massivr, { foreignKey: 'order_id' });
+      this.hasMany(models.Massiv, { foreignKey: 'order_id' });
       this.hasMany(models.Mdf, { foreignKey: 'order_id' });
     }
   }
@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
     isForm: DataTypes.BOOLEAN,
     isSent: DataTypes.BOOLEAN,
     isAccept: DataTypes.BOOLEAN,
-    address: DataTypes.STRING
+    address: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Order',

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import styles from './navbar.module.css';
 import { Suspense } from 'react';
@@ -8,8 +7,8 @@ export const Navbar = () => {
 
   // тут надо добавить функции проверки
 
-  const isAdmin = () => true;
-  const isAuth = () => true;
+  const isAdmin = () => false;
+  const isAuth = () => false;
 
   return (
     <>
@@ -41,9 +40,9 @@ export const Navbar = () => {
         ) : (
           <>
             <Link className={styles.link} to='/login'>
-              Войти
+              Войти!
             </Link>
-            <Link className={styles.link} to='/reg'>
+            <Link className={styles.link} to='/registration'>
               Зарегистрироваться
             </Link>
           </>
