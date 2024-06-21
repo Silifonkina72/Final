@@ -17,17 +17,17 @@ import { Product } from '../../types/basketTypes';
 import { OneProduct } from '../../components/Basket/OneProduct';
 
 const Basket = () => {
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
-  const items = useAppSelector((state) => state.basketSlice.items);
+  // const items = useAppSelector((state) => state.basketSlice.items);
   console.log('itemsss', items);
 
   return (
     <>
       <div>
-        {items.map((item) => (
+        {/* {items.map((item) => (
           <OneProduct key={item.model + item.id} item={item} />
-        ))}
+        ))} */}
       </div>
       <Box p={5} maxWidth='500px' mx='auto'>
 

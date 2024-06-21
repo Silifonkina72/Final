@@ -32,12 +32,12 @@ const [count, setCount] = useState(0);
 
 const handleIncrement = () => {
     setCount(count + 1);
-//     dispatch(resetBasket());
-//     localStorage.removeItem("basketItemsPrice");
-    const obj = {'count': count, 'model':{model}, 'name': {name}}
-    const res = []
-     res.push(obj)
-    dispatch(addItemPrice(obj));
+    // dispatch(resetBasket());
+    // localStorage.removeItem("basketItemsPrice");
+   // const obj = {'count': count, {model}, {name}}
+    //const res = []
+    //res.push(obj)
+   //dispatch(addItemsVolume(itemPrice));
 
 }
 
@@ -59,7 +59,8 @@ const handleDecrement = () => {
             overflow="hidden"
             mb="4"
           >
-            <Flex>
+
+             <Flex>
               <Image
                 src={img}
                 alt="Card image"
@@ -73,6 +74,8 @@ const handleDecrement = () => {
                     {model}
                   </Badge>
                 </Box>
+
+
 
                 <Box
                   mt="1"
@@ -118,8 +121,14 @@ const handleDecrement = () => {
                 </Button>
 
                 <Box d="flex" mt="2" alignItems="center"></Box>
+
+
+
               </Box>
-            </Flex>
+            </Flex> 
+
+
+
           </Box>
         </>
     )

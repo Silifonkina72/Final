@@ -5,7 +5,7 @@ import {
 import { DeleteIcon } from '@chakra-ui/icons'
 import { AddIcon, MinusIcon, ChevronDownIcon } from '@chakra-ui/icons';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { removeItem } from '../../store/slices/basketSlice';
+import { removeItem, removeItemVolume } from '../../store/slices/basketSlice';
 
 export const OneProduct = ({ item }): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -13,7 +13,7 @@ export const OneProduct = ({ item }): JSX.Element => {
   const { model, id, name } = item;
 
   const handleRemoveToBasket = () => {
-    dispatch(removeItem({ model: model, id: id }));
+    dispatch(removeItemVolume({ model: model, id: id }));
   };
 
   return (
