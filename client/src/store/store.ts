@@ -11,6 +11,7 @@ import primerInsulatorSlice from './slices/primerInsulatorSlice'
 import paintSlice from './slices/paintSlice';
 import acrylicPrimerSlice from './slices/acrylicPrimerSlice'
 import patinaSlice from './slices/patinaSlice'
+import inventorySlice from './slices/inventorySlice';
 
 ////! import ваших слайсов
 
@@ -27,6 +28,7 @@ const storeOptions = {
     paintSlice,
     acrylicPrimerSlice,
     patinaSlice,
+    inventorySlice,
   },
 };
 

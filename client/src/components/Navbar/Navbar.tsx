@@ -60,6 +60,9 @@ export const Navbar = () => {
         {isAuth() ? (
           isAdmin() ? (
             <>
+              <Link className={styles.link} to="/changer">
+                Изменение
+              </Link>
               <Link className={styles.link} to="/availability">
                 Наличие
               </Link>
