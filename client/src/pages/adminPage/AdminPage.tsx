@@ -1,11 +1,13 @@
+import AcrylicPrimersList from "../../components/Exist/Exist";
+
  export default function AdminPage() {
     
 
     return (
         <>
             <div className='contener'>
-                <div>Заказы</div>
-                <div>Остаток</div>
+                <div>Остаток :</div>
+                <AcrylicPrimersList />
 
             </div>
         </>
