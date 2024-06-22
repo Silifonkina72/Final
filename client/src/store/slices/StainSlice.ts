@@ -1,12 +1,15 @@
-
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { StainsThunk } from '../thunkActions/StainThunk';
-import { Stain, StainSlice } from '../../types';
+import { Stain } from '../../types/stainTypes';
 
+interface StainSlice {
+  stains: Stain[];
+  error: null | string;
+}
 
 const initialState: StainSlice = {
-    stains: [],
-    error: null,
+  stains: [],
+  error: null,
 };
 
 const stainSlice = createSlice({
@@ -15,22 +18,24 @@ const stainSlice = createSlice({
   reducers: {
     clearError(state) {
       state.error = null;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
       .addCase(StainsThunk.pending, (state) => {
         state.error = null;
       })
-      .addCase(StainsThunk.fulfilled, (state, action: PayloadAction<Stain[]>) => {
-        state.stains = action.payload;
-      })
-      .addCase(StainsThunk.rejected, (state, action: PayloadAction<string>) => {
-        state.error = action.payload;
-      })
+      .addCase(
+        StainsThunk.fulfilled,
+        (state, action: PayloadAction<Stain[]>) => {
+          state.stains = action.payload;
+        }
+      )
+      .addCase(StainsThunk.rejected, (state, action) => {
+        state.error = (action.payload as string) || 'Unknown error';
+      });
   },
 });
 
 export const { clearError } = stainSlice.actions;
 export default stainSlice.reducer;
-

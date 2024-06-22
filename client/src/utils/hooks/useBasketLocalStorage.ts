@@ -3,13 +3,15 @@ import {
   setItemsSquare,
   setItemsVolume,
   setItemPrice,
+  ProductSquare,
+  ProductVolume,
 } from '../../store/slices/basketSlice';
 import { Product, Price } from '../../types/basketTypes';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 
 const useBasketLocalStorage = () => {
   const dispatch = useAppDispatch();
-  
+
   const { itemsVolume, itemsSquare, allPrice } = useAppSelector(
     (state) => state.basketSlice
   );
@@ -17,17 +19,21 @@ const useBasketLocalStorage = () => {
   useEffect(() => {
     const storedItemsVolume = localStorage.getItem('basketItemsVolume');
     if (storedItemsVolume) {
-      dispatch(setItemsVolume(JSON.parse(storedItemsVolume) as Product[]));
+      dispatch(
+        setItemsVolume(JSON.parse(storedItemsVolume) as ProductVolume[])
+      );
     }
 
     const storedItemsSquare = localStorage.getItem('basketItemsSquare');
     if (storedItemsSquare) {
-      dispatch(setItemsSquare(JSON.parse(storedItemsSquare) as Product[]));
+      dispatch(
+        setItemsSquare(JSON.parse(storedItemsSquare) as ProductSquare[])
+      );
     }
 
     const storedItemsPrice = localStorage.getItem('basketItemsPrice');
     if (storedItemsPrice) {
-      dispatch(setItemPrice(JSON.parse(storedItemsPrice) as Price[]));
+      dispatch(setItemPrice(JSON.parse(storedItemsPrice) as Product[]));
     }
   }, []);
 
