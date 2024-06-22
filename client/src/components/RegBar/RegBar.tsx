@@ -43,46 +43,27 @@ export default function Login({ user }) {
 
   return (
     <>
-      <div className={styles.wrapper}>
-        <nav className="navbar bg-body-tertiary">
-          <div className="container-fluid">
-            <a className="navbar-brand me-auto p-2" href="/">
-              Финалка Оли , Ани, Кирилла!
-            </a>
-            {!user?.length && (
-              <>
-                <button
-                  onClick={loginHandler}
-                  className="btn btn-outline-dark me-2 p-2"
-                >
-                  Login
-                </button>
-                <Link to={"/registration"}>
-                  <button className="btn btn-outline-dark me-2 p-2">
-                    Registration
-                  </button>
-                </Link>
-              </>
-            )}
+      {!user?.length && (
+        <>
+          <button
+            onClick={loginHandler}
+            className="btn btn-outline-dark me-2 p-2"
+          >
+            Login
+          </button>
+        </>
+      )}
 
-            {!!user?.length && (
-              <>
-                <button
-                  onClick={logoutHandler}
-                  className="btn btn-outline-dark me-2 p-2"
-                >
-                  Logout
-                </button>
-                <Link to={"/"}>
-                  <button className="btn btn-outline-dark me-2 p-2">
-                    Game
-                  </button>
-                </Link>
-              </>
-            )}
-          </div>
-        </nav>
-      </div>
+      {!!user?.length && (
+        <>
+          <button
+            onClick={logoutHandler}
+            className="btn btn-outline-dark me-2 p-2"
+          >
+            Logout
+          </button>
+        </>
+      )}
 
       {isModalOpen && (
         <dialog open style={{ padding: "0", borderRadius: "10px" }}>
@@ -99,15 +80,14 @@ export default function Login({ user }) {
                   backgroundColor: "white",
                 }}
                 onClick={closeModal}
-              ></button>
+              >X</button>
               <h6 className="logErrMsg" />
 
               <div className="mb-30">
-                <label htmlFor="exampleInputLogin1" className="form-label">
-                  Ваш login
-                </label>
+                
                 <input
                   name="login"
+                  placeholder="введите login"
                   type="text"
                   className="form-control"
                   id="exampleInputLogin1"
@@ -115,11 +95,9 @@ export default function Login({ user }) {
                 />
               </div>
               <div className="mb-30">
-                <label htmlFor="exampleInputPassword1" className="form-label">
-                  Ваш пароль
-                </label>
                 <input
                   name="password"
+                  placeholder="введите Password"
                   type="password"
                   className="form-control"
                   id="exampleInputPassword1"

@@ -1,4 +1,3 @@
-//! #3 => go hooks.ts
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchReg} from '../thunkActions/thunkActions';
 
