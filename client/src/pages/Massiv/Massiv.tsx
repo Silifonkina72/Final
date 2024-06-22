@@ -1,17 +1,20 @@
-import React, { ChangeEvent, useCallback, useMemo } from "react";
-import { useState } from "react";
-import Karusel from "../../components/Karusel/Karusel";
-import { useAppDispatch, useAppSelector } from "../../hooks";
-import { StainsThunk } from "../../store/thunkActions/StainThunk";
-import { useEffect } from "react";
-import { GroundThunk } from "../../store/thunkActions/groundThunk";
-import { LakThunk } from "../../store/thunkActions/lakThunk";
 import {
+  ChangeEvent,
+  KeyboardEvent,
+  useCallback,
+  useMemo,
+  useRef,
+} from 'react';
+import { useState } from 'react';
+import Karusel from '../../components/Karusel/Karusel';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+
+import {
+  ProductVolume,
   addItemsSquare,
   addItemsVolume,
-  addItemPrice,
   resetBasket,
-} from "../../store/slices/basketSlice";
+} from '../../store/slices/basketSlice';
 import {
   Button,
   Modal,
@@ -25,58 +28,51 @@ import {
   Image,
   Badge,
   Flex,
-} from "@chakra-ui/react";
-import KardMap from "../../components/KardMap/KardMap";
+} from '@chakra-ui/react';
+import KardVolume from '../../components/KardVolume/KardVolume';
+
+import styles from './massiv.module.css';
+import { useStartEffect } from '../../utils/hooks/useStartEffect';
 
 const Massiv = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [input, setInput] = useState(0);
   const [boxVisible, setBoxVisible] = useState(false);
   const [boxVisible2, setBoxVisible2] = useState(false);
-
-  // //? счетчик
-  // const [count, setCount] = useState(0);
-  // const handleIncrement = () => setCount(count + 1);
-  // const handleDecrement = () => setCount(count - 1);
-
-
-  //? достаем данные для карусели
-  useEffect(() => {
-    void dispatch(StainsThunk());
-  }, []);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const dispatch = useAppDispatch();
-  const stains = useAppSelector((store) => store.stainSlice.stains);
 
-  useEffect(() => {
-    void dispatch(GroundThunk());
-  }, []);
+  const { stains } = useAppSelector((store) => store.stainSlice);
+  const { grounds } = useAppSelector((store) => store.groundSlice);
+  const { laks } = useAppSelector((store) => store.lakSlice);
+  const { allPrice: itemPrice } = useAppSelector((state) => state.basketSlice);
 
-  const grounds = useAppSelector((store) => store.groundSlice.grounds);
-
-  useEffect(() => {
-    void dispatch(LakThunk());
-  }, []);
-  const laks = useAppSelector((store) => store.lakSlice.laks);
+  //? достаем данные для карусели
+  useStartEffect();
 
   //? модальное окно
-  const closeModal = useCallback(() => setIsOpen(false), []);
+  const closeModal = useCallback(() => {
+    setIsOpen(false);
+  }, []);
 
-  const openModal = useCallback(() => setIsOpen(true), []);
+  const openModal = useCallback(() => {
+    setIsOpen(true);
+    setTimeout(() => {
+      if (inputRef.current) {
+        inputRef.current.focus();
+        inputRef.current.setSelectionRange(0, 0);
+      }
+    }, 1);
+  }, [inputRef]);
 
   //? это массивы из хранилища
-  const {
-    itemsSquare,
-    itemsVolume,
-    allPrice: itemPrice,
-  } = useAppSelector((state) => state.basketSlice);
 
   //! полная стоимость (по площади)
   const allCostMassiv = itemPrice.reduce((acc, el) => acc + el.priceArea, 0);
   const allPricesquareAnswer = useMemo(() => input * allCostMassiv, [input]);
 
-
-//? инпут значение
+  //? инпут значение
   const changeHandler = (e: ChangeEvent<HTMLInputElement>): void => {
     setInput(Number(e.target.value));
   };
@@ -99,36 +95,51 @@ const Massiv = () => {
 
   //? отправка в корзину (передача данных в itemsSquare, itemsVolume), очищаем allPrice
   const submitHandler = () => {
-    //console.log("******", itemPrice);
-    const objSquare = {'square': input}
-    dispatch(addItemsSquare(itemPrice));
-    dispatch(addItemsSquare(objSquare));
+    const itemsSquare = itemPrice
+      .filter((el, i, arr) => {
+        const findIndex = arr.findIndex(
+          (findElem) => findElem.id === el.id && findElem.name === el.name
+        );
+        return findIndex === i;
+      })
+      .map((el) => {
+        const newEl = { ...el, square: input };
+        return newEl;
+      });
 
+    dispatch(addItemsSquare(itemsSquare));
     setBoxVisible(false);
     dispatch(resetBasket());
-    localStorage.removeItem("basketItemsPrice");
+    // localStorage.removeItem('basketItemsPrice');
   };
 
   //? отправка в корзину (передача данных в itemsSquare, itemsVolume), очищаем allPrice
   const submitHandler2 = () => {
-   
-   //console.log("******", itemPrice);
-   dispatch(addItemsVolume(itemPrice));
+    const itemsVolume = itemPrice.map((item) => ({
+      ...item,
+      count: item.count ?? input,
+    }));
+
+    dispatch(addItemsVolume(itemsVolume));
     setBoxVisible2(false);
     dispatch(resetBasket());
-    localStorage.removeItem("basketItemsPrice");
   };
 
-
+  const onKeyDownHandler = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
+    if (isNaN(Number(e.key)) && e.key !== 'Backspace') {
+      e.preventDefault();
+    }
+  }, []);
 
   return (
-    <>
+    <div className={styles.page}>
       <div>Massiv</div>
-      <Karusel arr={stains} model={"Stain"} />
+
+      <Karusel stains={stains} model={'Stain'} />
       <br />
-      <Karusel arr={grounds} model={"Ground"} />
+      <Karusel stains={grounds} model={'Ground'} />
       <br />
-      <Karusel arr={laks} model={"Lak"} />
+      <Karusel stains={laks} model={'Lak'} />
 
       <Modal isOpen={isOpen} onClose={closeModal}>
         <ModalOverlay />
@@ -142,24 +153,26 @@ const Massiv = () => {
               Укажите площадь которая вам требуеться (м.кв) либо объем (м.куб)
               на 1ед. товара :
               <input
+                ref={inputRef}
                 style={{
-                  margin: "10px",
-                  borderColor: "black",
-                  borderWidth: "2px",
-                  borderRadius: "5px",
+                  margin: '10px',
+                  borderColor: 'black',
+                  borderWidth: '2px',
+                  borderRadius: '5px',
                 }}
-                type="number"
-                name="answer"
+                type='text'
+                name='answer'
+                onKeyDown={onKeyDownHandler}
                 onChange={changeHandler}
                 value={input}
               />
             </label>
           </ModalBody>
-          <ModalFooter display="flex" justifyContent="center">
-            <Button colorScheme="blue" mr={3} onClick={allSquareHandler}>
+          <ModalFooter display='flex' justifyContent='center'>
+            <Button colorScheme='blue' mr={3} onClick={allSquareHandler}>
               посчитать по площади
             </Button>
-            <Button colorScheme="teal" mr={3} onClick={allVolumeHandler}>
+            <Button colorScheme='teal' mr={3} onClick={allVolumeHandler}>
               посчитать по объему
             </Button>
           </ModalFooter>
@@ -171,42 +184,42 @@ const Massiv = () => {
         itemPrice.map((item) => (
           <Box
             key={`${item.model}-${item.id}`}
-            maxW="sm"
-            borderWidth="1px"
-            borderRadius="lg"
-            overflow="hidden"
-            mb="4"
+            maxW='sm'
+            borderWidth='1px'
+            borderRadius='lg'
+            overflow='hidden'
+            mb='4'
           >
             <Flex>
               <Image
                 src={item.img}
-                alt="Card image"
-                boxSize="174px"
-                objectFit="cover"
+                alt='Card image'
+                boxSize='174px'
+                objectFit='cover'
               />
 
-              <Box p="6">
-                <Box d="flex" alignItems="baseline">
-                  <Badge borderRadius="full" px="2" colorScheme="teal">
+              <Box p='6'>
+                <Box display='flex' alignItems='baseline'>
+                  <Badge borderRadius='full' px='2' colorScheme='teal'>
                     {item.model}
                   </Badge>
                 </Box>
 
                 <Box
-                  mt="1"
-                  fontWeight="semibold"
-                  as="h4"
-                  lineHeight="tight"
+                  mt='1'
+                  fontWeight='semibold'
+                  as='h4'
+                  lineHeight='tight'
                   isTruncated
                 >
                   {item.name}
                 </Box>
                 <Box>
                   {item.priceArea} руб/м.кв
-                  <Box as="span" color="gray.600" fontSize="sm"></Box>
+                  <Box as='span' color='gray.600' fontSize='sm'></Box>
                 </Box>
 
-                <Box d="flex" mt="2" alignItems="center"></Box>
+                <Box display='flex' mt='2' alignItems='center'></Box>
               </Box>
             </Flex>
           </Box>
@@ -214,7 +227,7 @@ const Massiv = () => {
       {boxVisible && (
         <>
           <div>
-            Итоговая стоимость составит {allPricesquareAnswer}.руб на {input}{" "}
+            Итоговая стоимость составит {allPricesquareAnswer}.руб на {input}{' '}
             м.кв.
           </div>
           <Button onClick={submitHandler}>отложить в корзину</Button>
@@ -222,21 +235,20 @@ const Massiv = () => {
       )}
 
       {boxVisible2 &&
-        itemPrice.map((item) => (
-          <KardMap id={item.id} img={item.img} model={item.model} name={item.name} priceVolume={item.priceVolume} />
-
+        (itemPrice as ProductVolume[]).map((item) => (
+          <KardVolume key={`${item.id}-${item.name}`} productVolume={item} />
         ))}
 
       {boxVisible2 && (
         <>
           <div>
-            Итоговая стоимость составит {allPricesquareAnswer}.руб на {input}{" "}
+            Итоговая стоимость составит {allPricesquareAnswer}.руб на {input}{' '}
             м.кв.
           </div>
           <Button onClick={submitHandler2}>отложить в корзину</Button>
         </>
       )}
-    </>
+    </div>
   );
 };
 

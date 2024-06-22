@@ -57,6 +57,10 @@ export const Navbar = () => {
         <Link className={styles.link} to="/">
           Тут будет название
         </Link>
+        <Link className={styles.link} to='/massiv'>
+          Массив
+        </Link>
+        {/* <div className={styles.title}></div> */}
         {isAuth() ? (
           isAdmin() ? (
             <>
