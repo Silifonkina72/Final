@@ -50,17 +50,17 @@ export default function Mdf() {
     <>
       <div>Mdf</div>
 
-      <Karusel arr={primerInsulators} model={"PrimerInsulator"} />
+      <Karusel stains={primerInsulators} model={"PrimerInsulator"} />
       <br />
-      <Karusel arr={paints} model={"Paint"} />
+      <Karusel stains={paints} model={"Paint"} />
       <br />
-      <Karusel arr={acrylicPrimers} model={"AcrylicPrimer"} />
+      <Karusel stains={acrylicPrimers} model={"AcrylicPrimer"} />
       <br />
-      <Karusel arr={patinas} model={"Patina"} />
+      <Karusel stains={patinas} model={"Patina"} />
       <br />
-      <Karusel arr={laks} model={"Lak"} />
+      <Karusel stains={laks} model={"Lak"} />
       <br />
-      <Karusel arr={grounds} model={"Ground"} />
+      <Karusel stains={grounds} model={"Ground"} />
     </>
   );
 }

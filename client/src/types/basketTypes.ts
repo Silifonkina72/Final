@@ -1,14 +1,12 @@
 export type Product = {
   id: number;
-  model: string;
-  name: string;
   priceArea: number;
+  name: string;
+  model: string;
   priceVolume: number;
   img?: string;
-  // number: number;
-  // onlyMdf?: boolean;
-  // highGrade?: boolean;
-  // intensity?: number | null;
+  number: number;
+  count?: number;
 };
 
 export type Price = {
