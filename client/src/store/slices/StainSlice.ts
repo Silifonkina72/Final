@@ -3,6 +3,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { StainsThunk } from '../thunkActions/StainThunk';
 import { Stain, StainSlice } from '../../types';
 
+export type StainSliceType = {
+  stains: Stain[];
+  error: null | string;
+}
 
 const initialState: StainSlice = {
     stains: [],

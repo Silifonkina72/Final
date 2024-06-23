@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback, useMemo } from "react";
+import { ChangeEvent, useCallback, useMemo } from "react";
 import { useState } from "react";
 import Karusel from "../../components/Karusel/Karusel";
 import { useAppDispatch, useAppSelector } from "../../hooks";
@@ -21,23 +21,16 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Box,
-  Image,
-  Badge,
-  Flex,
 } from "@chakra-ui/react";
-import KardMap from "../../components/KardMap/KardMap";
+import KardMapVolume from "../../components/KardMapVolume/KardMapVolume";
+import KardMapSquare from '../../components/KardMapSquare/KardMapSquare'
 
 const Massiv = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [input, setInput] = useState(0);
-  const [boxVisible, setBoxVisible] = useState(false);
-  const [boxVisible2, setBoxVisible2] = useState(false);
 
-  // //? счетчик
-  // const [count, setCount] = useState(0);
-  // const handleIncrement = () => setCount(count + 1);
-  // const handleDecrement = () => setCount(count - 1);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [input, setInput] = useState<number>(0);
+  const [boxVisible, setBoxVisible] = useState<boolean>(false);
+  const [boxVisible2, setBoxVisible2] = useState<boolean>(false);
 
 
   //? достаем данные для карусели
@@ -169,47 +162,10 @@ const Massiv = () => {
 
       {boxVisible &&
         itemPrice.map((item) => (
-          <Box
-            key={`${item.model}-${item.id}`}
-            maxW="sm"
-            borderWidth="1px"
-            borderRadius="lg"
-            overflow="hidden"
-            mb="4"
-          >
-            <Flex>
-              <Image
-                src={item.img}
-                alt="Card image"
-                boxSize="174px"
-                objectFit="cover"
-              />
 
-              <Box p="6">
-                <Box d="flex" alignItems="baseline">
-                  <Badge borderRadius="full" px="2" colorScheme="teal">
-                    {item.model}
-                  </Badge>
-                </Box>
 
-                <Box
-                  mt="1"
-                  fontWeight="semibold"
-                  as="h4"
-                  lineHeight="tight"
-                  isTruncated
-                >
-                  {item.name}
-                </Box>
-                <Box>
-                  {item.priceArea} руб/м.кв
-                  <Box as="span" color="gray.600" fontSize="sm"></Box>
-                </Box>
+         <KardMapSquare id={item.id} img={item.img} model={item.model} name={item.name} priceVolume={item.priceArea} />
 
-                <Box d="flex" mt="2" alignItems="center"></Box>
-              </Box>
-            </Flex>
-          </Box>
         ))}
       {boxVisible && (
         <>
@@ -223,7 +179,7 @@ const Massiv = () => {
 
       {boxVisible2 &&
         itemPrice.map((item) => (
-          <KardMap id={item.id} img={item.img} model={item.model} name={item.name} priceVolume={item.priceVolume} />
+          <KardMapVolume id={item.id} img={item.img} model={item.model} name={item.name} priceVolume={item.priceVolume} />
 
         ))}
 

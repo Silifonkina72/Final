@@ -6,7 +6,11 @@ module.exports = (sequelize, DataTypes) => {
   class PrimerInsulator extends Model {
    
     static associate(models) {
-      this.hasMany(models.Mdf, { foreignKey: 'primerInsulator_id' });
+      this.belongsToMany(models.Order, { 
+        through: models.OrdersPrimerInsulator,
+        foreignKey: 'primerInsulator_id',
+        otherKey: 'order_id'
+      });
       
     }
   }

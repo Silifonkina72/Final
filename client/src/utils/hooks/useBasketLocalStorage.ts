@@ -9,6 +9,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks';
 
 const useBasketLocalStorage = () => {
   const dispatch = useAppDispatch();
+  
   const { itemsVolume, itemsSquare, allPrice } = useAppSelector(
     (state) => state.basketSlice
   );

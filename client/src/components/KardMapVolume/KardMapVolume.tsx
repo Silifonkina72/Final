@@ -18,7 +18,7 @@ import {
 
   
 
-function KardMap({ id, img, model, name, priceVolume}) {
+function KardMapVolume({ id, img, model, name, priceVolume}) {
     
 //? это массивы из хранилища
 const {
@@ -135,4 +135,4 @@ const handleDecrement = () => {
     )
 }
 
-export default KardMap
+export default KardMapVolume

@@ -2,50 +2,43 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Orders', {
+    await queryInterface.createTable('OrdersStains', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      allPrice: {
-        type: Sequelize.INTEGER
-      },
-      user_id: {
+      stain_id: {
         type: Sequelize.INTEGER,
         references: {
-          model: 'Users',
+          model: 'Stains',
           key: 'id',
         },
-        onDelete: 'cascade',
-        allowNull: false,
       },
-      isForm: {
-        type: Sequelize.BOOLEAN
+      order_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'Orders',
+          key: 'id',
+        },
       },
-      isSent: {
-        type: Sequelize.BOOLEAN
-      },
-      isAccept: {
-        type: Sequelize.BOOLEAN
-      },
-      address: {
-        type: Sequelize.STRING
+      quantity: {
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('NOW')
+        defaultValue: Sequelize.fn('NOW'),
       },
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE,
-        defaultValue: Sequelize.fn('NOW')
+        defaultValue: Sequelize.fn('NOW'),
       }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Orders');
+    await queryInterface.dropTable('OrdersStains');
   }
 };

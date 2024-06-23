@@ -10,9 +10,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@mantine/hooks": "^7.10.2",
-    "@mantine/modals": "^7.10.2",
+    "@chakra-ui/icons": "^2.1.1",
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
     "@mantine/core": "^7.10.2",
+    "@mantine/hooks": "^7.10.2",
+    "@pbe/react-yandex-maps": "^1.2.5",
     "@reduxjs/toolkit": "^2.2.5",
     "@tabler/icons-react": "^3.6.0",
     "@tiptap/extension-link": "^2.4.0",
