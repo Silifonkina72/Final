@@ -1,11 +1,11 @@
 import axios, { AxiosError } from 'axios';
 import { logError } from '../utils/logger';
 
-export const fetchNewOrder = async (model) => {
+export const createOrder = async (order) => {
     try {
-        const Model = model.charAt(0).toUpperCase() + model.slice(1).toLowerCase();
-        const response = await  axios.get()
+        const response = await axios.post('http://localhost:3000/api/order/newOrder', order);
+        return response.data;
     } catch (error) {
-        
+        throw new Error((error as Error).message);
     }
 }
