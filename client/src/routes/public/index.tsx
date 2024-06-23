@@ -11,6 +11,7 @@ import Registration from '../../pages/Registration/Registration';
 import Mdf from '../../pages/Mdf/Mdf';
 import AcrylicPrimersList from '../../components/Exist/Exist';
 import Change from '../../pages/adminPage/Change';
+import Orders from '../../pages/adminPage/Order';
 
 const PublicRouteObject: RouteObject[] = [
   {
@@ -52,8 +53,12 @@ const PublicRouteObject: RouteObject[] = [
         errorElement: <ErrorBoundary />,
       },
       {
+        path: '/orders',
+        element: <Orders />,
+        errorElement: <ErrorBoundary />,
+      },
+      {
         path: '/changer',
-        index: true,
         element: <Change />,
         errorElement: <ErrorBoundary />,
       },
