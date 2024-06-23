@@ -6,8 +6,11 @@ module.exports = (sequelize, DataTypes) => {
   class Ground extends Model {
    
     static associate(models) {
-      this.hasMany(models.Mdf, { foreignKey: 'ground_id' });
-      this.hasMany(models.Massiv, { foreignKey: 'ground_id' });
+      this.belongsToMany(models.Order, { 
+        through: models.OrdersGround,
+        foreignKey: 'ground_id',
+        otherKey: 'order_id'
+      });
     }
   }
   Ground.init({

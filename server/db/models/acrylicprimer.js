@@ -6,7 +6,11 @@ module.exports = (sequelize, DataTypes) => {
   class AcrylicPrimer extends Model {
     
     static associate(models) {
-      this.hasMany(models.Mdf, { foreignKey: 'acrylicPrimer_id' });
+      this.belongsToMany(models.Order, { 
+        through: models.OrdersAcrylicPrimer,
+        foreignKey: 'acrylicPrimer_id',
+        otherKey: 'order_id'
+      });
     }
   }
   AcrylicPrimer.init({
