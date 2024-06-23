@@ -215,6 +215,7 @@ const deleteStudentById = async (first_name) => {
 
 //? Миграция для связующей таблицы
 // * npx sequelize-cli model:generate --name BooksAuthor --attributes book_id:integer,author_id:integer
+// npx sequelize-cli model:generate --name OrdersPaint --attributes order_id:integer,paint_id:integer,quantity:integer
 
 //! Работа с миграциями: правим связи в миграциях только в связующей таблице
 

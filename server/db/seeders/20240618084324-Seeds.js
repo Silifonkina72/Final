@@ -36,16 +36,14 @@ module.exports = {
       [
         {
           allPrice: null,
-          discount: null,
           user_id: 1,
-          isForm: null,
-          isSent: null,
-          isAccept: null,
+          isForm: true,
+          isSent: false,
+          isAccept: false,
           address: "Тюмень",
         },
         {
           allPrice: null,
-          discount: null,
           user_id: 2,
           isForm: null,
           isSent: null,
@@ -54,11 +52,10 @@ module.exports = {
         },
         {
           allPrice: null,
-          discount: null,
           user_id: 2,
-          isForm: null,
-          isSent: null,
-          isAccept: null,
+          isForm: true,
+          isSent: false,
+          isAccept: false,
           address: "Tbilisy",
         },
       ],
@@ -713,7 +710,7 @@ module.exports = {
           priceArea: 90,
           priceVolume: 3600,
           intensity: null,
-          name: "Renner TM M006\T01 (Черная)",
+          name: "Renner TM M006T01 (Черная)",
           number: 145,
           img: "https://renner.ru/upload/iblock/9f9/TM_M006_T01.png",
         },
@@ -721,7 +718,7 @@ module.exports = {
           priceArea: 95,
           priceVolume: 3793,
           intensity: null,
-          name: "Renner TM M006\T02 (белая)",
+          name: "Renner TM M006T02 (белая)",
           number: 111,
           img: "https://renner.ru/upload/iblock/906/TM_M006_T02.png",
         },
@@ -729,7 +726,7 @@ module.exports = {
           priceArea: 138,
           priceVolume: 5507,
           intensity: null,
-          name: "Renner TM M006\T03 (красная)",
+          name: "Renner TM M006T03 (красная)",
           number: 200,
           img: "https://renner.ru/upload/iblock/165/TM_M006_T03.png",
         },
@@ -737,7 +734,7 @@ module.exports = {
           priceArea: 86,
           priceVolume: 3444,
           intensity: null,
-          name: "Renner TM M006\T07 (желтая)",
+          name: "Renner TM M006T07 (желтая)",
           number: 200,
           img: "https://renner.ru/upload/iblock/1bd/TM_M006_T07.png",
         },
@@ -745,7 +742,7 @@ module.exports = {
           priceArea: 79,
           priceVolume: 3444,
           intensity: null,
-          name: "Renner TM M006\T15 (красное дерево)",
+          name: "Renner TM M006T15 (красное дерево)",
           number: 110,
           img: "https://renner.ru/upload/iblock/562/TM_M006_T15.png",
         },
@@ -753,7 +750,7 @@ module.exports = {
           priceArea: 95,
           priceVolume: 3793,
           intensity: null,
-          name: "Renner TM M006\T16 (коричневый орех)",
+          name: "Renner TM M006T16 (коричневый орех)",
           number: 80,
           img: "https://renner.ru/upload/iblock/078/TM_M006_T16.png",
         },
@@ -761,7 +758,7 @@ module.exports = {
           priceArea: 60,
           priceVolume: 2384,
           intensity: null,
-          name: "TM M006\T19 (старинный орех)",
+          name: "TM M006T19 (старинный орех)",
           number: 60,
           img: "https://renner.ru/upload/iblock/e93/TM_M006_T19.png",
         },
@@ -769,7 +766,7 @@ module.exports = {
           priceArea: 83,
           priceVolume: 3296,
           intensity: null,
-          name: "Renner TM M006\T20 (светлый орех)",
+          name: "Renner TM M006T20 (светлый орех)",
           number: 60,
           img: "https://renner.ru/upload/iblock/6ad/TM_M006_T20.png",
         },
@@ -777,7 +774,7 @@ module.exports = {
           priceArea: 95,
           priceVolume: 3793,
           intensity: null,
-          name: "Renner TM M006\T21 (бренерский орех)",
+          name: "Renner TM M006T21 (бренерский орех)",
           number: 60,
           img: "https://renner.ru/upload/iblock/a31/TM_M006_T21.png",
         },
@@ -785,7 +782,7 @@ module.exports = {
           priceArea: 77,
           priceVolume: 3084,
           intensity: null,
-          name: "Renner TM M006\T22 (орех)",
+          name: "Renner TM M006T22 (орех)",
           number: 30,
           img: "https://renner.ru/upload/iblock/a96/TM_M006_T22.png",
         },
@@ -793,7 +790,7 @@ module.exports = {
           priceArea: 87,
           priceVolume: 3459,
           intensity: null,
-          name: "Renner TM M006\T24 (розовое дерево)",
+          name: "Renner TM M006T24 (розовое дерево)",
           number: 70,
           img: "https://renner.ru/upload/iblock/94b/24.png",
         },
@@ -801,7 +798,7 @@ module.exports = {
           priceArea: 68,
           priceVolume: 2735,
           intensity: null,
-          name: "Renner TM M006\T10 (вишня)",
+          name: "Renner TM M006T10 (вишня)",
           number: 40,
           img: "https://renner.ru/upload/iblock/0a4/TM_M006_T10.png",
         },
@@ -809,7 +806,7 @@ module.exports = {
           priceArea: 94,
           priceVolume: 3745,
           intensity: null,
-          name: "Renner TM M006\T34 (венге)",
+          name: "Renner TM M006T34 (венге)",
           number: 36,
           img: "https://renner.ru/upload/iblock/de5/TM_M006_T34.png",
         },
@@ -817,7 +814,7 @@ module.exports = {
           priceArea: 108,
           priceVolume: 4300,
           intensity: null,
-          name: "Renner TM M006\T04 (синий)",
+          name: "Renner TM M006T04 (синий)",
           number: 12,
           img: "https://renner.ru/upload/iblock/87a/t62.png",
         },
@@ -825,7 +822,7 @@ module.exports = {
           priceArea: 108,
           priceVolume: 4300,
           intensity: null,
-          name: "Renner TM M006\M09 (зеленый)",
+          name: "Renner TM M006M09 (зеленый)",
           number: 26,
           img: "https://renner.ru/upload/iblock/7a3/m09.png",
         },
@@ -834,50 +831,40 @@ module.exports = {
     );
 
     await queryInterface.bulkInsert(
-      "Solvents",
+      "OrdersAcrylicPrimers",
       [
+        // Для первого заказа
         {
-          priceArea: 92,
-          priceVolume: 604,
-          name: "Renner DF R801 (органический растворитель универсальный)",
-          number: 162,
-        },
-      ],
-      {}
-    );
-
-    await queryInterface.bulkInsert(
-      "Mdfs",
-      [
-        {
-          primerInsulator_id: null,
-          ground_id: null,
-          paint_id: null,
-          acrylicPrimer_id: null,
-          patina_id: null,
-          lak_id: null,
           order_id: 1,
+          acrylicPrimer_id: 1,
+          quantity: 1,
+        },
+       
+       // Для второго заказа
+        {
+          order_id: 1,
+          acrylicPrimer_id: 1,
+          quantity: 1,
         },
       ],
       {}
     );
 
     await queryInterface.bulkInsert(
-      "Massivs",
+      "OrdersLaks",
       [
+        // Для первого заказа
         {
-          stain_id: null,
-          ground_id: null,
-          lak_id: null,
-          solvent_id: null,
-          order_id: 2,
+          order_id: 1,
+          lak_id: 1,
+          quantity: 1,
         },
+       
+        //Для второго заказа
         {
-          stain_id: null,
-          ground_id: null,
-          lak_id: null,
-          solvent_id: null,
-          order_id: 3,
+          order_id: 2,
+          lak_id: 2,
+          quantity: 1,
         },
       ],
       {}
@@ -885,9 +872,7 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.bulkDelete("Massivs", null, {});
-    await queryInterface.bulkDelete("Mdfs", null, {});
-    await queryInterface.bulkDelete("Solvents", null, {});
+    await queryInterface.bulkDelete("OrdersAcrylicPrimers", null, {});
     await queryInterface.bulkDelete("Stains", null, {});
     await queryInterface.bulkDelete("Grounds", null, {});
     await queryInterface.bulkDelete("Laks", null, {});

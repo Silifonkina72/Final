@@ -53,8 +53,8 @@
 - img https://renner.ru/paint-material/morilki/tm-m006-xx-morilka-organika-tm-m006-xx/?oid=26851#gallery-1
 
 1.7
-- priceArea 60р  
-- priceVolume 2384р 
+- priceArea 60р                                     2384 р - 1000гр
+- priceVolume 2384р                                  60р - х гр 
 - name Renner TM M006\T19 (старинный орех)
 - img https://renner.ru/paint-material/morilki/tm-m006-xx-morilka-organika-tm-m006-xx/?oid=26853#gallery-1
 
