@@ -9,6 +9,7 @@ const apiRouter = require('./routes/apiRouter');
 const loginRouter = require('./routes/login.router');
 const changeRouter = require('./routes/existRouter');
 const nalichieRouter = require('./routes/nalichieRouter');
+const ordersRouter = require('./routes/ordersRouter');
 // const indexRouter = require('./routers/index');
 const logOutRouter = require('./routes/logout.router');
 const regRouter = require('./routes/registration.router');
@@ -50,7 +51,7 @@ app.use('/logout', logOutRouter);
 app.use('/login', loginRouter);
 app.use('/availability', nalichieRouter);
 app.use('/changer', changeRouter);
-
+app.use('/orders', ordersRouter);
 
 app.listen(3000, () => {
   console.log(`Сервер запущен на ${PORT} порту`);

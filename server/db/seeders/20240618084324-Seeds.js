@@ -37,9 +37,9 @@ module.exports = {
         {
           allPrice: null,
           user_id: 1,
-          isForm: null,
-          isSent: null,
-          isAccept: null,
+          isForm: true,
+          isSent: false,
+          isAccept: false,
           address: "Тюмень",
         },
         {
@@ -53,9 +53,9 @@ module.exports = {
         {
           allPrice: null,
           user_id: 2,
-          isForm: null,
-          isSent: null,
-          isAccept: null,
+          isForm: true,
+          isSent: false,
+          isAccept: false,
           address: "Tbilisy",
         },
       ],

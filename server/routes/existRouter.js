@@ -1,6 +1,3 @@
-/* eslint-disable consistent-return */
-/* eslint-disable no-await-in-loop */
-/* eslint-disable no-restricted-syntax */
 const express = require('express');
 const acrylicPrimerRouter = express.Router();
 const {
@@ -145,4 +142,26 @@ acrylicPrimerRouter.patch('/:id', async (req, res) => {
   }
 });
 
+// Маршрут для добавления нового ингредиента
+acrylicPrimerRouter.post('/', async (req, res) => {
+  const { model, priceArea, priceVolume, name, number, img } = req.body;
+  try {
+    const Model = models.find((m) => m.name === model);
+    if (!Model) {
+      return res.status(400).send('Invalid model name');
+    }
+    const newIngredient = await Model.create({
+      priceArea,
+      priceVolume,
+      name,
+      number,
+      img,
+    });
+    res.status(201).json(newIngredient);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+});
+
 module.exports = acrylicPrimerRouter;
+
