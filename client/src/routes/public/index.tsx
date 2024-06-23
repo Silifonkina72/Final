@@ -1,14 +1,16 @@
-import React from 'react';
-import { RouteObject, useRoutes, createBrowserRouter } from 'react-router-dom';
+import { RouteObject, createBrowserRouter } from 'react-router-dom';
 import { Navbar } from '../../components/Navbar/Navbar';
 import { ErrorBoundary } from '../../components/ErrorBoundary';
-import  Catalog  from '../../pages/Catalog/Catalog';
+import Catalog from '../../pages/Catalog/Catalog';
 import Basket from '../../pages/Basket/Basket';
 import Massiv from '../../pages/Massiv/Massiv';
 import Login from '../../components/RegBar/RegBar';
+
+import AdminPage from '../../pages/adminPage/AdminPage';
 import Registration from '../../pages/Registration/Registration';
 import Mdf from '../../pages/Mdf/Mdf';
-
+import AcrylicPrimersList from '../../components/Exist/Exist';
+import Change from '../../pages/adminPage/Change';
 
 const PublicRouteObject: RouteObject[] = [
   {
@@ -33,6 +35,7 @@ const PublicRouteObject: RouteObject[] = [
         element: <Registration />,
         errorElement: <ErrorBoundary />,
       },
+     
       {
         path: 'basket',
         element: <Basket />,
@@ -41,6 +44,17 @@ const PublicRouteObject: RouteObject[] = [
       {
         path: 'massiv',
         element: <Massiv />,
+        errorElement: <ErrorBoundary />,
+      },
+      {
+        path: '/availability',
+        element: <AdminPage />,
+        errorElement: <ErrorBoundary />,
+      },
+      {
+        path: '/changer',
+        index: true,
+        element: <Change />,
         errorElement: <ErrorBoundary />,
       },
       {

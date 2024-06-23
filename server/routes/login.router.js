@@ -15,15 +15,17 @@ loginRouter.post('/', async (req, res) => {
     const user = await User.findOne({ where: { login } });
     if (!user) {
       console.log('user not found');
-      res.json({ logErr: `Пользователь ${login} не найден, вам необходимо зарегистрироваться` });
+      res.json({
+        logErr: `Пользователь ${login} не найден, вам необходимо зарегистрироваться`,
+      });
     } else {
       const checkPass = await bcrypt.compare(password, user.password);
       if (checkPass) {
         req.session.login = user.login;
-
+        req.session.isAdmin = user.isAdmin;
         req.session.save(() => {
           console.log('Password correct. Session saved');
-          res.json({ logDone: `Welcome ${user.login}`, login: user.login });
+          res.json({ logDone: `Welcome ${user.login}`, login: user.login, isAdmin: user.isAdmin });
         });
       } else {
         console.log('Wrong password');

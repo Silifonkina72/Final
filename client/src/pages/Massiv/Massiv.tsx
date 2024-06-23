@@ -1,17 +1,19 @@
-import { ChangeEvent, useCallback, useMemo } from "react";
-import { useState } from "react";
+import { ChangeEvent, useCallback, useMemo, KeyboardEvent,  useRef } from "react";
 import Karusel from "../../components/Karusel/Karusel";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { StainsThunk } from "../../store/thunkActions/StainThunk";
 import { useEffect } from "react";
 import { GroundThunk } from "../../store/thunkActions/groundThunk";
 import { LakThunk } from "../../store/thunkActions/lakThunk";
+import { useState } from 'react';
+
+
 import {
+  ProductVolume,
   addItemsSquare,
   addItemsVolume,
-  addItemPrice,
   resetBasket,
-} from "../../store/slices/basketSlice";
+} from '../../store/slices/basketSlice';
 import {
   Button,
   Modal,
@@ -24,6 +26,7 @@ import {
 } from "@chakra-ui/react";
 import KardMapVolume from "../../components/KardMapVolume/KardMapVolume";
 import KardMapSquare from '../../components/KardMapSquare/KardMapSquare'
+import { useStartEffect } from '../../utils/hooks/useStartEffect';
 
 const Massiv = () => {
 
@@ -31,6 +34,7 @@ const Massiv = () => {
   const [input, setInput] = useState<number>(0);
   const [boxVisible, setBoxVisible] = useState<boolean>(false);
   const [boxVisible2, setBoxVisible2] = useState<boolean>(false);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
 
   //? достаем данные для карусели
@@ -39,37 +43,37 @@ const Massiv = () => {
   }, []);
 
   const dispatch = useAppDispatch();
-  const stains = useAppSelector((store) => store.stainSlice.stains);
 
-  useEffect(() => {
-    void dispatch(GroundThunk());
-  }, []);
+  const { stains } = useAppSelector((store) => store.stainSlice);
+  const { grounds } = useAppSelector((store) => store.groundSlice);
+  const { laks } = useAppSelector((store) => store.lakSlice);
+  const { allPrice: itemPrice } = useAppSelector((state) => state.basketSlice);
 
-  const grounds = useAppSelector((store) => store.groundSlice.grounds);
-
-  useEffect(() => {
-    void dispatch(LakThunk());
-  }, []);
-  const laks = useAppSelector((store) => store.lakSlice.laks);
+  //? достаем данные для карусели
+  useStartEffect();
 
   //? модальное окно
-  const closeModal = useCallback(() => setIsOpen(false), []);
+  const closeModal = useCallback(() => {
+    setIsOpen(false);
+  }, []);
 
-  const openModal = useCallback(() => setIsOpen(true), []);
+  const openModal = useCallback(() => {
+    setIsOpen(true);
+    setTimeout(() => {
+      if (inputRef.current) {
+        inputRef.current.focus();
+        inputRef.current.setSelectionRange(0, 0);
+      }
+    }, 1);
+  }, [inputRef]);
 
   //? это массивы из хранилища
-  const {
-    itemsSquare,
-    itemsVolume,
-    allPrice: itemPrice,
-  } = useAppSelector((state) => state.basketSlice);
 
   //! полная стоимость (по площади)
   const allCostMassiv = itemPrice.reduce((acc, el) => acc + el.priceArea, 0);
   const allPricesquareAnswer = useMemo(() => input * allCostMassiv, [input]);
 
-
-//? инпут значение
+  //? инпут значение
   const changeHandler = (e: ChangeEvent<HTMLInputElement>): void => {
     setInput(Number(e.target.value));
   };
@@ -92,36 +96,52 @@ const Massiv = () => {
 
   //? отправка в корзину (передача данных в itemsSquare, itemsVolume), очищаем allPrice
   const submitHandler = () => {
-    //console.log("******", itemPrice);
-    const objSquare = {'square': input}
-    dispatch(addItemsSquare(itemPrice));
-    dispatch(addItemsSquare(objSquare));
+    const itemsSquare = itemPrice
+      .filter((el, i, arr) => {
+        const findIndex = arr.findIndex(
+          (findElem) => findElem.id === el.id && findElem.name === el.name
+        );
+        return findIndex === i;
+      })
+      .map((el) => {
+        const newEl = { ...el, square: input };
+        return newEl;
+      });
 
+    dispatch(addItemsSquare(itemsSquare));
     setBoxVisible(false);
     dispatch(resetBasket());
-    localStorage.removeItem("basketItemsPrice");
+    // localStorage.removeItem('basketItemsPrice');
   };
 
   //? отправка в корзину (передача данных в itemsSquare, itemsVolume), очищаем allPrice
   const submitHandler2 = () => {
-   
-   //console.log("******", itemPrice);
-   dispatch(addItemsVolume(itemPrice));
+    const itemsVolume = itemPrice.map((item) => ({
+      ...item,
+      count: item.count ?? input,
+    }));
+
+    dispatch(addItemsVolume(itemsVolume));
     setBoxVisible2(false);
     dispatch(resetBasket());
-    localStorage.removeItem("basketItemsPrice");
   };
 
-
+  const onKeyDownHandler = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
+    if (isNaN(Number(e.key)) && e.key !== 'Backspace') {
+      e.preventDefault();
+    }
+  }, []);
 
   return (
-    <>
+    // <div className={styles.page}>
+    <div >
       <div>Massiv</div>
-      <Karusel arr={stains} model={"Stain"} />
+
+      <Karusel stains={stains} model={'Stain'} />
       <br />
-      <Karusel arr={grounds} model={"Ground"} />
+      <Karusel stains={grounds} model={'Ground'} />
       <br />
-      <Karusel arr={laks} model={"Lak"} />
+      <Karusel stains={laks} model={'Lak'} />
 
       <Modal isOpen={isOpen} onClose={closeModal}>
         <ModalOverlay />
@@ -135,24 +155,26 @@ const Massiv = () => {
               Укажите площадь которая вам требуеться (м.кв) либо объем (м.куб)
               на 1ед. товара :
               <input
+                ref={inputRef}
                 style={{
-                  margin: "10px",
-                  borderColor: "black",
-                  borderWidth: "2px",
-                  borderRadius: "5px",
+                  margin: '10px',
+                  borderColor: 'black',
+                  borderWidth: '2px',
+                  borderRadius: '5px',
                 }}
-                type="number"
-                name="answer"
+                type='text'
+                name='answer'
+                onKeyDown={onKeyDownHandler}
                 onChange={changeHandler}
                 value={input}
               />
             </label>
           </ModalBody>
-          <ModalFooter display="flex" justifyContent="center">
-            <Button colorScheme="blue" mr={3} onClick={allSquareHandler}>
+          <ModalFooter display='flex' justifyContent='center'>
+            <Button colorScheme='blue' mr={3} onClick={allSquareHandler}>
               посчитать по площади
             </Button>
-            <Button colorScheme="teal" mr={3} onClick={allVolumeHandler}>
+            <Button colorScheme='teal' mr={3} onClick={allVolumeHandler}>
               посчитать по объему
             </Button>
           </ModalFooter>
@@ -164,13 +186,13 @@ const Massiv = () => {
         itemPrice.map((item) => (
 
 
-         <KardMapSquare id={item.id} img={item.img} model={item.model} name={item.name} priceVolume={item.priceArea} />
+         <KardMapSquare id={item.id} img={item.img} model={item.model} name={item.name} priceArea={item.priceArea} />
 
         ))}
       {boxVisible && (
         <>
           <div>
-            Итоговая стоимость составит {allPricesquareAnswer}.руб на {input}{" "}
+            Итоговая стоимость составит {allPricesquareAnswer}.руб на {input}{' '}
             м.кв.
           </div>
           <Button onClick={submitHandler}>отложить в корзину</Button>
@@ -179,20 +201,22 @@ const Massiv = () => {
 
       {boxVisible2 &&
         itemPrice.map((item) => (
-          <KardMapVolume id={item.id} img={item.img} model={item.model} name={item.name} priceVolume={item.priceVolume} />
-
-        ))}
+          <KardMapVolume id={item.id} img={item.img} model={item.model} name={item.name} priceVolume={item.priceVolume} /> ))}
+{/* 
+         (itemPrice as ProductVolume[]).map((item) => (
+           <KardVolume key={`${item.id}-${item.name}`} productVolume={item} />
+         ))} */}
 
       {boxVisible2 && (
         <>
           <div>
-            Итоговая стоимость составит {allPricesquareAnswer}.руб на {input}{" "}
+            Итоговая стоимость составит {allPricesquareAnswer}.руб на {input}{' '}
             м.кв.
           </div>
           <Button onClick={submitHandler2}>отложить в корзину</Button>
         </>
       )}
-    </>
+    </div>
   );
 };
 

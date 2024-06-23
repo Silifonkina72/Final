@@ -7,6 +7,8 @@ const logger = require('morgan');
 const app = express();
 const apiRouter = require('./routes/apiRouter');
 const loginRouter = require('./routes/login.router');
+const changeRouter = require('./routes/existRouter');
+const nalichieRouter = require('./routes/nalichieRouter');
 // const indexRouter = require('./routers/index');
 const logOutRouter = require('./routes/logout.router');
 const regRouter = require('./routes/registration.router');
@@ -14,9 +16,9 @@ const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 const { PORT } = process.env;
 const corsOptions = {
-  origin: ['http://localhost:5173', 'http://127.0.0.1:5173'],
+  origin: 'http://localhost:5173',
   credentials: true,
-  methods: ['GET', 'POST', 'DELETE'],
+  methods: ['GET', 'POST', 'DELETE', 'PUT', 'PATCH'],
 };
 app.use(cors(corsOptions));
 const sessionConfig = {
@@ -30,11 +32,11 @@ const sessionConfig = {
     httpOnly: true, // секьюрность, оставляем true
   },
 };
+// app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(logger('dev'));
 app.use(express.static(path.join(process.cwd(), 'public/')));
-app.use(cors());
 app.use(session(sessionConfig));
 // app.use('/api/v1', apiRouter);
 // app.use('/login', loginRouter);
@@ -46,6 +48,9 @@ app.use(session(sessionConfig));
 app.use('/registration', regRouter);
 app.use('/logout', logOutRouter);
 app.use('/login', loginRouter);
+app.use('/availability', nalichieRouter);
+app.use('/changer', changeRouter);
+
 
 app.listen(3000, () => {
   console.log(`Сервер запущен на ${PORT} порту`);
