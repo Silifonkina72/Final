@@ -1,13 +1,12 @@
-import {
-  ChangeEvent,
-  KeyboardEvent,
-  useCallback,
-  useMemo,
-  useRef,
-} from 'react';
+import { ChangeEvent, useCallback, useMemo, KeyboardEvent,  useRef } from "react";
+import Karusel from "../../components/Karusel/Karusel";
+import { useAppDispatch, useAppSelector } from "../../hooks";
+import { StainsThunk } from "../../store/thunkActions/StainThunk";
+import { useEffect } from "react";
+import { GroundThunk } from "../../store/thunkActions/groundThunk";
+import { LakThunk } from "../../store/thunkActions/lakThunk";
 import { useState } from 'react';
-import Karusel from '../../components/Karusel/Karusel';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+
 
 import {
   ProductVolume,
@@ -24,22 +23,24 @@ import {
   ModalFooter,
   ModalHeader,
   ModalOverlay,
-  Box,
-  Image,
-  Badge,
-  Flex,
-} from '@chakra-ui/react';
-import KardVolume from '../../components/KardVolume/KardVolume';
-
-import styles from './massiv.module.css';
+} from "@chakra-ui/react";
+import KardMapVolume from "../../components/KardMapVolume/KardMapVolume";
+import KardMapSquare from '../../components/KardMapSquare/KardMapSquare'
 import { useStartEffect } from '../../utils/hooks/useStartEffect';
 
 const Massiv = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [input, setInput] = useState(0);
-  const [boxVisible, setBoxVisible] = useState(false);
-  const [boxVisible2, setBoxVisible2] = useState(false);
+
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [input, setInput] = useState<number>(0);
+  const [boxVisible, setBoxVisible] = useState<boolean>(false);
+  const [boxVisible2, setBoxVisible2] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
+
+
+  //? достаем данные для карусели
+  useEffect(() => {
+    void dispatch(StainsThunk());
+  }, []);
 
   const dispatch = useAppDispatch();
 
@@ -132,7 +133,8 @@ const Massiv = () => {
   }, []);
 
   return (
-    <div className={styles.page}>
+    // <div className={styles.page}>
+    <div >
       <div>Massiv</div>
 
       <Karusel stains={stains} model={'Stain'} />
@@ -182,47 +184,10 @@ const Massiv = () => {
 
       {boxVisible &&
         itemPrice.map((item) => (
-          <Box
-            key={`${item.model}-${item.id}`}
-            maxW='sm'
-            borderWidth='1px'
-            borderRadius='lg'
-            overflow='hidden'
-            mb='4'
-          >
-            <Flex>
-              <Image
-                src={item.img}
-                alt='Card image'
-                boxSize='174px'
-                objectFit='cover'
-              />
 
-              <Box p='6'>
-                <Box display='flex' alignItems='baseline'>
-                  <Badge borderRadius='full' px='2' colorScheme='teal'>
-                    {item.model}
-                  </Badge>
-                </Box>
 
-                <Box
-                  mt='1'
-                  fontWeight='semibold'
-                  as='h4'
-                  lineHeight='tight'
-                  isTruncated
-                >
-                  {item.name}
-                </Box>
-                <Box>
-                  {item.priceArea} руб/м.кв
-                  <Box as='span' color='gray.600' fontSize='sm'></Box>
-                </Box>
+         <KardMapSquare id={item.id} img={item.img} model={item.model} name={item.name} priceArea={item.priceArea} />
 
-                <Box display='flex' mt='2' alignItems='center'></Box>
-              </Box>
-            </Flex>
-          </Box>
         ))}
       {boxVisible && (
         <>
@@ -235,9 +200,12 @@ const Massiv = () => {
       )}
 
       {boxVisible2 &&
-        (itemPrice as ProductVolume[]).map((item) => (
-          <KardVolume key={`${item.id}-${item.name}`} productVolume={item} />
-        ))}
+        itemPrice.map((item) => (
+          <KardMapVolume id={item.id} img={item.img} model={item.model} name={item.name} priceVolume={item.priceVolume} /> ))}
+{/* 
+         (itemPrice as ProductVolume[]).map((item) => (
+           <KardVolume key={`${item.id}-${item.name}`} productVolume={item} />
+         ))} */}
 
       {boxVisible2 && (
         <>

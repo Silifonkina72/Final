@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { StainsThunk } from '../thunkActions/StainThunk';
-import { Stain } from '../../types/stainTypes';
+import { Stain, StainSlice } from '../../types/stainTypes';
 
-interface StainSlice {
+export type StainSliceType = {
   stains: Stain[];
   error: null | string;
 }

@@ -1,0 +1,50 @@
+.chat-container {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .borderChat {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    height: 300px;
+    overflow-y: auto;
+  }
+  
+  .message {
+    margin: 5px 0;
+  }
+  
+  .message span {
+    padding: 10px;
+    border-radius: 10px;
+    display: inline-block;
+  }
+  
+  .message.user {
+    text-align: right; 
+  }
+  
+  .message.user span {
+    background: #aee;
+  }
+  
+  .message.bot {
+    text-align: left; 
+  }
+  
+  .message.bot span {
+    background: #eee;
+  }
+  
+  .input {
+    width: 80%;
+    padding: 10px;
+  }
+  
+  .button {
+    width: 20%;
+    padding: 10px;
+  }
+  

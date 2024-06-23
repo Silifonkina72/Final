@@ -6,8 +6,11 @@ module.exports = (sequelize, DataTypes) => {
   class Lak extends Model {
     
     static associate(models) {
-      this.hasMany(models.Mdf, { foreignKey: 'lak_id' });
-      this.hasMany(models.Massiv, { foreignKey: 'lak_id' });
+      this.belongsToMany(models.Order, { 
+        through: models.OrdersLak,
+        foreignKey: 'lak_id',
+        otherKey: 'order_id'
+      });
     }
   }
   Lak.init({
