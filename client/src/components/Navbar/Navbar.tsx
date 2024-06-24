@@ -11,8 +11,6 @@ export const Navbar = () => {
   const user = useAppSelector((state) => state.logSlice.user); // Правильный путь к пользователю
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  // тестовая строка
-
 
   const logoutHandler = async () => {
     try {

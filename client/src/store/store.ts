@@ -12,6 +12,7 @@ import paintSlice from './slices/paintSlice';
 import acrylicPrimerSlice from './slices/acrylicPrimerSlice'
 import patinaSlice from './slices/patinaSlice'
 import inventorySlice from './slices/inventorySlice';
+import orderSlice from './slices/orderSlice';
 
 ////! import ваших слайсов
 
@@ -29,6 +30,7 @@ const storeOptions = {
     acrylicPrimerSlice,
     patinaSlice,
     inventorySlice,
+    orderSlice,
   },
 };
 

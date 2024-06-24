@@ -7,6 +7,8 @@ import useBasketLocalStorage from './utils/hooks/useBasketLocalStorage';
 function App() {
   useBasketLocalStorage();
 
+  //useEffect
+
   return (
     // <Provider store={store}>
       <AppRoutes />
