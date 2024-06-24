@@ -6,6 +6,7 @@ import { useAppDispatch } from '../../hooks';
 
 export const useStartEffect = () => {
   const dispatch = useAppDispatch();
+  
   useEffect(() => {
     void dispatch(StainsThunk());
   }, []);

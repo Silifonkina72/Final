@@ -7,87 +7,31 @@ const {
   Paint,
   Patina,
   PrimerInsulator,
-  Solvent,
   Stain,
 } = require('../db/models');
 
 acrylicPrimerRouter.get('/', async (req, res) => {
   try {
     const result = [];
-    const primers = await AcrylicPrimer.findAll({ raw: true, nest: true });
-    primers.forEach((primer) => {
-      if (primer.number < 15) {
-        result.push(primer);
-      }
-    });
+    const models = [
+      { model: AcrylicPrimer, label: 'AcrylicPrimers' },
+      { model: Ground, label: 'Grounds' },
+      { model: Lak, label: 'Laks' },
+      { model: Paint, label: 'Paints' },
+      { model: Patina, label: 'Patinas' },
+      { model: PrimerInsulator, label: 'PrimerInsulators' },
+      { model: Stain, label: 'Stains' },
+    ];
 
-    console.log('Primers:', primers);
-
-    const grounds = await Ground.findAll({ raw: true, nest: true });
-    grounds.forEach((ground) => {
-      if (ground.number < 15) {
-        result.push(ground);
-      }
-    });
-
-    console.log('Grounds:', grounds);
-
-    const laks = await Lak.findAll({ raw: true, nest: true });
-    laks.forEach((lak) => {
-      if (lak.number < 15) {
-        result.push(lak);
-      }
-    });
-
-    console.log('Laks:', laks);
-
-    const paints = await Paint.findAll({ raw: true, nest: true });
-    paints.forEach((paint) => {
-      if (paint.number < 15) {
-        result.push(paint);
-      }
-    });
-
-    console.log('Paints:', paints);
-
-    const patinas = await Patina.findAll({ raw: true, nest: true });
-    patinas.forEach((patina) => {
-      if (patina.number < 15) {
-        result.push(patina);
-      }
-    });
-
-    console.log('Patinas:', patinas);
-
-    const primerInsulators = await PrimerInsulator.findAll({
-      raw: true,
-      nest: true,
-    });
-    primerInsulators.forEach((primerInsulator) => {
-      if (primerInsulator.number < 15) {
-        result.push(primerInsulator);
-      }
-    });
-
-    console.log('PrimerInsulators:', primerInsulators);
-
-    const solvents = await Solvent.findAll({ raw: true, nest: true });
-    solvents.forEach((solvent) => {
-      if (solvent.number < 15) {
-        result.push(solvent);
-      }
-    });
-
-    console.log('Solvents:', solvents);
-
-    const stains = await Stain.findAll({ raw: true, nest: true });
-    stains.forEach((stain) => {
-      if (stain.number < 15) {
-        result.push(stain);
-      }
-    });
-
-    console.log('Stains:', stains);
+    for (const { model, label } of models) {
+      const items = await model.findAll({ raw: true, nest: true });
+      items.forEach((item) => {
+        if (item.number < 15) {
+          result.push(item);
+        }
+      });
+      console.log(`${label}:`, items);
+    }
 
     const allResult = result.sort((a, b) => a.number - b.number);
     console.log('All Results:', allResult);
@@ -105,7 +49,6 @@ const models = [
   Paint,
   Patina,
   PrimerInsulator,
-  Solvent,
   Stain,
 ];
 
@@ -164,4 +107,5 @@ acrylicPrimerRouter.post('/', async (req, res) => {
 });
 
 module.exports = acrylicPrimerRouter;
+
 
