@@ -6,8 +6,6 @@ export type ProductVolume = Product & { count: number };
 
 export type BasketState = {
   allPrice: Product[];
-  // itemsSquareВeforeBasket: ProductSquare[]; // до корзины
-  // itemsVolumeВeforeBasket: ProductVolume[]; // до корзины
   itemsSquare: ProductSquare[]; // в корзине
   itemsVolume: ProductVolume[]; // в корзине
 

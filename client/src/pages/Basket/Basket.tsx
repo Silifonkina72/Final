@@ -18,6 +18,7 @@ import {} from './Basket.css';
 import { OneProductSquare } from '../../components/Basket/OneProductSquare';
 import { OneProductVolum } from '../../components/Basket/OneProductVolum';
 import { useEffect, useState } from 'react';
+import { createOrderThunk } from '../../store/thunkActions/createOrderThunk';
 
 const Basket = () => {
   const dispatch = useAppDispatch();
@@ -26,6 +27,13 @@ const Basket = () => {
   const itemsVolume = useAppSelector((state) => state.basketSlice.itemsVolume);
 
   const [totalPrice, setTotalPrice] = useState(0);
+
+
+  const [address, setAddress] = useState('');
+  
+  const handleAddressChange = (event) => {
+      setAddress(event.target.value);
+    };
 
   const calculateTotalPrice = () => {
     let total = 0;
@@ -41,6 +49,10 @@ const Basket = () => {
   useEffect(() => {
     calculateTotalPrice();
   }, [itemsSquare, itemsVolume]);
+
+  const handleToCreate = () => {
+    dispatch(createOrderThunk({allPrice: totalPriceWithDiscount, address: address, itemsSquare, itemsVolume}))
+  }
 
   const discountThreshold = 30000;
   const discountRate = 0.1;
@@ -67,7 +79,7 @@ const Basket = () => {
       <Box p={5} maxWidth='500px' mx='auto'>
         <FormControl mb={5}>
           <FormLabel>Адрес доставки</FormLabel>
-          <Input value='address' placeholder='Введите адрес доставки' />
+          <Input value={address} placeholder='Введите адрес доставки' onChange={handleAddressChange} />
           <Button colorScheme='blue' 
           // onClick={handleCalculateShipping}
           >
@@ -99,7 +111,7 @@ const Basket = () => {
           Общая цена: 200
         </Text>
 
-        <Button colorScheme='teal'>Оформить заказ</Button>
+        <Button colorScheme='teal' onClick={handleToCreate}>Оформить заказ</Button>
       </Box>
     </>
   );
