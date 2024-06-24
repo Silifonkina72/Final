@@ -1,10 +1,17 @@
 const express = require('express');
 const ordersRouter = express.Router();
 const { Order } = require('../db/models'); // Подключаем модель Order
+const { where, Op } = require('sequelize');
 
 ordersRouter.get('/', async (req, res) => {
   try {
-    const orders = await Order.findAll();
+    const orders = await Order.findAll({
+      where: {
+        isForm: {
+          [Op.ne]: null,
+        },
+      },
+    });
     res.json(orders);
   } catch (error) {
     res.status(500).json({ error: 'Произошла ошибка при получении заказов' });
@@ -13,19 +20,18 @@ ordersRouter.get('/', async (req, res) => {
 
 ordersRouter.put('/:id', async (req, res) => {
   const { id } = req.params;
-  const { status } = req.body;
-
+  const { isForm, isAccept, isSent } = req.body;
   try {
     const order = await Order.findByPk(id);
     if (!order) {
       return res.status(404).json({ error: 'Заказ не найден' });
     }
 
-    if (status === 'isSent') {
+    if (isSent) {
       order.isForm = false;
       order.isSent = true;
       order.isAccept = false;
-    } else if (status === 'isAccept') {
+    } else if (isAccept) {
       order.isForm = false;
       order.isSent = false;
       order.isAccept = true;
@@ -49,8 +55,12 @@ ordersRouter.delete('/:id', async (req, res) => {
       return res.status(404).json({ error: 'Заказ не найден' });
     }
 
-    await order.destroy();
-    res.json({ message: 'Заказ удалён' });
+    order.isForm = null;
+    order.isSent = null;
+    order.isAccept = null;
+
+    await order.save();
+    res.json(order);
   } catch (error) {
     res.status(500).json({ error: 'Произошла ошибка при удалении заказа' });
   }

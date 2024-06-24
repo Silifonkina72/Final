@@ -9,7 +9,6 @@ const {
   Paint,
   Patina,
   PrimerInsulator,
-  Solvent,
   Stain,
 } = require('../db/models');
 
@@ -26,7 +25,6 @@ nalichieRouter.get('/', async (req, res) => {
       raw: true,
       nest: true,
     });
-    const solvents = await Solvent.findAll({ raw: true, nest: true });
     const stains = await Stain.findAll({ raw: true, nest: true });
     console.log(grounds);
 
@@ -37,7 +35,6 @@ nalichieRouter.get('/', async (req, res) => {
       ...paints,
       ...patinas,
       ...primerInsulators,
-      ...solvents,
       ...stains,
     );
 

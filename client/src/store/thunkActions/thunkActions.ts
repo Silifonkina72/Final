@@ -8,7 +8,7 @@ export const fetchReg = createAsyncThunk(
   "reg/fetchReg",
   async (inputs: IInputData) => {
     try {
-      // axios.defaults.withCredentials = true;
+      axios.defaults.withCredentials = true;
       const response = await axios.post<IInputData, AxiosResponse<any>>(
         "http://localhost:3000/registration",
         inputs,

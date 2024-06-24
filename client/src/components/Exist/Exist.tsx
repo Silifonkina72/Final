@@ -94,7 +94,7 @@ const AcrylicPrimersList: React.FC = () => {
 
   return (
     <div className={styles.container}>
-       <div className={styles.addNew}>
+      <div className={styles.addNew}>
         <h3>Добавить новый ингредиент</h3>
         <select
           value={newIngredient.model}
@@ -108,7 +108,6 @@ const AcrylicPrimersList: React.FC = () => {
           <option value="Paint">Paint</option>
           <option value="Patina">Patina</option>
           <option value="PrimerInsulator">PrimerInsulator</option>
-          <option value="Solvent">Solvent</option>
           <option value="Stain">Stain</option>
         </select>
         <input
@@ -140,7 +139,10 @@ const AcrylicPrimersList: React.FC = () => {
           placeholder="Price Volume"
           value={newIngredient.priceVolume}
           onChange={(e) =>
-            setNewIngredient({ ...newIngredient, priceVolume: e.target.value })
+            setNewIngredient({
+              ...newIngredient,
+              priceVolume: e.target.value,
+            })
           }
         />
         <input
@@ -225,11 +227,11 @@ const AcrylicPrimersList: React.FC = () => {
           </p>
         </div>
       ))}
-     
     </div>
   );
 };
 
 export default AcrylicPrimersList;
+
 
 
