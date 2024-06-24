@@ -14,8 +14,9 @@ interface AuthState {
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
 }
+
 const initialState: AuthState = {
-  user: undefined,
+  user: JSON.parse(localStorage.getItem('user') || 'null'),
   status: 'idle',
   error: null,
 };
@@ -33,6 +34,7 @@ const logSlice = createSlice({
         state.status = 'succeeded';
         state.user = action.payload;
         state.error = null;
+        localStorage.setItem('user', JSON.stringify(action.payload));
       })
       .addCase(fetchLogin.rejected, (state, action: PayloadAction<string | null>) => {
         state.status = 'failed';
@@ -42,11 +44,13 @@ const logSlice = createSlice({
         state.status = 'succeeded';
         state.user = action.payload;
         state.error = null;
+        localStorage.setItem('user', JSON.stringify(action.payload));
       })
       .addCase(fetchLogOut.fulfilled, (state) => {
         state.status = 'succeeded';
         state.user = null;
         state.error = null;
+        localStorage.removeItem('user');
       })
       .addCase(fetchLogOut.rejected, (state, action: PayloadAction<string | null>) => {
         state.status = 'failed';

@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from 'react';
 import styles from './order.module.css';
 
@@ -14,6 +12,7 @@ export default function Orders() {
     try {
       const response = await fetch('http://localhost:3000/orders');
       const data = await response.json();
+      
       setOrders(data);
     } catch (error) {
       console.error('Ошибка при загрузке заказов:', error);
@@ -22,13 +21,25 @@ export default function Orders() {
 
   const updateOrderStatus = async (id, status) => {
     try {
+      
+      const updatedOrder = orders.find(order => order.id === id);
+      if (status === 'isSent') {
+        updatedOrder.isForm = false;
+        updatedOrder.isSent = true;
+      } else if (status === 'isAccept') {
+        updatedOrder.isSent = false;
+        updatedOrder.isAccept = true;
+      }
       await fetch(`http://localhost:3000/orders/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ status }),
+        
+        
+        body: JSON.stringify(updatedOrder),
       });
+      console.log(updatedOrder);
       fetchOrders();
     } catch (error) {
       console.error('Ошибка при обновлении статуса заказа:', error);
@@ -49,29 +60,46 @@ export default function Orders() {
   return (
     <div className={styles.container}>
       <h2>Заказы тут:</h2>
-      <div>
-        {orders.map((order) => (
-          <div key={order.id} className={styles.order}>
-            <p>Пользователь ID: {order.user_id}</p>
-            <p>Адрес: {order.address}</p>
-            <p>Общая цена: {order.allPrice ?? 'Не указано'}</p>
-            <p>Скидка: {order.discount ?? 'Не указано'}</p>
-            <p>Форма: {order.isForm ? 'Да' : 'Нет'}</p>
-            <p>Отправлено: {order.isSent ? 'Да' : 'Нет'}</p>
-            <p>Принято: {order.isAccept ? 'Да' : 'Нет'}</p>
-            {order.isForm && (
+      <div className={styles.columns}>
+        <div className={styles.column}>
+          <h3>Выходящий заказ</h3>
+          {orders.filter(order => !order.isSent && !order.isAccept).map((order) => (
+            <div key={order.id} className={styles.order}>
+              <p>Пользователь ID: {order.user_id}</p>
+              <p>Адрес: {order.address}</p>
+              <p>Общая цена: {order.allPrice ?? 'Не указано'}</p>
+              <p>Форма: {order.isForm ? 'Да' : 'Нет'}</p>
               <button onClick={() => updateOrderStatus(order.id, 'isSent')}>Отправить</button>
-            )}
-            {order.isSent && (
+            </div>
+          ))}
+        </div>
+        <div className={styles.column}>
+          <h3>Отправлено</h3>
+          {orders.filter(order => order.isSent && !order.isAccept).map((order) => (
+            <div key={order.id} className={styles.order}>
+              <p>Пользователь ID: {order.user_id}</p>
+              <p>Адрес: {order.address}</p>
+              <p>Общая цена: {order.allPrice ?? 'Не указано'}</p>
+              <p>Форма: {order.isForm ? 'Да' : 'Нет'}</p>
               <button onClick={() => updateOrderStatus(order.id, 'isAccept')}>Завершить</button>
-            )}
-            {order.isAccept && (
+            </div>
+          ))}
+        </div>
+        <div className={styles.column}>
+          <h3>Принято</h3>
+          {orders.filter(order => order.isAccept).map((order) => (
+            <div key={order.id} className={styles.order}>
+              <p>Пользователь ID: {order.user_id}</p>
+              <p>Адрес: {order.address}</p>
+              <p>Общая цена: {order.allPrice ?? 'Не указано'}</p>
+              <p>Форма: {order.isForm ? 'Да' : 'Нет'}</p>
               <button onClick={() => deleteOrder(order.id)}>Удалить</button>
-            )}
-          </div>
-        ))}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
 }
+
 

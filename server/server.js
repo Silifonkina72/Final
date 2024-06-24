@@ -30,7 +30,8 @@ const sessionConfig = {
   saveUninitialized: false, // если false, куки появятся только при установке req.session
   cookie: {
     maxAge: 24 * 1000 * 60 * 60, // время жизни в ms, 24(h)*1000(ms)*60(sec)*60(min) = 86400000
-    httpOnly: true, // секьюрность, оставляем true
+    httpOnly: true,
+    secure: false, // секьюрность, оставляем true
   },
 };
 // app.use(cors());
