@@ -15,6 +15,7 @@ export const Navbar = () => {
   const logoutHandler = async () => {
     try {
       await dispatch(fetchLogOut());
+      navigate('./');
     } catch (error) {
       console.error("Ошибка при выходе из системы", error);
     }
@@ -107,53 +108,49 @@ export const Navbar = () => {
       </Suspense>
 
       {isModalOpen && (
-        <dialog open style={{ padding: "0", borderRadius: "10px" }}>
-          <div id="modal-box" style={{ padding: "1rem" }}>
-            <form className="logForm" onSubmit={handleFormSubmit}>
-              <button
-                type="button"
-                id="close-modal-btn"
-                className="btn-close"
-                aria-label="Закрыть"
-                style={{
-                  float: "right",
-                  border: "0px",
-                  backgroundColor: "white",
-                }}
-                onClick={closeModal}
-              >
-                X
-              </button>
-              <h6 className="logErrMsg" />
+          <div className={styles.modalOverlay}>
+          <dialog open style={{ borderRadius: "10px" }}>
+            <div id="modal-box">
+              <form className="logForm" onSubmit={handleFormSubmit}>
+                <button
+                  type="button"
+                  className="btn-close"
+                  aria-label="Закрыть"
+                  onClick={closeModal}
+                >
+                  X
+                </button>
+                <h6 className="logErrMsg" />
 
-              <div className="mb-30">
-                <input
-                  name="login"
-                  placeholder="введите login"
-                  type="text"
-                  className="form-control"
-                  id="exampleInputLogin1"
-                  aria-describedby="loginHelp"
-                />
-              </div>
-              <div className="mb-30">
-                <input
-                  name="password"
-                  placeholder="введите Password"
-                  type="password"
-                  className="form-control"
-                  id="exampleInputPassword1"
-                />
-                <div id="passwordHelp" className="form-text">
-                  Не забывай пассворд!
+                <div className="mb-30">
+                  <input
+                    name="login"
+                    placeholder="Введите логин"
+                    type="text"
+                    className="form-control"
+                    id="exampleInputLogin1"
+                    aria-describedby="loginHelp"
+                  />
                 </div>
-              </div>
-              <button type="submit" className="btn btn-outline-light">
-                Отправить
-              </button>
-            </form>
-          </div>
-        </dialog>
+                <div className="mb-30">
+                  <input
+                    name="password"
+                    placeholder="Введите пароль"
+                    type="password"
+                    className="form-control"
+                    id="exampleInputPassword1"
+                  />
+                  <div id="passwordHelp" className="form-text">
+                    Не забывайте пароль!
+                  </div>
+                </div>
+                <button type="submit" className="btn btn-outline-light">
+                  Отправить
+                </button>
+              </form>
+            </div>
+          </dialog>
+        </div>
       )}
     </>
   );
