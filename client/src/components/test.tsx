@@ -1,23 +1,19 @@
-import { useEffect, useState } from 'react';
-import { YMaps, withYMaps } from '@pbe/react-yandex-maps';
-import axios from 'axios';
+import { useEffect, useState } from "react";
+import { YMaps, withYMaps } from "@pbe/react-yandex-maps";
+import axios from "axios";
 
 const calculateDistance = ({ ymaps, route }) => {
   const [routeLength, setRouteLength] = useState(null);
 
+  const apiKey = `513313f4-6089-4a80-b442-af1d3277a73e`;
+
   useEffect(() => {
     let canceled = false;
-    
-    console.log('1',  ymaps.route);
-    console.log('2',  Boolean(ymaps));
 
     if (ymaps && ymaps.route) {
       ymaps.route(route).then((route) => {
-        console.log('****', route);
-        
         if (!canceled) {
-           
-          setRouteLength(route.getHumanLength().replace('&#160;', ' '));
+          setRouteLength(route.getHumanLength().replace("&#160;", " "));
         }
       });
     }
@@ -26,23 +22,31 @@ const calculateDistance = ({ ymaps, route }) => {
       canceled = true;
     };
   }, [ymaps, ...route]);
+  console.log("routeLength", routeLength);
 
   return routeLength ? (
     <p>
-      The route from <strong>{route[0]}</strong> to <strong>{route[1]}</strong> is <strong>{routeLength}</strong> long
+      The route from <strong>{route[0]}</strong> to <strong>{route[1]}</strong>{" "}
+      is <strong>{routeLength}</strong> long
     </p>
   ) : (
     <p>Loading route...</p>
   );
 };
 
-const ConnectedLengthPrinter = withYMaps(calculateDistance, true, ['route']);
+const ConnectedLengthPrinter = withYMaps(calculateDistance, true, ["route"]);
 
 const Test = () => {
   return (
-    
-      <ConnectedLengthPrinter route={['Россия, город Тюмень, улица Мельникайте, дом 10', 'Россия, город Тюмень, улица Республики, дом 10']} />
-   
+    <>
+      <ConnectedLengthPrinter
+        route={[
+          "Россия, город Тюмень, улица Мельникайте, дом 10",
+          "Россия, город Тюмень, улица Республики, дом 10",
+        ]}
+      />
+      <div>hljhlhil</div>
+    </>
   );
 };
 
