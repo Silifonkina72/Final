@@ -19,12 +19,19 @@ const orderSlice = createSlice({
   reducers: {
     clearError(state) {
         state.error = null;
+      },
+      clearBasket(state) {
+        state.basketItemsVolume = [];
+        state.basketItemsSquare = [];
       }
   },
   extraReducers: (builder) => {
     builder
     .addCase(createOrderThunk.pending, (state) => {
         state.error = null;
+        localStorage.removeItem('basketItemsVolume');
+        localStorage.removeItem('basketItemsSquare');
+        // clearBasket(state);
       })
       .addCase(createOrderThunk.fulfilled, (state, action) => {
         state.products = action.payload;
@@ -36,3 +43,4 @@ const orderSlice = createSlice({
 });
 
 export default orderSlice.reducer;
+export const { clearError, clearBasket } = orderSlice.actions;

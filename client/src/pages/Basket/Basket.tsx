@@ -1,4 +1,3 @@
-
 import {
   Box,
   Button,
@@ -19,10 +18,12 @@ import { OneProductSquare } from '../../components/Basket/OneProductSquare';
 import { OneProductVolum } from '../../components/Basket/OneProductVolum';
 import { useEffect, useState } from 'react';
 import { createOrderThunk } from '../../store/thunkActions/createOrderThunk';
-import Test from '../../components/test';
-
+import { Delivery } from '../../components/Basket/Delivery';
+import { YMaps } from '@pbe/react-yandex-maps';
+const apiKey = '513313f4-6089-4a80-b442-af1d3277a73e';
 
 const Basket = () => {
+  const user = useAppSelector((state) => state.logSlice.user);
   const dispatch = useAppDispatch();
 
   const itemsSquare = useAppSelector((state) => state.basketSlice.itemsSquare);
@@ -30,14 +31,11 @@ const Basket = () => {
 
   const [totalPrice, setTotalPrice] = useState(0);
 
+  // const [address, setAddress] = useState('');
 
-  const [address, setAddress] = useState('');
-  
-  const handleAddressChange = (event) => {
-      setAddress(event.target.value);
-     
-      
-    };
+  // const handleAddressChange = (event) => {
+  //     setAddress(event.target.value);
+  //   };
 
     const handleCalculateShipping =() => {
       console.log('++++', address);
@@ -46,10 +44,16 @@ const Basket = () => {
   const calculateTotalPrice = () => {
     let total = 0;
     if (itemsSquare) {
-      total += itemsSquare.reduce((acc, item) => acc + item.square * item.priceArea, 0);
+      total += itemsSquare.reduce(
+        (acc, item) => acc + item.square * item.priceArea,
+        0
+      );
     }
     if (itemsVolume) {
-      total += itemsVolume.reduce((acc, item) => acc + item.count * item.priceVolume, 0);
+      total += itemsVolume.reduce(
+        (acc, item) => acc + item.count * item.priceVolume,
+        0
+      );
     }
     setTotalPrice(total);
   };
@@ -59,69 +63,61 @@ const Basket = () => {
   }, [itemsSquare, itemsVolume]);
 
   const handleToCreate = () => {
-    dispatch(createOrderThunk({allPrice: totalPriceWithDiscount, address: address, itemsSquare, itemsVolume}))
-  }
-
-  const discountThreshold = 30000;
-  const discountRate = 0.1;
-  const isDiscountApplicable = totalPrice > discountThreshold;
-  const discountAmount = isDiscountApplicable ? totalPrice * discountRate : 0;
-  const totalPriceWithDiscount = totalPrice - discountAmount;
+    dispatch(
+      createOrderThunk({
+        user,
+        allPrice: totalPriceWithDiscount,
+        address: address,
+        itemsSquare,
+        itemsVolume,
+      })
+    );
+  };
 
   return (
     <>
    
       <div className='types'>
         <div className='product'>
+          <p style={{ fontSize: '25px' }}>Товары, рассчитанные по площади</p>
+          <br></br>
+          <p style={{ fontSize: '20px' }}>Обратите внимание! Площадь меняется для всех товаров сразу</p>
           {itemsSquare &&
             itemsSquare.map((item) => (
-              <OneProductSquare key={item.model + item.id} item={item} onPriceUpdate={calculateTotalPrice}/>
+              <OneProductSquare
+                key={item.model + item.id}
+                item={item}
+                onPriceUpdate={calculateTotalPrice}
+              />
             ))}
         </div>
-        <div>
+        <div className='product'>
+          <p style={{ fontSize: '25px' }}>Товары, рассчитанные по объему</p>
+          <br></br>
+          <p style={{ fontSize: '20px' }}>Объем можно менять для каждого товара отдельно</p>
+          <br></br>
           {itemsVolume &&
             itemsVolume.map((item) => (
-              <OneProductVolum key={item.model + item.id} item={item} onPriceUpdate={calculateTotalPrice}/>
+              <OneProductVolum
+                key={item.model + item.id}
+                item={item}
+                onPriceUpdate={calculateTotalPrice}
+              />
             ))}
         </div>
       </div>
-      <Box p={5} maxWidth='500px' mx='auto'>
-        <FormControl mb={5}>
-          <FormLabel>Адрес доставки</FormLabel>
-          <Input value={address} placeholder='Введите адрес доставки' onChange={handleAddressChange} />
-          <Button colorScheme='blue' 
-           onClick={handleCalculateShipping}
-          >
-            Рассчитать стоимость доставки
-          </Button>
-        </FormControl>
-
-        <Text mb={5}>Цена товара: {totalPrice}</Text>
-
-        <Text mb={5}>При покупке больше 30000 скидка 10%</Text>
-        {isDiscountApplicable ? (
-          <>
-            <Text mb={5}>Сумма скидки: {discountAmount}</Text>
-            <Text mb={5} fontWeight='bold'>
-              Цена с учетом скидки: {totalPriceWithDiscount}
-            </Text>
-          </>
-        ) : (
-          <>
-            <Text mb={5}>Сумма скидки: 0</Text>
-            <Text mb={5} fontWeight='bold'>
-              Цена с учетом скидки: {totalPrice}
-            </Text>
-          </>
-        )}
-
-        <Text mb={5}>Цена доставки: 100</Text>
-        <Text mb={5} fontWeight='bold'>
-          Общая цена: 200
-        </Text>
-
-        <Button colorScheme='teal' onClick={handleToCreate}>Оформить заказ</Button>
-      </Box>
+      <YMaps
+        query={{
+          load: 'package.full',
+          apikey: apiKey,
+        }}
+      >
+        <Delivery
+          itemsSquare={itemsSquare}
+          itemsVolume={itemsVolume}
+          totalPrice={totalPrice}
+        />
+      </YMaps>
     </>
   );
 };

@@ -22,11 +22,13 @@ loginRouter.post('/', async (req, res) => {
       const checkPass = await bcrypt.compare(password, user.password);
       if (checkPass) {
         req.session.userId = user.id;
+        const userId = user.id;
+        console.log('user from end', user.id, req.session.userId, userId);
         req.session.login = user.login;
         req.session.isAdmin = user.isAdmin;
         req.session.save(() => {
           console.log('Password correct. Session saved');
-          res.json({ logDone: `Welcome ${user.login}`, login: user.login, isAdmin: user.isAdmin });
+          res.json({ logDone: `Welcome new ${user.login}`, userId, login: user.login, isAdmin: user.isAdmin });
         });
       } else {
         console.log('Wrong password');
