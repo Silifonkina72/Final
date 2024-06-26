@@ -35,8 +35,6 @@ export default function Orders() {
         headers: {
           'Content-Type': 'application/json',
         },
-        
-        
         body: JSON.stringify(updatedOrder),
       });
       console.log(updatedOrder);
@@ -65,7 +63,7 @@ export default function Orders() {
           <h3>Выходящий заказ</h3>
           {orders.filter(order => !order.isSent && !order.isAccept).map((order) => (
             <div key={order.id} className={styles.order}>
-              <p>Пользователь ID: {order.user_id}</p>
+              <p>Пользователь : {order.user_id}</p>
               <p>Адрес: {order.address}</p>
               <p>Общая цена: {order.allPrice ?? 'Не указано'}</p>
               <p>Форма: {order.isForm ? 'Да' : 'Нет'}</p>

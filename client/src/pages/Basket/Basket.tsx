@@ -37,6 +37,10 @@ const Basket = () => {
   //     setAddress(event.target.value);
   //   };
 
+    const handleCalculateShipping =() => {
+      console.log('++++', address);
+    }
+
   const calculateTotalPrice = () => {
     let total = 0;
     if (itemsSquare) {
@@ -72,6 +76,7 @@ const Basket = () => {
 
   return (
     <>
+   
       <div className='types'>
         <div className='product'>
           <p style={{ fontSize: '25px' }}>Товары, рассчитанные по площади</p>
