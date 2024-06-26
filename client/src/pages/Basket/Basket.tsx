@@ -19,6 +19,8 @@ import { OneProductSquare } from '../../components/Basket/OneProductSquare';
 import { OneProductVolum } from '../../components/Basket/OneProductVolum';
 import { useEffect, useState } from 'react';
 import { createOrderThunk } from '../../store/thunkActions/createOrderThunk';
+import Test from '../../components/test';
+
 
 const Basket = () => {
   const dispatch = useAppDispatch();
@@ -33,7 +35,13 @@ const Basket = () => {
   
   const handleAddressChange = (event) => {
       setAddress(event.target.value);
+     
+      
     };
+
+    const handleCalculateShipping =() => {
+      console.log('++++', address);
+    }
 
   const calculateTotalPrice = () => {
     let total = 0;
@@ -62,6 +70,7 @@ const Basket = () => {
 
   return (
     <>
+   
       <div className='types'>
         <div className='product'>
           {itemsSquare &&
@@ -81,7 +90,7 @@ const Basket = () => {
           <FormLabel>Адрес доставки</FormLabel>
           <Input value={address} placeholder='Введите адрес доставки' onChange={handleAddressChange} />
           <Button colorScheme='blue' 
-          // onClick={handleCalculateShipping}
+           onClick={handleCalculateShipping}
           >
             Рассчитать стоимость доставки
           </Button>

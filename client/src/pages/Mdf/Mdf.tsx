@@ -62,6 +62,8 @@ export default function Mdf() {
   const grounds = useAppSelector((store) => store.groundSlice.grounds);
   const { allPrice: itemPrice } = useAppSelector((state) => state.basketSlice);
 
+  console.log('!!!!', patinas);
+  
   //? инпут значение
   const changeHandler = (e: ChangeEvent<HTMLInputElement>): void => {
     setInput(Number(e.target.value));
@@ -391,6 +393,8 @@ export default function Mdf() {
             </ModalFooter>
           </ModalContent>
         </Modal>
+
+
         <Button
           className="raschet"
           colorScheme="teal"

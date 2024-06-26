@@ -36,13 +36,15 @@ const calculateDistance = ({ ymaps, route }) => {
 
 const ConnectedLengthPrinter = withYMaps(calculateDistance, true, ["route"]);
 
-const Test = () => {
+const Test = ({address: address}) => {
+  console.log('address', address);
+  
   return (
     <>
       <ConnectedLengthPrinter
         route={[
           "Россия, город Тюмень, улица Мельникайте, дом 10",
-          "Россия, город Тюмень, улица Республики, дом 10",
+          address,
         ]}
       />
       <div>hljhlhil</div>

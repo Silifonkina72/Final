@@ -6,7 +6,7 @@ import { acrylicPrimerThunk } from '../../store/thunkActions/acrylicPrimerThunk'
 import { patinaThunk } from "../../store/thunkActions/patinaThunk";
 import { GroundThunk } from "../../store/thunkActions/groundThunk";
  import { LakThunkMdf } from "../../store/thunkActions/lakThunk";
-
+ import { StainsThunk } from "../../store/thunkActions/StainThunk";
 
 export const useStartEffectMdf = () => {
   const dispatch = useAppDispatch();
@@ -35,4 +35,7 @@ export const useStartEffectMdf = () => {
     void dispatch(LakThunkMdf());
   }, []);
 
+  // useEffect(() => {
+  //   void dispatch(StainsThunk());
+  // }, []);
 };
