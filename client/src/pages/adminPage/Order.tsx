@@ -12,7 +12,6 @@ export default function Orders() {
     try {
       const response = await fetch('http://localhost:3000/orders');
       const data = await response.json();
-      
       setOrders(data);
     } catch (error) {
       console.error('Ошибка при загрузке заказов:', error);
@@ -21,8 +20,9 @@ export default function Orders() {
 
   const updateOrderStatus = async (id, status) => {
     try {
-      
       const updatedOrder = orders.find(order => order.id === id);
+      console.log(updatedOrder);
+      
       if (status === 'isSent') {
         updatedOrder.isForm = false;
         updatedOrder.isSent = true;
@@ -35,11 +35,8 @@ export default function Orders() {
         headers: {
           'Content-Type': 'application/json',
         },
-        
-        
-        body: JSON.stringify(updatedOrder),
+          body: JSON.stringify(updatedOrder),
       });
-      console.log(updatedOrder);
       fetchOrders();
     } catch (error) {
       console.error('Ошибка при обновлении статуса заказа:', error);
@@ -69,7 +66,7 @@ export default function Orders() {
               <p>Адрес: {order.address}</p>
               <p>Общая цена: {order.allPrice ?? 'Не указано'}</p>
               <p>Форма: {order.isForm ? 'Да' : 'Нет'}</p>
-              <button onClick={() => updateOrderStatus(order.id, 'isSent')}>Отправить</button>
+              <button onClick={() => updateOrderStatus(order.id, 'isSent', order)}>Отправить</button>
             </div>
           ))}
         </div>
@@ -81,7 +78,7 @@ export default function Orders() {
               <p>Адрес: {order.address}</p>
               <p>Общая цена: {order.allPrice ?? 'Не указано'}</p>
               <p>Форма: {order.isForm ? 'Да' : 'Нет'}</p>
-              <button onClick={() => updateOrderStatus(order.id, 'isAccept')}>Завершить</button>
+              <button onClick={() => updateOrderStatus(order.id, 'isAccept', order)}>Завершить</button>
             </div>
           ))}
         </div>
@@ -101,5 +98,6 @@ export default function Orders() {
     </div>
   );
 }
+
 
 
