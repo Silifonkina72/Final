@@ -51,9 +51,9 @@ app.use(session(sessionConfig));
 app.use('/registration', regRouter);
 app.use('/logout', logOutRouter);
 app.use('/login', loginRouter);
-app.use('/availability', checkAdmin, nalichieRouter);
-app.use('/changer', checkAdmin, changeRouter);
-app.use('/orders', checkAdmin, ordersRouter);
+app.use('/availability', nalichieRouter);
+app.use('/changer', changeRouter);
+app.use('/orders',  ordersRouter);
 
 app.listen(3000, () => {
   console.log(`Сервер запущен на ${PORT} порту`);

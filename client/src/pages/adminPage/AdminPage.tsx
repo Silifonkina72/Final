@@ -5,8 +5,6 @@ export default function AdminPage() {
   return (
     <>
       <div className="contener">
-        <div>Остаток :</div>
-        {/* <AcrylicPrimersList /> */}
         <AdminTable />
       </div>
     </>

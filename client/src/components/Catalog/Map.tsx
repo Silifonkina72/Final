@@ -71,38 +71,6 @@ const MyMap = (): JSX.Element => {
   }, []);
 
 
-
-
-  // useEffect(() => {
-  //   const calculateDistance = async () => {
-  //     console.log('ymaps1', placemarks);
-  //     if (placemarks.length >= 2) {
-  //       const ymaps = await window.ymaps.ready();
-  //       console.log('ymaps2');
-  //       ymaps.route(
-  //         [
-  //           placemarks[0].coords,
-  //           placemarks[1].coords
-  //         ],
-  //         {
-  //           mapStateAutoApply: true
-  //         }
-  //       ).then((route: any) => {
-  //         const distance = route.getLength();
-  //         setDistance(distance);
-  //         console.log('Calculated distance: ', distance);
-  //       }).catch((error: any) => {
-  //         console.error("Error calculating distance:", error);
-  //       });
-  //     }
-  //   };
-
-  //   calculateDistance();
-  // }, [placemarks]);
-
-
-
-
   //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   useEffect(() => {
     // Проверка, поддерживает ли браузер API геолокации
@@ -140,7 +108,7 @@ const MyMap = (): JSX.Element => {
           <Placemark key={coords} geometry={coords} />
         ))}
       </Map>
-      <Test/>
+    
     </div>
   );
 };

@@ -4,13 +4,64 @@ import styles from "./navbar.module.css";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { fetchLogOut, fetchLogin } from "../../store/thunkActions/thunkActions";
 import { Suspense } from "react";
+import {
+  Modal,
+  Button,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Input,
+  Text,
+} from "@chakra-ui/react";
 
 export const Navbar = () => {
+
+  const isAdmin = () => user?.isAdmin ?? false;
+  const isAuth = () => !!user?.logDone;
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const user = useAppSelector((state) => state.logSlice.user); // Правильный путь к пользователю
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [inputs, setInputs] = useState({ login: "", password: "" });
+  const [erer, setErer] = useState({text: ''})
+
+  useEffect(() => {
+    setErer({text: ''})
+  }, []);
+
+  useEffect(() => {
+    if (isAuth() && isAdmin()) {
+      navigate('/orders');
+      console.log(')))))', (isAuth() && isAdmin()));
+      console.log('фдм', (isAdmin()));
+      console.log('зарег', (isAuth() ));
+      
+    //     setErer({text: ''})
+      
+    // } else {
+     
+    //     setErer({text: 'Введите корректный логин или пароль!'})
+      
+    }
+  }, [user]);
+
+
+  useEffect(() => {
+    console.log(1);
+    setInputs({ login: '', password: '' });
+    console.log(2);
+  }, [isModalOpen]);
+
+  //? инпут значение
+
+  const changeHandler = (e) => {
+    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
 
   const logoutHandler = async () => {
     try {
@@ -26,132 +77,164 @@ export const Navbar = () => {
   };
 
   const closeModal = () => {
+    setInputs({ login: "", password: "" });
+    setErer({text: ''})
     setIsModalOpen(false);
   };
 
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const login = formData.get("login") as string;
-    const password = formData.get("password") as string;
-    try {
-      await dispatch(fetchLogin({ login, password })).unwrap();
-      closeModal();
-    } catch (err) {
-      console.error("Failed to login:", err);
-    }
-    closeModal();
-  };
+  
 
-  const isAdmin = () => user?.isAdmin ?? false;
-  const isAuth = () => !!user;
+  
+
+  const userNav = useAppSelector((state) => state.logSlice.user);
+  const userLogin = userNav?.login;
+
+  const handleFormSubmit = async (): Promise<void> => {
+    await dispatch(fetchLogin(inputs));
+    setInputs({ login: "", password: "" });
+    console.log('*****', user);
+    if (isAdmin()) {
+      navigate('/orders');
+    }
+  };
 
   return (
     <>
       <div className={styles.navbar}>
-        <Link className={styles.link} to="/">
-          Тут будет название
-        </Link>
-        <Link className={styles.link} to='/massiv'>
-          Массив
-        </Link>
-        {/* <div className={styles.title}></div> */}
         {isAuth() ? (
           isAdmin() ? (
             <>
-            
-              <Link className={styles.link} to="/changer">
-                Изменение
-              </Link>
-              <Link className={styles.link} to="/availability">
-                Наличие
-              </Link>
-              <Link className={styles.link} to="/orders">
-                Заказы
-              </Link>
-              <button
-                onClick={logoutHandler}
-                className="btn btn-outline-dark me-2 p-2"
-              >
-                Выйти
-              </button>
+              <div className={styles.leftLinks}>
+                <div className={styles.leftLinks}>
+                  Приветствую,
+                  <span className={styles.userName}>{userLogin}!</span>
+                </div>
+                <Link className={styles.link} to="/changer">
+                  Изменение
+                </Link>
+                <Link className={styles.link} to="/availability">
+                  Остаток
+                </Link>
+                <Link className={styles.link} to="/orders">
+                  Текущие заказы
+                </Link>
+              </div>
+
+              <div className={styles.rightLinks}>
+                <Link onClick={logoutHandler} className={styles.link} to="/">
+                  Выйти
+                </Link>
+              </div>
             </>
           ) : (
             <>
-              <Link className={styles.link} to="/basket">
-                Корзина
-              </Link>
-              <button
-                onClick={logoutHandler}
-                className="btn btn-outline-dark me-2 p-2"
-              >
-                Выйти
-              </button>
+              <div className={styles.leftLinks}>
+                <div className={styles.leftLinks}>
+                  Приветствую,
+                  <span className={styles.userName}>{userLogin}!</span>
+                </div>
+
+                <Link className={styles.link} to="/">
+                  Главная
+                </Link>
+                <Link className={styles.link} to="/massiv">
+                  Массив
+                </Link>
+                <Link className={styles.link} to="/mdf">
+                  МДФ
+                </Link>
+                <Link className={styles.link} to="/basket">
+                  Корзина
+                </Link>
+              </div>
+
+              <div className={styles.rightLinks}>
+                <Link onClick={logoutHandler} className={styles.link} to="/">
+                  Выйти
+                </Link>
+              </div>
             </>
           )
         ) : (
           <>
-            <button
-              onClick={loginHandler}
-              className="btn btn-outline-dark me-2 p-2"
-            >
-              Войти!
-            </button>
-            <Link className={styles.link} to="/registration">
-              Зарегистрироваться
-            </Link>
+            <div className={styles.leftLinks}>
+              <Link className={styles.link} to="/">
+                Главная
+              </Link>
+              <Link className={styles.link} to="/massiv">
+                Массив
+              </Link>
+              <Link className={styles.link} to="/mdf">
+                МДФ
+              </Link>
+            </div>
+            <div className={styles.rightLinks}>
+              <Link onClick={loginHandler} to="/" className={styles.link}>
+                Войти
+              </Link>
+              <Link className={styles.link} to="/registration">
+                Зарегистрироваться
+              </Link>
+            </div>
           </>
         )}
       </div>
+
       <Suspense fallback={<>Загрузка</>}>
         <Outlet />
       </Suspense>
 
-      {isModalOpen && (
-          <div className={styles.modalOverlay}>
-          <dialog open style={{ borderRadius: "10px" }}>
-            <div id="modal-box">
-              <form className="logForm" onSubmit={handleFormSubmit}>
-                <button
-                  type="button"
-                  className="btn-close"
-                  aria-label="Закрыть"
-                  onClick={closeModal}
-                >
-                  X
-                </button>
-                <h6 className="logErrMsg" />
+      <Modal isOpen={isModalOpen} onClose={closeModal}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Введите ваш логин и пароль</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            {/* <Text color="red.700">{user?.logErr}</Text> */}
+            <Text color="red.700">{erer.text}</Text>
+            <label>
+              <input
+                // ref={inputRef}
+                style={{
+                  margin: "10px",
+                  borderColor: "black",
+                  borderWidth: "2px",
+                  borderRadius: "5px",
+                }}
+                type="text"
+                name="login"
+                placeholder="Введите логин"
+                // id="exampleInputLogin1"
+                onChange={changeHandler}
+                value={inputs.login}
+              />
+              <input
+                style={{
+                  margin: "10px",
+                  borderColor: "black",
+                  borderWidth: "2px",
+                  borderRadius: "5px",
+                }}
+                type="password"
+                name="password"
+                placeholder="Введите password"
+                // id="exampleInputLogin1"
+                onChange={changeHandler}
+                value={inputs.password}
+              />
+            </label>
+          </ModalBody>
 
-                <div className="mb-30">
-                  <input
-                    name="login"
-                    placeholder="Введите логин"
-                    type="text"
-                    className="form-control"
-                    id="exampleInputLogin1"
-                    aria-describedby="loginHelp"
-                  />
-                </div>
-                <div className="mb-30">
-                  <input
-                    name="password"
-                    placeholder="Введите пароль"
-                    type="password"
-                    className="form-control"
-                    id="exampleInputPassword1"
-                  />
-                  <div id="passwordHelp" className="form-text">
-                    Не забывайте пароль!
-                  </div>
-                </div>
-                <button type="submit" className="btn btn-outline-light">
-                  Отправить
-                </button>
-              </form>
-            </div>
-          </dialog>
-        </div>
-      )}
+          <ModalFooter display="flex" justifyContent="center">
+            <Button colorScheme="blue" mr={3} onClick={handleFormSubmit}>
+              Войти
+            </Button>
+            <Button colorScheme="purple" mr={3} onClick={closeModal}>
+              Закрыть
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </>
   );
 };
