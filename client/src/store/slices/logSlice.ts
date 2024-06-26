@@ -30,10 +30,13 @@ const logSlice = createSlice({
       .addCase(fetchLogin.pending, (state) => {
         state.status = 'loading';
       })
+
       .addCase(fetchLogin.fulfilled, (state, action: PayloadAction<User>) => {
         state.status = 'succeeded';
         state.user = action.payload;
         state.error = null;
+        console.log('state.user!!!!! ', state.user);
+        
         localStorage.setItem('user', JSON.stringify(action.payload));
       })
       .addCase(fetchLogin.rejected, (state, action: PayloadAction<string | null>) => {

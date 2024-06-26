@@ -14,9 +14,11 @@ function Karusel({ stains, model }: Props): JSX.Element {
   return (
     <Carousel
       width={400}
-      showThumbs={false}
-      // infiniteLoop={true}
+      //showThumbs={true}
+       infiniteLoop={true}
       showStatus={false}
+      showIndicators={false}
+      className='karusel'
     >
       {stains.map((stain) => (
         <OneComponentKarusel

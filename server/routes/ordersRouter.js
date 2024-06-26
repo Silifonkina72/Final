@@ -13,6 +13,17 @@ ordersRouter.get("/", async (req, res) => {
           [Op.ne]: null,
         },
       },
+      include: [
+        {
+          model: User, 
+          as: 'user',  
+        },
+        {
+          model: Material, 
+          as: 'materials', 
+          through: { attributes: [] }, 
+        },
+      ],
     });
     res.json(orders);
   } catch (error) {

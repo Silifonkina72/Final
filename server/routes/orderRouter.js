@@ -20,15 +20,13 @@ const {
 } = require('../db/models');
 
 orderRouter.post('/', async (req, res) => {
-  const { allPrice, address, itemsSquare, itemsVolume } = req.body;
-  // console.log('aaaaaaall', itemsVolume);
-  const user_id = req.session.userId;
-  //   console.log(' uuuuuuser', req.session);
-
+  const { user, allPrice, address } = req.body;
+  console.log(user);
+  const user_id = user.userId;
   try {
     const newOrder = await Order.create({
       allPrice,
-      user_id: 1,
+      user_id,
       isForm: false,
       isSent: false,
       isAccept: true,
@@ -44,218 +42,120 @@ orderRouter.post('/', async (req, res) => {
 
 orderRouter.post('/product', async (req, res) => {
   const { order, id } = req.body;
-  //   console.log('iiiiiiid', id);
   const order_id = id;
   const { itemsSquare, itemsVolume } = order;
-  //   console.log('aaaaaaall', itemsSquare, itemsVolume);
 
-  for (const product of itemsVolume) {
-    const { model, id: productId, count } = product;
+  try {
+    const volumePromises = itemsVolume.map((product) => {
+      const { model, id: productId, count } = product;
 
-    switch (model) {
-      case 'Lak':
-        try {
-          const newOrder = await OrdersLak.create({
+      switch (model) {
+        case 'Lak':
+          return OrdersLak.create({
             lak_id: productId,
             order_id,
             quantity: count,
           });
-          res.status(201).json(newOrder);
-        } catch (error) {
-          console.error('Error creating order:', error);
-          res.status(500).json({ error: 'Error creating order' });
-        }
-        break;
-
-      case 'AcrylicPrimer':
-        try {
-          const newOrder = await OrdersAcrylicPrimer.create({
+        case 'AcrylicPrimer':
+          return OrdersAcrylicPrimer.create({
             acrylicPrimer_id: productId,
             order_id,
             quantity: count,
           });
-          res.status(201).json(newOrder);
-        } catch (error) {
-          console.error('Error creating order:', error);
-          res.status(500).json({ error: 'Error creating order' });
-        }
-        break;
-
-      case 'Ground':
-        try {
-          const newOrder = await OrdersGround.create({
+        case 'Ground':
+          return OrdersGround.create({
             ground_id: productId,
             order_id,
             quantity: count,
           });
-          res.status(201).json(newOrder);
-        } catch (error) {
-          console.error('Error creating order:', error);
-          res.status(500).json({ error: 'Error creating order' });
-        }
-        break;
-
-      case 'Paint':
-        try {
-          const newOrder = await OrdersPaint.create({
+        case 'Paint':
+          return OrdersPaint.create({
             paint_id: productId,
             order_id,
             quantity: count,
           });
-          res.status(201).json(newOrder);
-        } catch (error) {
-          console.error('Error creating order:', error);
-          res.status(500).json({ error: 'Error creating order' });
-        }
-        break;
-
-      case 'Patina':
-        try {
-          const newOrder = await OrdersPatina.create({
+        case 'Patina':
+          return OrdersPatina.create({
             patina_id: productId,
             order_id,
             quantity: count,
           });
-          res.status(201).json(newOrder);
-        } catch (error) {
-          console.error('Error creating order:', error);
-          res.status(500).json({ error: 'Error creating order' });
-        }
-        break;
-
-      case 'PrimerInsulator':
-        try {
-          const newOrder = await OrdersPrimerInsulator.create({
+        case 'PrimerInsulator':
+          return OrdersPrimerInsulator.create({
             primerInsulator_id: productId,
             order_id,
             quantity: count,
           });
-          res.status(201).json(newOrder);
-        } catch (error) {
-          console.error('Error creating order:', error);
-          res.status(500).json({ error: 'Error creating order' });
-        }
-        break;
-
-      case 'Stain':
-        try {
-          const newOrder = await OrdersStain.create({
+        case 'Stain':
+          return OrdersStain.create({
             stain_id: productId,
             order_id,
             quantity: count,
           });
-          res.status(201).json(newOrder);
-        } catch (error) {
-          console.error('Error creating order:', error);
-          res.status(500).json({ error: 'Error creating order' });
-        }
-        break;
-    }
-  }
+        default:
+          return null;
+      }
+    });
 
-
-  for (const product of itemsSquare) {
-    const { model, id: productId, count } = product;
-
-    switch (model) {
-      case 'Lak':
-        try {
-          const newOrder = await OrdersLak.create({
+    const squarePromises = itemsSquare.map((product) => {
+      const { model, id: productId, square } = product;
+      const count = Math.ceil(square / 4);
+      switch (model) {
+        case 'Lak':
+          return OrdersLak.create({
             lak_id: productId,
             order_id,
             quantity: count,
           });
-          res.status(201).json(newOrder);
-        } catch (error) {
-          console.error('Error creating order:', error);
-          res.status(500).json({ error: 'Error creating order' });
-        }
-        break;
-
-      case 'AcrylicPrimer':
-        try {
-          const newOrder = await OrdersAcrylicPrimer.create({
+        case 'AcrylicPrimer':
+          return OrdersAcrylicPrimer.create({
             acrylicPrimer_id: productId,
             order_id,
             quantity: count,
           });
-          res.status(201).json(newOrder);
-        } catch (error) {
-          console.error('Error creating order:', error);
-          res.status(500).json({ error: 'Error creating order' });
-        }
-        break;
-
-      case 'Ground':
-        try {
-          const newOrder = await OrdersGround.create({
+        case 'Ground':
+          return OrdersGround.create({
             ground_id: productId,
             order_id,
             quantity: count,
           });
-          res.status(201).json(newOrder);
-        } catch (error) {
-          console.error('Error creating order:', error);
-          res.status(500).json({ error: 'Error creating order' });
-        }
-        break;
-
-      case 'Paint':
-        try {
-          const newOrder = await OrdersPaint.create({
+        case 'Paint':
+          return OrdersPaint.create({
             paint_id: productId,
             order_id,
             quantity: count,
           });
-          res.status(201).json(newOrder);
-        } catch (error) {
-          console.error('Error creating order:', error);
-          res.status(500).json({ error: 'Error creating order' });
-        }
-        break;
-
-      case 'Patina':
-        try {
-          const newOrder = await OrdersPatina.create({
+        case 'Patina':
+          return OrdersPatina.create({
             patina_id: productId,
             order_id,
             quantity: count,
           });
-          res.status(201).json(newOrder);
-        } catch (error) {
-          console.error('Error creating order:', error);
-          res.status(500).json({ error: 'Error creating order' });
-        }
-        break;
-
-      case 'PrimerInsulator':
-        try {
-          const newOrder = await OrdersPrimerInsulator.create({
+        case 'PrimerInsulator':
+          return OrdersPrimerInsulator.create({
             primerInsulator_id: productId,
             order_id,
             quantity: count,
           });
-          res.status(201).json(newOrder);
-        } catch (error) {
-          console.error('Error creating order:', error);
-          res.status(500).json({ error: 'Error creating order' });
-        }
-        break;
-
-      case 'Stain':
-        try {
-          const newOrder = await OrdersStain.create({
+        case 'Stain':
+          return OrdersStain.create({
             stain_id: productId,
             order_id,
             quantity: count,
           });
-          res.status(201).json(newOrder);
-        } catch (error) {
-          console.error('Error creating order:', error);
-          res.status(500).json({ error: 'Error creating order' });
-        }
-        break;
-    }
+        default:
+          return null; 
+      }
+    });
+
+    // Ожидаем выполнения всех промисов
+    await Promise.all(volumePromises);
+    await Promise.all(squarePromises);
+
+    res.status(201).json({ message: 'Orders created successfully' });
+  } catch (error) {
+    console.error('Error creating orders:', error);
+    res.status(500).json({ error: 'Error creating orders' });
   }
 });
 

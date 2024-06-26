@@ -33,9 +33,11 @@ import {
   Th,
   Td,
   Box,
+  Heading,
 } from "@chakra-ui/react";
 import KardMapVolume from "../../components/KardMapVolume/KardMapVolume";
 import KardMapSquare from "../../components/KardMapSquare/KardMapSquare";
+import "./mdfAndMassiv.css";
 
 export default function Mdf() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -60,6 +62,8 @@ export default function Mdf() {
   const grounds = useAppSelector((store) => store.groundSlice.grounds);
   const { allPrice: itemPrice } = useAppSelector((state) => state.basketSlice);
 
+  console.log('!!!!', patinas);
+  
   //? инпут значение
   const changeHandler = (e: ChangeEvent<HTMLInputElement>): void => {
     setInput(Number(e.target.value));
@@ -137,170 +141,306 @@ export default function Mdf() {
   //! полная стоимость (по площади)
   const allCostMassiv = itemPrice.reduce((acc, el) => acc + el.priceArea, 0);
   const allPricesquareAnswer = useMemo(() => input * allCostMassiv, [input]);
-  console.log("++++++", primerInsulators);
 
   const rows = [];
   for (let i = 0; i < paints.length; i += 9) {
     rows.push(paints.slice(i, i + 9));
   }
 
+  const rowsPatina = [];
+  for (let i = 0; i < patinas.length; i += 4) {
+    rowsPatina.push(patinas.slice(i, i + 4));
+  }
+
+  console.log("????? ", acrylicPrimers);
+
   return (
     <>
-      <div>Mdf</div>
-
-      <Karusel stains={primerInsulators} model={"PrimerInsulator"} />
-
-      <Box p={4} width="40%">
-        <Table variant="simple" size="md">
-          <Tbody>
-            <Tr>
-              {primerInsulators.map((el) => (
-                <Td>
-                  <img src={el.img} alt="el" width="100px" />
-                </Td>
-              ))}
-            </Tr>
-          </Tbody>
-        </Table>
+      <Box className="textHeading">
+        <div>
+          Если вы хотите придать поверхности эффект старения или изменения
+          оттенка, вам необходимо будет выбрать 6 компонентов: грунт-изолятор,
+          заполняющий грунт, краску, акриловый грунт, патину и лак. Если такой
+          необходимости нет, то необходимо выбрать 3 компонента: грунт-изолятор,
+          заполняющий грунт и краску.
+        </div>
       </Box>
 
-      <br />
-
-      <Karusel stains={paints} model={"Paint"} />
-
-      <Box p={4} width="40%" mx="auto">
-        <Table variant="simple" size="md" sx={{ borderCollapse: 'collapse' }}>
-          <Tbody>
-            {rows.map((row, rowIndex) => (
-              <Tr key={rowIndex}>
-                {row.map((el, colIndex) => (
-                  <Td key={colIndex} p={0} border={0} style={{ padding: '3px' }}>
-                    <img src={el.img} alt={`paint-${rowIndex}-${colIndex}`} width="100px" style={{ margin: '3px' }} />
-                  </Td>
-                ))}
-                {row.length < 5 &&
-                  Array.from({ length: 5 - row.length }).map((_, index) => (
-                    <Td key={`empty-${index}`} p={0} border={0} style={{ padding: '3px' }} />
-                  ))}
-              </Tr>
-            ))}
-          </Tbody>
-        </Table>
-      </Box>
-
-      <br />
-      <Karusel stains={acrylicPrimers} model={"AcrylicPrimer"} />
-      <br />
-      <Karusel stains={patinas} model={"Patina"} />
-      <br />
-      <Karusel stains={laks} model={"Lak"} />
-      <br />
-      <Karusel stains={grounds} model={"Ground"} />
-
-      <Modal isOpen={isOpen} onClose={closeModal}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>
-            Как вы хотите расчитать стоимость? Исходя из площади или из объема?
-          </ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <label>
-              Укажите площадь и нажмите посчитать по{" "}
-              <span style={{ color: "purple", fontWeight: "bold" }}>
-                площади
-              </span>{" "}
-              или нажмите посчитать по{" "}
-              <span style={{ color: "purple", fontWeight: "bold" }}>
-                объему
-              </span>
-              <input
-                ref={inputRef}
-                style={{
-                  margin: "10px",
-                  borderColor: "black",
-                  borderWidth: "2px",
-                  borderRadius: "5px",
-                }}
-                type="text"
-                name="answer"
-                placeholder="укажите вашу площадь"
-                onKeyDown={onKeyDownHandler}
-                onChange={changeHandler}
-                value={input}
-              />
-            </label>
-          </ModalBody>
-
-          <ModalFooter display="flex" justifyContent="center">
-            <Button colorScheme="blue" mr={3} onClick={allSquareHandler}>
-              посчитать по площади
-            </Button>
-            <Button colorScheme="teal" mr={3} onClick={allVolumeHandler}>
-              посчитать по объему
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-      <Button onClick={openModal}>рассчитать стоимость</Button>
-
-      {boxVisible &&
-        itemPrice.map((item) => (
-          <KardMapSquare
-            id={item.id}
-            img={item.img}
-            model={item.model}
-            name={item.name}
-            priceArea={item.priceArea}
-          />
-        ))}
-      {boxVisible && (
-        <>
+      <div className="containerComponent">
+        <Box className="containerBox">
           <div>
-            Итоговая стоимость составит {allPricesquareAnswer}.руб на {input}{" "}
-            м.кв.
+            <Karusel stains={primerInsulators} model={"PrimerInsulator"} />
           </div>
-          <Button onClick={submitHandler}>отложить в корзину</Button>
-        </>
-      )}
 
-      {boxVisible2 &&
-        itemPrice.map((item) => (
-          <KardMapVolume
-            id={item.id}
-            img={item.img}
-            model={item.model}
-            name={item.name}
-            priceVolume={item.priceVolume}
-          />
-        ))}
+          <ol>
+            {primerInsulators.map((el) => (
+              <li>
+                <Button>{el.name}</Button>
+              </li>
+            ))}
+          </ol>
+        </Box>
 
-      {boxVisible2 && (
-        <>
-          <Button onClick={submitHandler2}>отложить в корзину</Button>
-        </>
-      )}
+        <div className="textComponent">
+          * Грунтовка-изолятор – это специальная грунтовка, предназначенная для{" "}
+          <br /> изоляции поверхностей от влаги или других веществ.
+        </div>
+        <br />
 
-      <Box p={4} width="40%">
-        <Table variant="simple" size="md">
-          <Tbody>
-            <Tr>
-              <Td>Data 1</Td>
-              <Td>Data 2</Td>
-              <Td>Data 3</Td>
-              <Td>Data 4</Td>
-              <Td>Data 5</Td>
-            </Tr>
-            <Tr>
-              <Td>Data 6</Td>
-              <Td>Data 7</Td>
-              <Td>Data 8</Td>
-              <Td>Data 9</Td>
-              <Td>Data 10</Td>
-            </Tr>
-          </Tbody>
-        </Table>
-      </Box>
+        <Box className="containerBox">
+          <div>
+            <Karusel stains={paints} model={"Paint"} />
+          </div>
+          <Box p={4} width="40%" minWidth="400px" minHeight="300px">
+            <Table
+              variant="simple"
+              size="md"
+              sx={{ borderCollapse: "collapse" }}
+            >
+              <Tbody>
+                {rows.map((row, rowIndex) => (
+                  <Tr key={rowIndex}>
+                    {row.map((el, colIndex) => (
+                      <Td
+                        key={colIndex}
+                        p={0}
+                        border={0}
+                        style={{ padding: "1px" }}
+                      >
+                        <button>
+                          {" "}
+                          <img
+                            src={el.img}
+                            alt={`paint-${rowIndex}-${colIndex}`}
+                            width="100px"
+                            style={{ margin: "1px" }}
+                          />
+                        </button>
+                      </Td>
+                    ))}
+                    {row.length < 5 &&
+                      Array.from({ length: 5 - row.length }).map((_, index) => (
+                        <Td
+                          key={`empty-${index}`}
+                          p={0}
+                          border={0}
+                          style={{ padding: "3px" }}
+                        />
+                      ))}
+                  </Tr>
+                ))}
+              </Tbody>
+            </Table>
+          </Box>
+          
+        </Box>
+
+        <div className="textComponent">
+          * Краска – это материал, используемый для окрашивания поверхностей.
+          <br />У нас предоставлено более 50 видов краски.
+        </div>
+
+        <br />
+        <Box className="containerBox">
+          <div>
+            <Karusel stains={acrylicPrimers} model={"AcrylicPrimer"} />
+          </div>
+          <ol>
+            {acrylicPrimers.map((el) => (
+              <li>
+                <Button>{el.name}</Button>
+              </li>
+            ))}
+          </ol>
+        </Box>
+        <div className="textComponent">
+          * Акриловый грунт – это материал или покрытие на основе акрила, <br />
+          обычно обладающее хорошей стойкостью и эластичностью.
+        </div>
+        <br />
+
+        <Box className="containerBox">
+          <div>
+            <Karusel stains={patinas} model={"Patina"} />
+          </div>
+          <Box p={4} width="40%" minWidth="400px" minHeight="150px" sx={{ alignSelf: "center" }}>
+            <Table
+              variant="simple"
+              size="md"
+              // sx={{ borderCollapse: "collapse" }}
+            >
+              <Tbody>
+                {rowsPatina.map((row, rowIndex) => (
+                  <Tr key={rowIndex}>
+                    {row.map((el, colIndex) => (
+                      <Td
+                        key={colIndex}
+                        p={0}
+                        border={0}
+                        style={{ padding: "1px" }}
+                      >
+                        <button>
+                          {" "}
+                          <img
+                            src={el.img}
+                            alt={`paint-${rowIndex}-${colIndex}`}
+                            width="900px"
+                            style={{ margin: "0,5 px" }}
+                          />
+                        </button>
+                      </Td>
+                    ))}
+                    {row.length < 5 &&
+                      Array.from({ length: 5 - row.length }).map((_, index) => (
+                        <Td
+                          key={`empty-${index}`}
+                          p={0}
+                          border={0}
+                          style={{ padding: "1px" }}
+                        />
+                      ))}
+                  </Tr>
+                ))}
+              </Tbody>
+            </Table>
+          </Box>
+        </Box>
+        <div className="textComponent">
+          * Патина – это специальное средство для придания поверхности
+          <br />
+          эффекта старения или изменения оттенка.
+        </div>
+        <br />
+
+        <Box className="containerBox">
+          <div>
+            <Karusel stains={laks} model={"Lak"} />
+          </div>
+          <ol>
+            {laks.map((el) => (
+              <li>
+                <Button>{el.name}</Button>
+              </li>
+            ))}
+          </ol>
+        </Box>
+        <div className="textComponent">
+          * Лак – это прозрачное или окрашенное покрытие, наносимое на
+          <br /> поверхность для защиты и придания блеска.
+        </div>
+        <br />
+
+        <Box className="containerBox">
+          <div>
+            <Karusel stains={grounds} model={"Ground"} />
+          </div>
+          <ol>
+            {grounds.map((el) => (
+              <li>
+                <Button>{el.name}</Button>
+              </li>
+            ))}
+          </ol>
+        </Box>
+        <div className="textComponent">
+          * Грунт – это основное покрытие, наносимое на поверхность <br />
+          перед окончательной отделкой, чтобы обеспечить адгезию и защиту.
+        </div>
+
+        <Modal isOpen={isOpen} onClose={closeModal}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>
+              Как вы хотите расчитать стоимость? Исходя из площади или из
+              объема?
+            </ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              <label>
+                Укажите площадь и нажмите посчитать по{" "}
+                <span style={{ color: "purple", fontWeight: "bold" }}>
+                  площади
+                </span>{" "}
+                или нажмите посчитать по{" "}
+                <span style={{ color: "purple", fontWeight: "bold" }}>
+                  объему
+                </span>
+                <input
+                  ref={inputRef}
+                  style={{
+                    margin: "10px",
+                    borderColor: "black",
+                    borderWidth: "2px",
+                    borderRadius: "5px",
+                  }}
+                  type="text"
+                  name="answer"
+                  placeholder="укажите вашу площадь"
+                  onKeyDown={onKeyDownHandler}
+                  onChange={changeHandler}
+                  value={input}
+                />
+              </label>
+            </ModalBody>
+
+            <ModalFooter display="flex" justifyContent="center">
+              <Button colorScheme="blue" mr={3} onClick={allSquareHandler}>
+                посчитать по площади
+              </Button>
+              <Button colorScheme="teal" mr={3} onClick={allVolumeHandler}>
+                посчитать по объему
+              </Button>
+            </ModalFooter>
+          </ModalContent>
+        </Modal>
+
+
+        <Button
+          className="raschet"
+          colorScheme="teal"
+          width={200}
+          onClick={openModal}
+        >
+          рассчитать стоимость
+        </Button>
+
+        {boxVisible &&
+          itemPrice.map((item) => (
+            <KardMapSquare
+              id={item.id}
+              img={item.img}
+              model={item.model}
+              name={item.name}
+              priceArea={item.priceArea}
+            />
+          ))}
+        {boxVisible && (
+          <>
+            <div>
+              Итоговая стоимость составит {allPricesquareAnswer}.руб на {input}{" "}
+              м.кв.
+            </div>
+            <Button onClick={submitHandler}>отложить в корзину</Button>
+          </>
+        )}
+
+        {boxVisible2 &&
+          itemPrice.map((item) => (
+            <KardMapVolume
+              id={item.id}
+              img={item.img}
+              model={item.model}
+              name={item.name}
+              priceVolume={item.priceVolume}
+            />
+          ))}
+
+        {boxVisible2 && (
+          <>
+            <Button onClick={submitHandler2}>отложить в корзину</Button>
+          </>
+        )}
+      </div>
     </>
   );
 }

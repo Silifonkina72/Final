@@ -3,7 +3,10 @@ import "./ChatBot.css";
 import { Message, InputData, KeyResponse } from "../../types/ChatBot";
 
 const ChatBot = (): JSX.Element => {
-  const [messages, setMessages] = useState<Message[] | []>([]);
+  const [messages, setMessages] = useState<Message[] | []>([{
+          text: "Добрый день! Чем я могу вам помочь?",
+          isBot: true,
+        }]);
   const [input, setInput] = useState<InputData>("");
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const MAX_MESSAGES = 20; // Максимальное количество сообщений
@@ -65,7 +68,7 @@ const ChatBot = (): JSX.Element => {
         "Патина – это специальное средство для придания поверхности эффекта старения или изменения оттенка.",
     },
     {
-      keywords: ["технология", "покраски"],
+      keywords: ["технология"],
       response:
         "Технология покраски – это процесс применения краски, включающий подготовку поверхности, выбор материалов и способов нанесения.",
     },

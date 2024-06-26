@@ -52,7 +52,7 @@ app.use('/registration', regRouter);
 app.use('/logout', logOutRouter);
 app.use('/login', loginRouter);
 app.use('/availability', nalichieRouter);
-app.use('/changer',changeRouter);
+app.use('/changer', changeRouter);
 app.use('/orders', ordersRouter);
 
 app.listen(3000, () => {
