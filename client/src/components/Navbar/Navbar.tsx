@@ -66,6 +66,7 @@ export const Navbar = () => {
   const logoutHandler = async () => {
     try {
       await dispatch(fetchLogOut());
+      navigate('./');
     } catch (error) {
       console.error("Ошибка при выходе из системы", error);
     }
