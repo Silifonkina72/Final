@@ -4,6 +4,7 @@ import './catalog.css';
 import ChatBot from '../../components/ChatBot/ChatBot'
 import MyMap from '../../components/Catalog/Map';
 import { Link } from 'react-router-dom';
+const apiKey = '513313f4-6089-4a80-b442-af1d3277a73e';
 
 
 const Catalog = () => {
@@ -18,7 +19,10 @@ const Catalog = () => {
         <div className='container'>
           <div className='map'>
             Как нас найти
-            <YMaps>
+            <YMaps query={{
+              load: "package.full",
+              apikey: apiKey
+            }}>
               <MyMap />
             </YMaps>
           </div>

@@ -20,15 +20,13 @@ const {
 } = require('../db/models');
 
 orderRouter.post('/', async (req, res) => {
-  const { allPrice, address, itemsSquare, itemsVolume } = req.body;
-  // console.log('aaaaaaall', itemsVolume);
-  const user_id = req.session.userId;
-  //   console.log(' uuuuuuser', req.session);
-
+  const { user, allPrice, address } = req.body;
+  console.log(user);
+  const user_id = user.userId;
   try {
     const newOrder = await Order.create({
       allPrice,
-      user_id: 1,
+      user_id,
       isForm: false,
       isSent: false,
       isAccept: true,
@@ -101,49 +99,49 @@ orderRouter.post('/product', async (req, res) => {
 
     const squarePromises = itemsSquare.map((product) => {
       const { model, id: productId, square } = product;
-
+      const count = Math.ceil(square / 4);
       switch (model) {
         case 'Lak':
           return OrdersLak.create({
             lak_id: productId,
             order_id,
-            quantity: square,
+            quantity: count,
           });
         case 'AcrylicPrimer':
           return OrdersAcrylicPrimer.create({
             acrylicPrimer_id: productId,
             order_id,
-            quantity: square,
+            quantity: count,
           });
         case 'Ground':
           return OrdersGround.create({
             ground_id: productId,
             order_id,
-            quantity: square,
+            quantity: count,
           });
         case 'Paint':
           return OrdersPaint.create({
             paint_id: productId,
             order_id,
-            quantity: square,
+            quantity: count,
           });
         case 'Patina':
           return OrdersPatina.create({
             patina_id: productId,
             order_id,
-            quantity: square,
+            quantity: count,
           });
         case 'PrimerInsulator':
           return OrdersPrimerInsulator.create({
             primerInsulator_id: productId,
             order_id,
-            quantity: square,
+            quantity: count,
           });
         case 'Stain':
           return OrdersStain.create({
             stain_id: productId,
             order_id,
-            quantity: square,
+            quantity: count,
           });
         default:
           return null; 
