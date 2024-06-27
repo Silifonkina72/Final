@@ -23,7 +23,7 @@ import {
 
 export default function Registration() {
   const [input, setInput] = useState({
-    username: "",
+    login: "",
     password: "",
     email: "",
     phone: "",
@@ -76,16 +76,16 @@ export default function Registration() {
         }
         if (resultAction.payload.regDone) {
           const loginResult = await dispatch(
-            fetchLogin({ login: input.username, password: input.password })
+            fetchLogin({ login: input.login, password: input.password })
           ).unwrap();
 
           if (loginResult) {
             localStorage.setItem(
-              "username",
-              resultAction.payload.username || ""
+              "login",
+              resultAction.payload.login || ""
             );
             setInput({
-              username: "",
+              login: "",
               email: "",
               phone: "",
               password: "",
@@ -123,12 +123,12 @@ export default function Registration() {
           boxShadow="0 0 10px rgba(50, 205, 50, 0.5)"
           width="300px"
         >
-          <FormControl id="usernameInput" isRequired mb={3}>
+          <FormControl id="inputInput" isRequired mb={3}>
             <Input
               placeholder="Придумайте логин"
               onChange={changeHandler}
-              value={input.username}
-              name="username"
+              value={input.login}
+              name="login"
               type="text"
               p={2}
               border="2px solid"

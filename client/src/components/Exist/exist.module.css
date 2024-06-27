@@ -1,14 +1,14 @@
-AcrylicPrimersList.module.css
-.container {
+/* AcrylicPrimersList.module.css */
+/* .container {
     display: flex;
     flex-direction: column;
     align-items: center;
     background-color: #f0f8ff;
     padding: 20px;
-  }
+  } */
   
   .primer {
-    width: 80%;
+    width: 100%;
     background-color: #fffaf0;
     border: 1px solid #ffa500;
     border-radius: 10px;
@@ -29,7 +29,7 @@ AcrylicPrimersList.module.css
   }
   
   .primer button {
-    background-color: #1e90ff;
+    background-color: #1d818d;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -39,14 +39,69 @@ AcrylicPrimersList.module.css
   }
   
   .primer button:hover {
-    background-color: #4169e1;
+    background-color: #145d65;
   }
   
-  .separator {
+  /* .separator {
     border-bottom: 1px dashed #ffa500;
     margin-top: 15px;
+  }  */
+
+  .addNewProd {
+    display: flex;
+    width: 100%; /* или укажите конкретную ширину, например, 50% */
+    max-width: 700px;
+    height: 400px;
+    flex-direction: column;
+    background-color: white;
+    border: 1px solid #00695c;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px; /* добавленный отступ */
+    margin: 30px;
+}
+
+.addNewProd input,
+.addNewProd select {
+    width: 100%; /* или укажите конкретную ширину, например, 50% */
+    max-width: 700px; /* максимальная ширина, если нужно ограничение */
+    padding: 6px; /* уменьшенное внутреннее пространство */
+    border: 1px solid #00695c; /* цвет границы */
+    border-radius: 5px; /* скругленные края */
+    margin-bottom: 10px; /* расстояние между элементами */
+}
+
+.addNewProd button {
+    padding: 8px 16px; /* уменьшенное внутреннее пространство */
+    width: 100%; /* или укажите конкретную ширину, например, 50% */
+    max-width: 700px;
+    background-color: #1d818d;
+    color: #fff;
+    border: none;
+    border-radius: 5px; /* скругленные края */
+    cursor: pointer;
+    margin-top: 10px; /* расстояние между кнопкой и предыдущим элементом */
+}
+
+.addNewProd h3 {
+  font-weight: bold; /* делаем текст жирным */
+}
+
+  .containerNal {
+    display: flex;
+    flex-direction: row;
   }
 
-  .addNew {
-    
+  @media (max-width: 1176px) {
+    .containerNal {
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+  .nalichie {
+    display: flex;
+    margin: 30px;
+    /* width: 100%; */
+    /* max-width: 700px; */
   }
