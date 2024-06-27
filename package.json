@@ -33,6 +33,7 @@
     "pg-hstore": "^2.3.4",
     "react-responsive-carousel": "^3.2.23",
     "sequelize": "^6.37.3",
-    "sequelize-cli": "^6.6.2"
+    "sequelize-cli": "^6.6.2",
+    "ymaps": "^0.2.1"
   }
 }

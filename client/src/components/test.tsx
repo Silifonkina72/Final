@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { YMaps, withYMaps } from "@pbe/react-yandex-maps";
 import axios from "axios";
 
-const calculateDistance = ({ ymaps, route }) => {
+export const calculateDistance = ({ ymaps, route }) => {
   const [routeLength, setRouteLength] = useState(null);
 
   const apiKey = `513313f4-6089-4a80-b442-af1d3277a73e`;
@@ -22,33 +22,23 @@ const calculateDistance = ({ ymaps, route }) => {
       canceled = true;
     };
   }, [ymaps, ...route]);
-  console.log("routeLength", routeLength);
-
-  return routeLength ? (
-    <p>
-      The route from <strong>{route[0]}</strong> to <strong>{route[1]}</strong>{" "}
-      is <strong>{routeLength}</strong> long
-    </p>
-  ) : (
-    <p>Loading route...</p>
-  );
+  console.log('roooooooout', routeLength);
+  return routeLength;
+  // return routeLength ? (
+  //   <p>
+  //     The route from <strong>{route[0]}</strong> to <strong>{route[1]}</strong> is <strong>{routeLength}</strong> long
+  //   </p>
+  // ) : (
+  //   <p>Loading route...</p>
+  // );
 };
 
-const ConnectedLengthPrinter = withYMaps(calculateDistance, true, ["route"]);
+const ConnectedLengthPrinter = withYMaps(calculateDistance, true, ['route']);
 
-const Test = ({address: address}) => {
-  console.log('address', address);
-  
+const Test = (address) => {
+  console.log('>>>>>>>', typeof address);
   return (
-    <>
-      <ConnectedLengthPrinter
-        route={[
-          "Россия, город Тюмень, улица Мельникайте, дом 10",
-          address,
-        ]}
-      />
-      <div>hljhlhil</div>
-    </>
+      <ConnectedLengthPrinter route={['Россия, город Тюмень, улица Мельникайте, дом 10', address]} />
   );
 };
 

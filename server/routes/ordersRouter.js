@@ -95,6 +95,7 @@ ordersRouter.patch("/:id", async (req, res) => {
   //const { isForm, isAccept, isSent } = req.body;
   try {
     const order = await Order.findByPk(id);
+    const user = await User.findByPk(user_id);
     if (!order) {
       return res.status(404).json({ error: "Заказ не найден" });
     }

@@ -2,7 +2,7 @@ import React, { ChangeEvent, useState, FormEvent } from "react";
 import { fetchLogin, fetchReg } from "../../store/thunkActions/thunkActions";
 import { useAppDispatch } from "../../hooks";
 import { useNavigate } from "react-router-dom";
-import styles from "./Registration.module.css";
+import { Box, Input, Button, Text, FormControl, FormLabel, FormErrorMessage } from "@chakra-ui/react";
 
 export default function Registration() {
   const [input, setInput] = useState({ login: "", password: "", email: "", phone: "", isAdmin: false });
@@ -45,7 +45,6 @@ export default function Registration() {
           setErrMsg(resultAction.payload.regErr);
         }
         if (resultAction.payload.regDone) {
-          // Автоматический логин после успешной регистрации
           const loginResult = await dispatch(fetchLogin({ login: input.login, password: input.password })).unwrap();
 
           if (loginResult) {
@@ -56,76 +55,119 @@ export default function Registration() {
         }
       } else {
         console.log(resultAction.payload);
-        setErrMsg(
-          "Произошла ошибка при отправке данных. Пожалуйста, еще раз."
-        );
+        setErrMsg("Произошла ошибка при отправке данных. Пожалуйста, попробуйте еще раз.");
       }
     } catch (error) {
-      console.log('======>>>>');
       console.log(error);
-      setErrMsg(
-        "Произошла ошибка при отправке данных. Пожалуйста раз."
-      );
+      setErrMsg("Произошла ошибка при отправке данных. Пожалуйста, попробуйте еще раз.");
     }
   };
 
   return (
-    <>
-      <form onSubmit={submitHandler} className={styles.regForm}>
-        {!!errMsg.length && <h4 className="errMsg">{errMsg}</h4>}
-        <div className="mb-3">
-          <input
-            placeholder="Придумай login"
-            required
-            onChange={changeHandler}
-            value={input.login}
-            name="login"
-            type="text"
-            className={`${styles.inputField} form-control`}
-            id="exampleInputLogin1"
-          />
-        </div>
-        <div className="mb-3">
-          <input
-            placeholder="введите EMAIL(необязательно)"
-            onChange={changeHandler}
-            value={input.email}
-            name="email"
-            type="text"
-            className={`${styles.inputField} form-control`}
-            id="exampleInputEmail1"
-          />
-        </div>
-        <div className="mb-3">
-          <input
-            placeholder="введите номер телефона"
-            required
-            onChange={changeHandler}
-            value={input.phone}
-            name="phone"
-            type="text"
-            className={`${styles.inputField} form-control`}
-            id="exampleInputPhone1"
-          />
-        </div>
-        <div className="mb-3">
-          <input
-            placeholder="придумай password"
-            required
-            onChange={changeHandler}
-            value={input.password}
-            name="password"
-            type="password"
-            className={`${styles.inputField} form-control`}
-            id="exampleInputPassword1"
-          />
-        </div>
-        <br />
-        <button type="submit" className="btn btn-outline-dark">
-          Отправить
-        </button>
-      </form>
-    </>
+    <Box
+    marginTop="100" 
+      as="form"
+      onSubmit={submitHandler}
+      display="flex"
+      flexDirection="column"
+      alignItems="center"
+      p={5}
+      borderRadius="md"
+      boxShadow="0 0 10px rgba(50, 205, 50, 0.5)"
+      // height="100vh"
+    >
+      {errMsg && <Text color="red.500" fontWeight="bold" mb={3}>{errMsg}</Text>}
+      <FormControl id="exampleInputLogin1" isRequired mb={3}>
+        <Input
+          placeholder="Придумай login"
+          onChange={changeHandler}
+          value={input.login}
+          name="login"
+          type="text"
+          width="300px"
+          p={2}
+          border="2px solid"
+          borderColor="gray.600"
+          borderRadius="md"
+          color="black"
+          _focus={{ borderColor: "green.400", boxShadow: "0 0 10px rgba(50, 205, 50, 0.5)" }}
+          _hover={{ borderColor: "green.400" }}
+          _placeholder={{ color: "gray.400", fontStyle: "italic" }}
+        />
+      </FormControl>
+      <FormControl id="exampleInputEmail1" mb={3}>
+        <Input
+          placeholder="введите EMAIL (обязательно)"
+          onChange={changeHandler}
+          value={input.email}
+          name="email"
+          type="email"
+          width="300px"
+          p={2}
+          border="2px solid"
+          borderColor="gray.600"
+          borderRadius="md"
+          color="black"
+          _focus={{ borderColor: "green.400", boxShadow: "0 0 10px rgba(50, 205, 50, 0.5)" }}
+          _hover={{ borderColor: "green.400" }}
+          _placeholder={{ color: "gray.400", fontStyle: "italic" }}
+        />
+      </FormControl>
+      <FormControl id="exampleInputPhone1" isRequired mb={3}>
+        <Input
+          placeholder="введите номер телефона"
+          onChange={changeHandler}
+          value={input.phone}
+          name="phone"
+          type="text"
+          width="300px"
+          p={2}
+          border="2px solid"
+          borderColor="gray.600"
+          borderRadius="md"
+          color="black"
+          _focus={{ borderColor: "green.400", boxShadow: "0 0 10px rgba(50, 205, 50, 0.5)" }}
+          _hover={{ borderColor: "green.400" }}
+          _placeholder={{ color: "gray.400", fontStyle: "italic" }}
+        />
+      </FormControl>
+      <FormControl id="exampleInputPassword1" isRequired mb={3}>
+        <Input
+          placeholder="придумай password"
+          onChange={changeHandler}
+          value={input.password}
+          name="password"
+          type="password"
+          width="300px"
+          p={2}
+          border="2px solid"
+          borderColor="gray.600"
+          borderRadius="md"
+          color="black"
+          _focus={{ borderColor: "green.400", boxShadow: "0 0 10px rgba(50, 205, 50, 0.5)" }}
+          _hover={{ borderColor: "green.400" }}
+          _placeholder={{ color: "gray.400", fontStyle: "italic" }}
+        />
+      </FormControl>
+      <Button
+      marginTop="30px" 
+        type="submit"
+        width="300px"
+        bg="green.400"
+        color="white"
+        border="2px solid"
+        borderColor="green.400"
+        borderRadius="md"
+        p={2}
+        cursor="pointer"
+        _hover={{ bg: "white", color: "green.400", boxShadow: "0 0 10px rgba(50, 205, 50, 0.5)" }}
+        _active={{ bg: "green.400", color: "white" }}
+      >
+        Отправить
+      </Button>
+    </Box>
   );
 }
+
+
 

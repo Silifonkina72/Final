@@ -20,7 +20,7 @@ const orderSlice = createSlice({
   reducers: {
     clearError(state) {
         state.error = null;
-      }
+      },
   },
   extraReducers: (builder) => {
     builder
@@ -37,3 +37,4 @@ const orderSlice = createSlice({
 });
 
 export default orderSlice.reducer;
+

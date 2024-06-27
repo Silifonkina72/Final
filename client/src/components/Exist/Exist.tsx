@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import styles from "./exist.module.css";
-
+import ItemComponent, { Primer } from "./OnePrimer";
+import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 interface AcrylicPrimer {
   id: number;
   priceArea: number;
@@ -12,7 +13,7 @@ interface AcrylicPrimer {
 }
 
 const AcrylicPrimersList: React.FC = () => {
-  const [primers, setPrimers] = useState<AcrylicPrimer[]>([]);
+  // const [primers, setPrimers] = useState<AcrylicPrimer[]>([]);
   const [editNumber, setEditNumber] = useState<{ [key: number]: string }>({});
   const [editPriceArea, setEditPriceArea] = useState<{ [key: number]: string }>(
     {}
@@ -29,9 +30,20 @@ const AcrylicPrimersList: React.FC = () => {
     img: "",
   });
 
+  const [primers, setPrimers] = useState({
+    AcrylicPrimers: [],
+    Grounds: [],
+    Laks: [],
+    Paints: [],
+    Patinas: [],
+    PrimerInsulators: [],
+    Stains: []
+  });
+  console.log(primers);
+  
   useEffect(() => {
     axios
-      .get<AcrylicPrimer[]>("http://localhost:3000/changer")
+      .get("http://localhost:3000/changer")
       .then((response) => {
         setPrimers(response.data);
       })
@@ -40,26 +52,31 @@ const AcrylicPrimersList: React.FC = () => {
       });
   }, []);
 
-  const handleDelete = (id: number) => {
+  const handleDelete = (model, id: number) => {
     axios
-      .delete(`http://localhost:3000/changer/${id}`)
+      .delete(`http://localhost:3000/changer/${model}/${id}`)
       .then(() => {
-        setPrimers(primers.filter((primer) => primer.id !== id));
+        setPrimers({
+          ...primers,
+          [model]: primers[model].filter((primer) => primer.id !== id)
+        });
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-  const handleUpdate = (id: number, field: string, value: string) => {
+  const handleUpdate = (model, id, field, value) => {
     axios
-      .patch(`http://localhost:3000/changer/${id}`, { [field]: value })
+      .patch(`http://localhost:3000/changer/${model}/${id}`, { [field]: value })
       .then(() => {
-        setPrimers(
-          primers.map((primer) =>
-            primer.id === id ? { ...primer, [field]: value } : primer
+        setPrimers({
+          ...primers,
+          [model]: primers[model].map((item) =>
+            item.id === id ? { ...item, [field]: value } : item
           )
-        );
+        });
+
         if (field === "number") {
           setEditNumber({ ...editNumber, [id]: "" });
         } else if (field === "priceArea") {
@@ -155,78 +172,101 @@ const AcrylicPrimersList: React.FC = () => {
         />
         <button onClick={handleAddNewIngredient}>Добавить</button>
       </div>
-      {primers.map((primer) => (
-        <div key={primer.id} className={styles.primer}>
-          <p>
-            {primer.name} : {primer.number}
-            <input
-              type="text"
-              value={editNumber[primer.id] || ""}
-              onChange={(e) =>
-                setEditNumber({ ...editNumber, [primer.id]: e.target.value })
-              }
+      <div>
+      </div>
+      <div>
+      <Tabs>
+      <TabList>
+        <Tab>AcrylicPrimers</Tab>
+        <Tab>Grounds</Tab>
+        <Tab>Laks</Tab>
+        <Tab>Paints</Tab>
+        <Tab>Patinas</Tab>
+        <Tab>PrimerInsulators</Tab>
+        <Tab>Stains</Tab>
+      </TabList>
+
+      <TabPanels>
+        <TabPanel>
+          {primers.AcrylicPrimers.map(primer => (
+            <ItemComponent
+              key={primer.id}
+              primer={primer}
+              model={'AcrylicPrimers'}
+              onUpdate={handleUpdate}
+              onDelete={handleDelete}
             />
-            <button
-              onClick={() =>
-                handleUpdate(primer.id, "number", editNumber[primer.id] || "")
-              }
-            >
-              изменить
-            </button>
-            <button onClick={() => handleDelete(primer.id)}>удалить</button>
-          </p>
-          <p>
-            Цена площадь : {primer.priceArea}
-            <input
-              type="text"
-              value={editPriceArea[primer.id] || ""}
-              onChange={(e) =>
-                setEditPriceArea({
-                  ...editPriceArea,
-                  [primer.id]: e.target.value,
-                })
-              }
+          ))}
+        </TabPanel>
+        <TabPanel>
+          {primers.Grounds.map(primer => (
+            <ItemComponent
+              key={primer.id}
+              primer={primer}
+              model={'Grounds'}
+              onUpdate={handleUpdate}
+              onDelete={handleDelete}
             />
-            <button
-              onClick={() =>
-                handleUpdate(
-                  primer.id,
-                  "priceArea",
-                  editPriceArea[primer.id] || ""
-                )
-              }
-            >
-              изменить цену
-            </button>
-            <button onClick={() => handleDelete(primer.id)}>удалить</button>
-          </p>
-          <p>
-            Цена объём : {primer.priceVolume}
-            <input
-              type="text"
-              value={editPriceVolume[primer.id] || ""}
-              onChange={(e) =>
-                setEditPriceVolume({
-                  ...editPriceVolume,
-                  [primer.id]: e.target.value,
-                })
-              }
+          ))}
+        </TabPanel>
+        <TabPanel>
+          {primers.Laks.map(primer => (
+            <ItemComponent
+              key={primer.id}
+              primer={primer}
+              model={'Laks'}
+              onUpdate={handleUpdate}
+              onDelete={handleDelete}
             />
-            <button
-              onClick={() =>
-                handleUpdate(
-                  primer.id,
-                  "priceVolume",
-                  editPriceVolume[primer.id] || ""
-                )
-              }
-            >
-              изменить цену
-            </button>
-            <button onClick={() => handleDelete(primer.id)}>удалить</button>
-          </p>
-        </div>
-      ))}
+          ))}
+        </TabPanel>
+        <TabPanel>
+          {primers.Paints.map(primer => (
+            <ItemComponent
+              key={primer.id}
+              primer={primer}
+              model={'Paints'}
+              onUpdate={handleUpdate}
+              onDelete={handleDelete}
+            />
+          ))}
+        </TabPanel>
+        <TabPanel>
+          {primers.Patinas.map(primer => (
+            <ItemComponent
+              key={primer.id}
+              primer={primer}
+              model={'Patinas'}
+              onUpdate={handleUpdate}
+              onDelete={handleDelete}
+            />
+          ))}
+        </TabPanel>
+        <TabPanel>
+          {primers.PrimerInsulators.map(primer => (
+            <ItemComponent
+              key={primer.id}
+              primer={primer}
+              model={'PrimerInsulators'}
+              onUpdate={handleUpdate}
+              onDelete={handleDelete}
+            />
+          ))}
+        </TabPanel>
+        <TabPanel>
+          {primers.Stains.map(primer => (
+            <ItemComponent
+              key={primer.id}
+              primer={primer}
+              model={'Stains'}
+              onUpdate={handleUpdate}
+              onDelete={handleDelete}
+            />
+          ))}
+        </TabPanel>
+      </TabPanels>
+    </Tabs>
+    </div>
     </div>
   );
 };

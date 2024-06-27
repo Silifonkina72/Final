@@ -22,7 +22,6 @@ export default function Orders() {
     try {
       const response = await fetch("http://localhost:3000/orders");
       const data = await response.json();
-
       setOrders(data);
     } catch (error) {
       console.error("Ошибка при загрузке заказов:", error);
