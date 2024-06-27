@@ -28,11 +28,8 @@ export const Navbar = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [inputs, setInputs] = useState({ login: "", password: "" });
-  const [erer, setErer] = useState({text: ''})
-
-  useEffect(() => {
-    setErer({text: ''})
-  }, []);
+  const [err, setErr] = useState(false)
+ 
 
   useEffect(() => {
     if (isAuth() && isAdmin()) {
@@ -40,13 +37,6 @@ export const Navbar = () => {
       console.log(')))))', (isAuth() && isAdmin()));
       console.log('фдм', (isAdmin()));
       console.log('зарег', (isAuth() ));
-      
-    //     setErer({text: ''})
-      
-    // } else {
-     
-    //     setErer({text: 'Введите корректный логин или пароль!'})
-      
     }
   }, [user]);
 
@@ -74,28 +64,27 @@ export const Navbar = () => {
 
   const loginHandler = () => {
     setIsModalOpen(true);
+    setErr(false)
   };
 
   const closeModal = () => {
     setInputs({ login: "", password: "" });
-    setErer({text: ''})
     setIsModalOpen(false);
+    setErr(false)
   };
 
-  
-
-  
-
-  const userNav = useAppSelector((state) => state.logSlice.user);
-  const userLogin = userNav?.login;
+ 
 
   const handleFormSubmit = async (): Promise<void> => {
     await dispatch(fetchLogin(inputs));
     setInputs({ login: "", password: "" });
+    setErr(true)
     console.log('*****', user);
     if (isAdmin()) {
       navigate('/orders');
+      
     }
+    setIsModalOpen(false);
   };
 
   return (
@@ -107,7 +96,7 @@ export const Navbar = () => {
               <div className={styles.leftLinks}>
                 <div className={styles.leftLinks}>
                   Приветствую,
-                  <span className={styles.userName}>{userLogin}!</span>
+                  <span className={styles.userName}>{user?.login}!</span>
                 </div>
                 <Link className={styles.link} to="/changer">
                   Изменение
@@ -131,7 +120,7 @@ export const Navbar = () => {
               <div className={styles.leftLinks}>
                 <div className={styles.leftLinks}>
                   Приветствую,
-                  <span className={styles.userName}>{userLogin}!</span>
+                  <span className={styles.userName}>{user?.login}!</span>
                 </div>
 
                 <Link className={styles.link} to="/">
@@ -191,10 +180,10 @@ export const Navbar = () => {
           <ModalCloseButton />
           <ModalBody>
             {/* <Text color="red.700">{user?.logErr}</Text> */}
-            <Text color="red.700">{erer.text}</Text>
+            {err&&<Text color="red.700">{user?.logErr}</Text>}
             <label>
               <input
-                // ref={inputRef}
+               
                 style={{
                   margin: "10px",
                   borderColor: "black",
@@ -204,9 +193,8 @@ export const Navbar = () => {
                 type="text"
                 name="login"
                 placeholder="Введите логин"
-                // id="exampleInputLogin1"
                 onChange={changeHandler}
-                value={inputs.login}
+                //value={inputs.login}
               />
               <input
                 style={{
@@ -218,9 +206,8 @@ export const Navbar = () => {
                 type="password"
                 name="password"
                 placeholder="Введите password"
-                // id="exampleInputLogin1"
                 onChange={changeHandler}
-                value={inputs.password}
+               // value={inputs.password}
               />
             </label>
           </ModalBody>

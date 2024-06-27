@@ -1,50 +1,95 @@
 .chat-container {
-    padding: 20px;
-    max-width: 600px;
-    margin: 0 auto;
-  }
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.borderChat {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  min-width: 400px;
+  width: 35vw;
+  height: 25vw;
+
+  overflow-y: auto;
+}
+
+.message {
+  margin: 5px 0;
+}
+
+.message span {
+  padding: 10px;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.message.user {
+  text-align: right;
+}
+
+.message.user span {
+  background: #aee;
+}
+
+.message.bot {
+  text-align: left;
+}
+
+.message.bot span {
+  background: #eee;
+}
+
+.inputBot {
+  width: 80%;
+  padding: 10px;
+}
+
+.buttonBot {
+  width: 60px;
+  padding: 5px;
+  margin-left: 20px;
+}
+
+/* .msgBOT {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
   
-  .borderChat {
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 10px;
-    height: 300px;
-    overflow-y: auto;
-  }
-  
-  .message {
-    margin: 5px 0;
-  }
-  
-  .message span {
-    padding: 10px;
-    border-radius: 10px;
-    display: inline-block;
-  }
-  
-  .message.user {
-    text-align: right; 
-  }
-  
-  .message.user span {
-    background: #aee;
-  }
-  
-  .message.bot {
-    text-align: left; 
-  }
-  
-  .message.bot span {
-    background: #eee;
-  }
-  
-  .input {
-    width: 80%;
-    padding: 10px;
-  }
-  
-  .button {
-    width: 20%;
-    padding: 10px;
-  }
-  
+}
+
+.textBOT {
+  align-self: flex-start;
+} */
+.bot-msg {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 8px; /* Пример отступа между сообщениями */
+}
+
+.bot-msg .text {
+  margin-left: 8px; /* Пример отступа между иконкой и текстом */
+}
+
+.user-msg {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end; /* Пример выравнивания для сообщений пользователя */
+  margin-bottom: 8px;
+}
+
+.chat-container {
+  position: relative;
+}
+
+.borderChat {
+  padding: 10px;
+}
+
+.svg-icon {
+  position: absolute; 
+  top: 30px; 
+  right: 30px; 
+  z-index: 1; 
+}

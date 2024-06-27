@@ -14,6 +14,8 @@ const OneComponentKarusel = memo(({ stain, model }: Props): JSX.Element => {
 
   const handleAddToBasket = useCallback(() => {
     const { id, name, priceArea, priceVolume, img, number } = stain;
+   
+    
     dispatch(
       addItemPrice({ model, id, name, priceArea, priceVolume, img, number })
     );

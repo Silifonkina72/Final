@@ -1,69 +1,126 @@
-const express = require('express');
+const express = require("express");
 const ordersRouter = express.Router();
-const { Order } = require('../db/models'); // Подключаем модель Order
-const { where, Op } = require('sequelize');
+const {
+  Order,
+  AcrylicPrimer,
+  Ground,
+  Lak,
+  Paint,
+  Patina,
+  PrimerInsulator,
+  Stain,
+} = require("../db/models"); // Подключаем модель Order
+const { where, Op } = require("sequelize");
+const { User } = require("../db/models");
 
-ordersRouter.get('/', async (req, res) => {
+ordersRouter.get("/", async (req, res) => {
   try {
+    
     const orders = await Order.findAll({
       where: {
-        isForm: {
-          [Op.ne]: null,
-        },
+        isForm: true,
       },
       include: [
         {
-          model: User, 
-          as: 'user',  
+          model: User,
+          attributes: ["login"],
         },
         {
-          model: Material, 
-          as: 'materials', 
-          through: { attributes: [] }, 
+          model: Lak,
+          attributes: ["name", 'img'],
+          through: {
+            attributes: [],
+          },
+        },
+        {
+          model: AcrylicPrimer,
+          attributes: ["name", 'img'],
+          through: {
+            attributes: [],
+          },
+        },
+        {
+          model: Ground,
+          attributes: ["name", 'img'],
+          through: {
+            attributes: [],
+          },
+        },
+        {
+          model: Paint,
+          attributes: ["name", 'img'],
+          through: {
+            attributes: [],
+          },
+        },
+        {
+          model: Patina,
+          attributes: ["name", 'img'],
+          through: {
+            attributes: [],
+          },
+        },
+        {
+          model: PrimerInsulator,
+          attributes: ["name", 'img'],
+          through: {
+            attributes: [],
+          },
+        },
+        {
+          model: Stain,
+          attributes: ["name", 'img'],
+          through: {
+            attributes: [],
+          },
         },
       ],
     });
-    res.json(orders);
+
+    const orders2 = orders.map((order) =>
+      order.get({ plain: true, nested: true })
+    );
+    // console.log(686889, orders2);
+    // console.log("ple", orders2[0].Laks[0].name);
+    // console.log("ple2", orders2);
+    res.json(orders2);
   } catch (error) {
-    res.status(500).json({ error: 'Произошла ошибка при получении заказов' });
+    res.status(500).json({ error: "Произошла ошибка при получении заказов" });
   }
 });
 
-ordersRouter.put('/:id', async (req, res) => {
+ordersRouter.patch("/:id", async (req, res) => {
   const { id } = req.params;
-  const { isForm, isAccept, isSent } = req.body;
+  
+  //const { isForm, isAccept, isSent } = req.body;
   try {
     const order = await Order.findByPk(id);
     if (!order) {
-      return res.status(404).json({ error: 'Заказ не найден' });
+      return res.status(404).json({ error: "Заказ не найден" });
     }
 
-    if (isSent) {
-      order.isForm = false;
+    if (order.isSent === false&& order.isAccept === false) {
       order.isSent = true;
-      order.isAccept = false;
-    } else if (isAccept) {
-      order.isForm = false;
-      order.isSent = false;
+    } else  {
       order.isAccept = true;
     }
-
+// console.log('ORDER', order);
     await order.save();
     res.json(order);
   } catch (error) {
     res
       .status(500)
-      .json({ error: 'Произошла ошибка при обновлении статуса заказа' });
+      .json({ error: "Произошла ошибка при обновлении статуса заказа" });
   }
 });
 
-ordersRouter.delete('/:id', async (req, res) => {
+ordersRouter.delete("/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
     const order = await Order.findByPk(id);
     if (!order) {
-      return res.status(404).json({ error: 'Заказ не найден' });
+      return res.status(404).json({ error: "Заказ не найден" });
     }
 
     order.isForm = null;
@@ -73,7 +130,7 @@ ordersRouter.delete('/:id', async (req, res) => {
     await order.save();
     res.json(order);
   } catch (error) {
-    res.status(500).json({ error: 'Произошла ошибка при удалении заказа' });
+    res.status(500).json({ error: "Произошла ошибка при удалении заказа" });
   }
 });
 

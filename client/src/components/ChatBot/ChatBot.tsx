@@ -1,12 +1,15 @@
 import { useState, useRef, useEffect } from "react";
 import "./ChatBot.css";
 import { Message, InputData, KeyResponse } from "../../types/ChatBot";
+import MySvgIcon from "../Bot/Bot";
 
 const ChatBot = (): JSX.Element => {
-  const [messages, setMessages] = useState<Message[] | []>([{
-          text: "Добрый день! Чем я могу вам помочь?",
-          isBot: true,
-        }]);
+  const [messages, setMessages] = useState<Message[] | []>([
+    {
+      text: "🤖: Добрый день! Какой у вас вопрос?",
+      isBot: true,
+    },
+  ]);
   const [input, setInput] = useState<InputData>("");
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const MAX_MESSAGES = 20; // Максимальное количество сообщений
@@ -100,12 +103,12 @@ const ChatBot = (): JSX.Element => {
         )
       );
 
-      let botMessage: Message
+      let botMessage: Message;
       if (foundResponse) {
-        botMessage = { text: `${foundResponse.response}`, isBot: true };
+        botMessage = { text: `🤖: ${foundResponse.response}`, isBot: true };
       } else {
         botMessage = {
-          text: "Не понимаю вашего вопроса, напишите еще раз подробнее",
+          text: "🤖: Не понимаю вашего вопроса, напишите еще раз подробнее",
           isBot: true,
         };
       }
@@ -159,12 +162,64 @@ const ChatBot = (): JSX.Element => {
         value={input}
         onChange={(e) => setInput(e.target.value)}
         onKeyDown={(e) => e.key === "Enter" && handleSend()}
-        className="input"
+        className="inputBot inputCatalog"
       />
-      <button onClick={handleSend} className="button">
+      <MySvgIcon width="60px" height="60px" className="svg-icon" />
+      <button onClick={handleSend} className="buttonBot">
         Send
       </button>
+      {/* <MySvgIcon width="50px" height="50px"  /> */}
     </div>
+
+    //   <div className="chat-container">
+    //   <div className="borderChat">
+    //     {messages.map((msg: Message, index: number) => (
+    //       <div key={index} className={`message ${msg.isBot ? "bot" : "user"}`}>
+    //         <span className="msgBOT">
+    //           <span>{msg.isBot && <MySvgIcon width="30px" height="30px" />} </span>
+    //           <span className="textBOT"> {msg.text}</span>
+
+    //         </span>
+    //       </div>
+    //     ))}
+    //     <div ref={messagesEndRef}></div>
+    //   </div>
+    //   <input
+    //     type="text"
+    //     value={input}
+    //     onChange={(e) => setInput(e.target.value)}
+    //     onKeyDown={(e) => e.key === "Enter" && handleSend()}
+    //     className="input"
+    //   />
+    //   <button onClick={handleSend} className="button">
+    //     Send
+    //   </button>
+    // </div>
+
+    // <div className="chat-container">
+    //     <div className="borderChat">
+    //       {messages.map((msg: Message, index: number) => (
+    //         <div key={index} className={`message ${msg.isBot ? "bot" : "user"}`}>
+    //           <span className={msg.isBot ? "bot-msg" : "user-msg"}>
+
+    //             {msg.isBot && <span><MySvgIcon width="25px" height="25px" /></span>}
+    //             <span>{msg.text}</span>
+    //           </span>
+    //         </div>
+    //       ))}
+    //       <div ref={messagesEndRef}></div>
+    //     </div>
+    //     <input
+    //       type="text"
+    //       value={input}
+    //       onChange={(e) => setInput(e.target.value)}
+    //       onKeyDown={(e) => e.key === "Enter" && handleSend()}
+    //       className="input"
+    //     />
+    //     <button onClick={handleSend} className="button">
+    //       Send
+    //     </button>
+    //   </div>
   );
 };
 
