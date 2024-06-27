@@ -43,23 +43,23 @@ const {
 acrylicPrimerRouter.get('/', async (req, res) => {
   try {
     const result = {
-      AcrylicPrimers: [],
-      Grounds: [],
-      Laks: [],
-      Paints: [],
-      Patinas: [],
-      PrimerInsulators: [],
-      Stains: [],
+      AcrylicPrimer: [],
+      Ground: [],
+      Lak: [],
+      Paint: [],
+      Patina: [],
+      PrimerInsulator: [],
+      Stain: [],
     };
 
     const models = [
-      { model: AcrylicPrimer, label: 'AcrylicPrimers' },
-      { model: Ground, label: 'Grounds' },
-      { model: Lak, label: 'Laks' },
-      { model: Paint, label: 'Paints' },
-      { model: Patina, label: 'Patinas' },
-      { model: PrimerInsulator, label: 'PrimerInsulators' },
-      { model: Stain, label: 'Stains' },
+      { model: AcrylicPrimer, label: 'AcrylicPrimer' },
+      { model: Ground, label: 'Ground' },
+      { model: Lak, label: 'Lak' },
+      { model: Paint, label: 'Paint' },
+      { model: Patina, label: 'Patina' },
+      { model: PrimerInsulator, label: 'PrimerInsulator' },
+      { model: Stain, label: 'Stain' },
     ];
 
     for (const { model, label } of models) {
@@ -93,25 +93,25 @@ acrylicPrimerRouter.delete('/:model/:id', async (req, res) => {
   try {
     let Model;
     switch (model) {
-      case 'AcrylicPrimers':
+      case 'AcrylicPrimer':
         Model = AcrylicPrimer;
         break;
-      case 'Patinas':
+      case 'Patina':
         Model = Patina;
         break;
-      case 'Grounds':
+      case 'Ground':
         Model = Ground;
         break;
-      case 'Laks':
+      case 'Lak':
         Model = Lak;
         break;
-      case 'Paints':
+      case 'Paint':
         Model = Paint;
         break;
-      case 'Stains':
+      case 'Stain':
         Model = Stain;
         break;
-      case 'PrimerInsulators':
+      case 'PrimerInsulator':
         Model = PrimerInsulator;
         break;
       default:
@@ -133,25 +133,25 @@ acrylicPrimerRouter.patch('/:model/:id', async (req, res) => {
   try {
     let Model;
     switch (model) {
-      case 'AcrylicPrimers':
+      case 'AcrylicPrimer':
         Model = AcrylicPrimer;
         break;
-      case 'Patinas':
+      case 'Patina':
         Model = Patina;
         break;
-      case 'Grounds':
+      case 'Ground':
         Model = Ground;
         break;
-      case 'Laks':
+      case 'Lak':
         Model = Lak;
         break;
-      case 'Paints':
+      case 'Paint':
         Model = Paint;
         break;
-      case 'Stains':
+      case 'Stain':
         Model = Stain;
         break;
-      case 'PrimerInsulators':
+      case 'PrimerInsulator':
         Model = PrimerInsulator;
         break;
       default:
@@ -172,6 +172,7 @@ acrylicPrimerRouter.patch('/:model/:id', async (req, res) => {
 acrylicPrimerRouter.post('/', async (req, res) => {
   const { model, priceArea, priceVolume, name, number, img } = req.body;
   try {
+    console.log('model', model);
     const Model = models.find((m) => m.name === model);
     if (!Model) {
       return res.status(400).send('Invalid model name');

@@ -27,9 +27,9 @@ orderRouter.post('/', async (req, res) => {
     const newOrder = await Order.create({
       allPrice,
       user_id,
-      isForm: false,
+      isForm: true,
       isSent: false,
-      isAccept: true,
+      isAccept: false,
       address,
     });
 
