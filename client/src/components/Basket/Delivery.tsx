@@ -12,7 +12,7 @@ import {
   } from '@chakra-ui/react';
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { createOrderThunk } from "../../store/thunkActions/createOrderThunk";
-import {clearBasket} from '../../store/slices/orderSlice';
+import {clearBasket} from '../../store/slices/basketSlice';
 import { YMaps, withYMaps } from '@pbe/react-yandex-maps';
 import { Link, useNavigate } from 'react-router-dom';
 import Test from "../test";
@@ -73,7 +73,7 @@ import Test from "../test";
   
     const handleToCreate = () => {
       dispatch(createOrderThunk({ user, allPrice: totalPrice, address, itemsSquare, itemsVolume }));
-      dispatch(clearBasket());
+      dispatch(clearBasket())
       navigate('/success');
     };
 

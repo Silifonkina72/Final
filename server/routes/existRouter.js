@@ -10,9 +10,48 @@ const {
   Stain,
 } = require('../db/models');
 
+// acrylicPrimerRouter.get('/', async (req, res) => {
+//   try {
+//     const result = [];
+//     const models = [
+//       { model: AcrylicPrimer, label: 'AcrylicPrimers' },
+//       { model: Ground, label: 'Grounds' },
+//       { model: Lak, label: 'Laks' },
+//       { model: Paint, label: 'Paints' },
+//       { model: Patina, label: 'Patinas' },
+//       { model: PrimerInsulator, label: 'PrimerInsulators' },
+//       { model: Stain, label: 'Stains' },
+//     ];
+
+//     for (const { model, label } of models) {
+//       const items = await model.findAll({ raw: true, nest: true });
+//       items.forEach((item) => {
+//         result.push(item);
+//       });
+//       console.log(`${label}:`, items);
+//     }
+
+//     const allResult = result.sort((a, b) => a.number - b.number);
+//     console.log('All Results:', allResult);
+//     res.json(allResult);
+//   } catch (error) {
+//     console.error('Ошибка при получении данных:', error);
+//     res.status(500).json({ error: 'Ошибка при получении данных' });
+//   }
+// });
+
 acrylicPrimerRouter.get('/', async (req, res) => {
   try {
-    const result = [];
+    const result = {
+      AcrylicPrimers: [],
+      Grounds: [],
+      Laks: [],
+      Paints: [],
+      Patinas: [],
+      PrimerInsulators: [],
+      Stains: [],
+    };
+
     const models = [
       { model: AcrylicPrimer, label: 'AcrylicPrimers' },
       { model: Ground, label: 'Grounds' },
@@ -25,17 +64,12 @@ acrylicPrimerRouter.get('/', async (req, res) => {
 
     for (const { model, label } of models) {
       const items = await model.findAll({ raw: true, nest: true });
-      items.forEach((item) => {
-        if (item.number < 15) {
-          result.push(item);
-        }
-      });
-      console.log(`${label}:`, items);
+      result[label] = items;
+      // console.log(`${label}:`, items);
     }
 
-    const allResult = result.sort((a, b) => a.number - b.number);
-    console.log('All Results:', allResult);
-    res.json(allResult);
+    // console.log('All Results:', result);
+    res.json(result);
   } catch (error) {
     console.error('Ошибка при получении данных:', error);
     res.status(500).json({ error: 'Ошибка при получении данных' });
@@ -53,14 +87,39 @@ const models = [
 ];
 
 // Маршрут для удаления
-acrylicPrimerRouter.delete('/:id', async (req, res) => {
-  const { id } = req.params;
+acrylicPrimerRouter.delete('/:model/:id', async (req, res) => {
+  const { model, id } = req.params;
+  console.log('>>>>>', model, id);
   try {
-    for (const model of models) {
-      const result = await model.destroy({ where: { id } });
-      if (result) {
-        return res.status(204).send();
-      }
+    let Model;
+    switch (model) {
+      case 'AcrylicPrimers':
+        Model = AcrylicPrimer;
+        break;
+      case 'Patinas':
+        Model = Patina;
+        break;
+      case 'Grounds':
+        Model = Ground;
+        break;
+      case 'Laks':
+        Model = Lak;
+        break;
+      case 'Paints':
+        Model = Paint;
+        break;
+      case 'Stains':
+        Model = Stain;
+        break;
+      case 'PrimerInsulators':
+        Model = PrimerInsulator;
+        break;
+      default:
+        return res.status(400).send('Invalid model');
+    }
+    const result = await Model.destroy({ where: { id } });
+    if (result) {
+      return res.status(204).send();
     }
     res.status(404).send('Not found');
   } catch (error) {
@@ -68,16 +127,40 @@ acrylicPrimerRouter.delete('/:id', async (req, res) => {
   }
 });
 
-// Маршрут для обновления
-acrylicPrimerRouter.patch('/:id', async (req, res) => {
-  const { id } = req.params;
+acrylicPrimerRouter.patch('/:model/:id', async (req, res) => {
+  const { model, id } = req.params;
   const updates = req.body;
   try {
-    for (const model of models) {
-      const result = await model.update(updates, { where: { id } });
-      if (result[0]) {
-        return res.status(200).send();
-      }
+    let Model;
+    switch (model) {
+      case 'AcrylicPrimers':
+        Model = AcrylicPrimer;
+        break;
+      case 'Patinas':
+        Model = Patina;
+        break;
+      case 'Grounds':
+        Model = Ground;
+        break;
+      case 'Laks':
+        Model = Lak;
+        break;
+      case 'Paints':
+        Model = Paint;
+        break;
+      case 'Stains':
+        Model = Stain;
+        break;
+      case 'PrimerInsulators':
+        Model = PrimerInsulator;
+        break;
+      default:
+        return res.status(400).send('Invalid model');
+    }
+
+    const result = await Model.update(updates, { where: { id } });
+    if (result[0]) {
+      return res.status(200).send();
     }
     res.status(404).send('Not found');
   } catch (error) {
@@ -107,5 +190,3 @@ acrylicPrimerRouter.post('/', async (req, res) => {
 });
 
 module.exports = acrylicPrimerRouter;
-
-

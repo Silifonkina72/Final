@@ -60,7 +60,7 @@ const PublicRouteObject: RouteObject[] = [
       },
       {
         path: '/changer',
-        element: <Change />,
+        element: <AcrylicPrimersList />,
         errorElement: <ErrorBoundary />,
       },
       {

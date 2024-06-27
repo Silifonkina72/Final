@@ -23,6 +23,10 @@ const basketSlice = createSlice({
   name: 'basket',
   initialState,
   reducers: {
+    clearBasket: (state) => {
+      state.itemsSquare = []
+      state.itemsVolume = []
+    },
     setItemsVolume: (state, action: PayloadAction<ProductVolume[]>) => {
       state.itemsVolume = action.payload;
     },
@@ -199,3 +203,4 @@ export const {
 } = basketSlice.actions;
 
 export default basketSlice.reducer;
+export const { clearError, clearBasket } = basketSlice.actions;

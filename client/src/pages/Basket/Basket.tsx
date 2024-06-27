@@ -9,7 +9,7 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react';
-import { addItem } from '../../store/slices/basketSlice';
+import { addItem, clearBasket } from '../../store/slices/basketSlice';
 import { Product } from '../../types/basketTypes';
 import { OneProduct } from '../../components/Basket/OneProduct';
 import { useAppDispatch, useAppSelector } from '../../hooks';
@@ -72,6 +72,7 @@ const Basket = () => {
         itemsVolume,
       })
     );
+    dispatch(clearBasket())
   };
 
   return (
