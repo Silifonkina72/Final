@@ -8,7 +8,7 @@ import {
 import { useState } from "react";
 import Karusel from "../../components/Karusel/Karusel";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-
+import { addItemPrice } from "../../store/slices/basketSlice";
 import { useEffect } from "react";
 
 import { useStartEffectMdf } from "../../utils/hooks/useStartEffectMdf";
@@ -41,7 +41,7 @@ import "./mdfAndMassiv.css";
 
 export default function Mdf() {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [input, setInput] = useState<number>(0);
+  const [input, setInput] = useState<number>(null);
   const [boxVisible, setBoxVisible] = useState<boolean>(false);
   const [boxVisible2, setBoxVisible2] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -62,14 +62,14 @@ export default function Mdf() {
   const grounds = useAppSelector((store) => store.groundSlice.grounds);
   const { allPrice: itemPrice } = useAppSelector((state) => state.basketSlice);
 
-  console.log('!!!!', patinas);
-  
+  console.log("!!!!", patinas);
+
   //? инпут значение
   const changeHandler = (e: ChangeEvent<HTMLInputElement>): void => {
     setInput(Number(e.target.value));
   };
 
-  // //? модальное окно
+  //? модальное окно
   const closeModal = useCallback(() => {
     setIsOpen(false);
   }, []);
@@ -123,6 +123,7 @@ export default function Mdf() {
     dispatch(addItemsSquare(itemsSquare));
     setBoxVisible(false);
     dispatch(resetBasket());
+    setInput(null);
     // localStorage.removeItem('basketItemsPrice');
   };
 
@@ -136,6 +137,7 @@ export default function Mdf() {
     dispatch(addItemsVolume(itemsVolume));
     setBoxVisible2(false);
     dispatch(resetBasket());
+    setInput(null);
   };
 
   //! полная стоимость (по площади)
@@ -152,7 +154,14 @@ export default function Mdf() {
     rowsPatina.push(patinas.slice(i, i + 4));
   }
 
-  console.log("????? ", acrylicPrimers);
+  const handleAddToBasket = (item, model) => {
+    const { id, name, priceArea, priceVolume, img, number } = item;
+    // console.log('ITEM', item);
+    // console.log('MODEL', model);
+    dispatch(
+      addItemPrice({ model, id, name, priceArea, priceVolume, img, number })
+    );
+  };
 
   return (
     <>
@@ -175,7 +184,12 @@ export default function Mdf() {
           <ol>
             {primerInsulators.map((el) => (
               <li>
-                <Button>{el.name}</Button>
+                <Button
+                  onClick={() => handleAddToBasket(el, "PrimerInsulator")}
+                  className="buttonComponent"
+                >
+                  {el.name}
+                </Button>
               </li>
             ))}
           </ol>
@@ -207,7 +221,10 @@ export default function Mdf() {
                         border={0}
                         style={{ padding: "1px" }}
                       >
-                        <button>
+                        <button
+                          onClick={() => handleAddToBasket(el, "Paint")}
+                          className="buttonPaints"
+                        >
                           {" "}
                           <img
                             src={el.img}
@@ -232,7 +249,6 @@ export default function Mdf() {
               </Tbody>
             </Table>
           </Box>
-          
         </Box>
 
         <div className="textComponent">
@@ -248,7 +264,12 @@ export default function Mdf() {
           <ol>
             {acrylicPrimers.map((el) => (
               <li>
-                <Button>{el.name}</Button>
+                <Button
+                  onClick={() => handleAddToBasket(el, "AcrylicPrimer")}
+                  className="buttonComponent"
+                >
+                  {el.name}
+                </Button>
               </li>
             ))}
           </ol>
@@ -263,7 +284,13 @@ export default function Mdf() {
           <div>
             <Karusel stains={patinas} model={"Patina"} />
           </div>
-          <Box p={4} width="40%" minWidth="400px" minHeight="150px" sx={{ alignSelf: "center" }}>
+          <Box
+            p={4}
+            width="40%"
+            minWidth="400px"
+            minHeight="150px"
+            sx={{ alignSelf: "center" }}
+          >
             <Table
               variant="simple"
               size="md"
@@ -279,7 +306,10 @@ export default function Mdf() {
                         border={0}
                         style={{ padding: "1px" }}
                       >
-                        <button>
+                        <button
+                          onClick={() => handleAddToBasket(el, "Patina")}
+                          className="buttonComponent"
+                        >
                           {" "}
                           <img
                             src={el.img}
@@ -319,7 +349,12 @@ export default function Mdf() {
           <ol>
             {laks.map((el) => (
               <li>
-                <Button>{el.name}</Button>
+                <Button
+                  onClick={() => handleAddToBasket(el, "Lak")}
+                  className="buttonComponent"
+                >
+                  {el.name}
+                </Button>
               </li>
             ))}
           </ol>
@@ -337,7 +372,12 @@ export default function Mdf() {
           <ol>
             {grounds.map((el) => (
               <li>
-                <Button>{el.name}</Button>
+                <Button
+                  onClick={() => handleAddToBasket(el, "Ground")}
+                  className="buttonComponent"
+                >
+                  {el.name}
+                </Button>
               </li>
             ))}
           </ol>
@@ -394,7 +434,6 @@ export default function Mdf() {
           </ModalContent>
         </Modal>
 
-
         <Button
           className="raschet"
           colorScheme="teal"
@@ -404,42 +443,84 @@ export default function Mdf() {
           рассчитать стоимость
         </Button>
 
-        {boxVisible &&
-          itemPrice.map((item) => (
-            <KardMapSquare
-              id={item.id}
-              img={item.img}
-              model={item.model}
-              name={item.name}
-              priceArea={item.priceArea}
-            />
-          ))}
-        {boxVisible && (
-          <>
-            <div>
-              Итоговая стоимость составит {allPricesquareAnswer}.руб на {input}{" "}
-              м.кв.
-            </div>
-            <Button onClick={submitHandler}>отложить в корзину</Button>
-          </>
-        )}
+        <div className="containerKardMapSquare">
+          <div className="oneComponentKardMapSquare">
+            {boxVisible &&
+              itemPrice.map((item) => (
+                <KardMapSquare
+                  id={item.id}
+                  img={item.img}
+                  model={item.model}
+                  name={item.name}
+                  priceArea={item.priceArea}
+                />
+              ))}
+          </div>
+          <div className="twoComponentKardMapSquare">
+            {boxVisible && (
+              <>
+                <div>
+                  Итоговая стоимость составит:{" "}
+                  <span style={{ fontWeight: "bold" }}>
+                    {allPricesquareAnswer}.руб
+                  </span>{" "}
+                  на {input} м.кв.
+                </div>
+                <Button
+                  bg="#693A69"
+                  color="white"
+                  _hover={{
+                    bg: "#7b1fa2",
+                  }}
+                  _active={{
+                    transform: "scale(1.1)",
+                  }}
+                  transition="transform 0.2s, background-color 0.2s"
+                  className="buttonsubmitHandler"
+                  onClick={submitHandler}
+                >
+                  отложить в корзину
+                </Button>
+              </>
+            )}
+          </div>
+        </div>
 
-        {boxVisible2 &&
-          itemPrice.map((item) => (
-            <KardMapVolume
-              id={item.id}
-              img={item.img}
-              model={item.model}
-              name={item.name}
-              priceVolume={item.priceVolume}
-            />
-          ))}
-
-        {boxVisible2 && (
-          <>
-            <Button onClick={submitHandler2}>отложить в корзину</Button>
-          </>
-        )}
+        <div className="containerKardMapVolume">
+          <div className="oneComponentKardMapVolume">
+            {boxVisible2 &&
+              itemPrice.map((item) => (
+                <KardMapVolume
+                  id={item.id}
+                  img={item.img}
+                  model={item.model}
+                  name={item.name}
+                  priceVolume={item.priceVolume}
+                />
+              ))}
+          </div>
+          <div className="twoComponentKardMapVolume">
+            {boxVisible2 && (
+              <>
+                <Button
+                  bg="#693A69"
+                  color="white"
+                  _hover={{
+                    bg: "#7b1fa2",
+                  }}
+                  _active={{
+                    transform: "scale(1.1)",
+                  }}
+                  transition="transform 0.2s, background-color 0.2s"
+                  className="buttonBasket"
+                  onClick={submitHandler2}
+                >
+                  отложить в корзину
+                </Button>
+              </>
+            )}
+          </div>
+        </div>
       </div>
     </>
   );

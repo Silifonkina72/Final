@@ -96,9 +96,13 @@ const MyMap = (): JSX.Element => {
     <div>
       <Map
         defaultState={{ center: location.center, zoom: location.zoom }}
-        width="500px"
-        height="400px"
+        // width="500px"
+        // height="380px"
+        width="35vw"
+        height="30vw"
+       
       >
+   
         <Placemark
           geometry={location.center}
           properties={{ iconCaption: "Вы здесь" }}

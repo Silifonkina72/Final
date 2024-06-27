@@ -8,7 +8,7 @@ import {
 import Karusel from "../../components/Karusel/Karusel";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { useState } from "react";
-
+import { addItemPrice } from '../../store/slices/basketSlice';
 import {
   addItemsSquare,
   addItemsVolume,
@@ -38,7 +38,7 @@ import "../Mdf/mdfAndMassiv.css";
 
 const Massiv = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [input, setInput] = useState<number>(0);
+  const [input, setInput] = useState<number>(null);
   const [boxVisible, setBoxVisible] = useState<boolean>(false);
   const [boxVisible2, setBoxVisible2] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -136,6 +136,17 @@ const Massiv = () => {
     rowsStains.push(stains.slice(i, i + 4));
   }
 
+
+  const handleAddToBasket = (item, model) => {
+    const { id, name, priceArea, priceVolume, img, number } = item;
+    // console.log('ITEM', item);
+    // console.log('MODEL', model);
+    dispatch(
+      addItemPrice({ model, id, name, priceArea, priceVolume, img, number })
+    );
+  }
+
+
   return (
     <>
       
@@ -168,7 +179,9 @@ const Massiv = () => {
                         border={0}
                         style={{ padding: "1px" }}
                       >
-                        <button>
+                        <button
+                         onClick={() => handleAddToBasket(el, 'Stain' )}
+                         className="buttonComponent">
                           {" "}
                           <img
                             src={el.img}
@@ -207,7 +220,9 @@ const Massiv = () => {
         <ol>
             {grounds.map((el) => (
               <li>
-                <Button>{el.name}</Button>
+                <Button
+                 onClick={() => handleAddToBasket(el, 'Ground' )}
+                className="buttonComponent">{el.name}</Button>
               </li>
             ))}
           </ol>
@@ -227,7 +242,9 @@ const Massiv = () => {
         <ol>
             {laks.map((el) => (
               <li>
-                <Button>{el.name}</Button>
+                <Button
+                 onClick={() => handleAddToBasket(el, 'Lak' )}
+                className="buttonComponent">{el.name}</Button>
               </li>
             ))}
           </ol>
@@ -289,6 +306,8 @@ const Massiv = () => {
         onClick={openModal}
         >рассчитать стоимость</Button>
 
+<div className="containerKardMapSquare">
+  <div className="oneComponentKardMapSquare">
         {boxVisible &&
           itemPrice.map((item) => (
             <KardMapSquare
@@ -299,16 +318,35 @@ const Massiv = () => {
               priceArea={item.priceArea}
             />
           ))}
+          </div>
+
+          <div className="twoComponentKardMapSquare">
         {boxVisible && (
           <>
-            <div>
-              Итоговая стоимость составит {allPricesquareAnswer}.руб на {input}{" "}
+            <div> 
+              Итоговая стоимость составит: <span style={{ fontWeight: 'bold' }}>{allPricesquareAnswer}.руб</span> на {input}{" "}
               м.кв.
             </div>
-            <Button onClick={submitHandler}>отложить в корзину</Button>
+            <Button
+            bg="#693A69" 
+            color="white" 
+            _hover={{
+              bg: '#7b1fa2', 
+            }}
+            _active={{
+              transform: 'scale(1.1)', 
+            }}
+            transition="transform 0.2s, background-color 0.2s"
+             className="buttonsubmitHandler" onClick={submitHandler}>отложить в корзину</Button>
           </>
         )}
+        </div>
+</div>
 
+
+<div className="containerKardMapVolume">
+
+<div className="oneComponentKardMapVolume">
         {boxVisible2 &&
           itemPrice.map((item) => (
             <KardMapVolume
@@ -319,13 +357,27 @@ const Massiv = () => {
               priceVolume={item.priceVolume}
             />
           ))}
+</div>
 
+<div className="twoComponentKardMapVolume">
         {boxVisible2 && (
           <>
-            <Button onClick={submitHandler2}>отложить в корзину</Button>
+            <Button
+             bg="#693A69" 
+             color="white" 
+             _hover={{
+               bg: '#7b1fa2', 
+             }}
+             _active={{
+               transform: 'scale(1.1)', 
+             }}
+             transition="transform 0.2s, background-color 0.2s"
+            className="buttonBasket" onClick={submitHandler2}>отложить в корзину</Button>
           </>
         )}
-      
+      </div>
+</div>
+
       </div>
     </>
   );
