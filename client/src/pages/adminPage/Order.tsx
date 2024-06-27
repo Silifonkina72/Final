@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./order.module.css";
 import { useAppDispatch } from "../../hooks";
 import { orderThunk } from "../../store/thunkActions/orderThunk";
+import { Button } from "@chakra-ui/react";
 
 export default function Orders() {
   const [orders, setOrders] = useState([]);
@@ -63,11 +64,11 @@ export default function Orders() {
     }
   };
 
-  // console.log("ORDERS ", orders[0]?.Laks[0]);
+  console.log(orders);
 
   return (
     <div className={styles.container}>
-      <h2>Заказы тут:</h2>
+      <h2>Здесь мы можем отслеживать статус заказов:</h2>
       <div className={styles.columns}>
         <div className={styles.column}>
           <h3>Заказы ожидающие оформления</h3>
@@ -75,113 +76,140 @@ export default function Orders() {
             .filter((order) => !order.isSent && !order.isAccept)
             .map((order) => (
               <div key={order.id} className={styles.order}>
-                <p>Пользователь : {order.User.login}</p>
-                <p>Адрес: {order.address}</p>
-                <p>Общая цена: {order.allPrice ?? "Не указано"}</p>
-                <p>Статус: оформлен</p>
-                <p>Компоненты:</p>
-                <ol>
+
+               
+
+                <p> <span  style={{ fontWeight: "bold" }}>Пользователь :</span> {order.User.login}</p>
+                <p><span  style={{ fontWeight: "bold" }}>Адрес:</span> {order.address}</p>
+                <p><span  style={{ fontWeight: "bold" }}>Общая цена:</span> {order.allPrice ?? "Не указано"}</p>
+                <p><span  style={{ fontWeight: "bold" }}>Статус:</span> оформлен</p>
+                <p> <span  style={{ fontWeight: "bold" }}>Компоненты:</span></p>
+                <div>
                   {order?.Laks[0]?.name && (
-                    <li>
+                    <div
+                     style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px' }} 
+                    className="containerImg">
                       <img
+                      className="imgOrder"
                         src={order.Laks[0].img}
                         alt={order.Laks[0].name}
-                        width={50}
-                        height={50}
-                        style={{ minHeight: "50px" }}
+                        width={40}
+                        height={40}
+                        style={{ minHeight: "40px", marginBottom: '10px', border: '1px solid black',  }}
                       />
-                      {order.Laks[0].name}
-                    </li>
+                      <span className="nameOrder">{order.Laks[0].name}</span> 
+                    </div>
                   )}
                   {order?.AcrylicPrimers[0]?.name && (
-                    <li>
+                    <div
+                    style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px' }} >
                       <img
+                      
                         src={order.AcrylicPrimers[0].img}
                         alt={order.AcrylicPrimers[0].name}
-                        width={50}
-                        height={50}
-                        style={{ minHeight: "50px" }}
+                        width={40}
+                        height={40}
+                        style={{ minHeight: "40px", marginBottom: '10px', border: '1px solid black',  }}
                       />
                       {order.AcrylicPrimers[0].name}
-                    </li>
+                    </div>
                   )}
                   {order?.Grounds[0]?.name && (
-                    <li>
+                    <div  style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px' }} >
                       <img
                         src={order.Grounds[0].img}
                         alt={order.Grounds[0].name}
-                        width={50}
-                        height={50}
-                        style={{ minHeight: "50px" }}
+                        width={40}
+                        height={40}
+                        style={{ minHeight: "40px", marginBottom: '10px', border: '1px solid black',  }}
                       />
                       {order.Grounds[0].name}
-                    </li>
+                    </div>
                   )}
                   {order?.Paints[0]?.name && (
-                    <li>
+                    <div
+                    style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px' }} >
                       <img
                         src={order.Paints[0].img}
                         alt={order.Paints[0].name}
-                        width={50}
-                        height={50}
-                        style={{ minHeight: "50px" }}
+                        width={40}
+                        height={40}
+                        style={{ minHeight: "40px", marginBottom: '10px', border: '1px solid black',  }}
                       />
                       {order.Paints[0].name}
-                    </li>
+                    </div>
                   )}
                   {order?.Patinas[0]?.name && (
-                    <li>
+                    <div
+                    style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px' }} >
                       <img
                         src={order.Patinas[0].img}
                         alt={order.Patinas[0].name}
-                        width={50}
-                        height={50}
-                        style={{ minHeight: "50px" }}
+                        width={40}
+                        height={40}
+                        style={{ minHeight: "40px", marginBottom: '10px', border: '1px solid black',  }}
                       />
                       {order.Patinas[0].name}
-                    </li>
+                    </div>
                   )}
                   {order?.PrimerInsulators[0]?.name && (
-                    <li>
+                    <div
+                    style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px' }} >
                       <img
                         src={order.PrimerInsulators[0].img}
                         alt={order.PrimerInsulators[0].name}
-                        width={50}
-                        height={50}
-                        style={{ minHeight: "50px" }}
+                        width={40}
+                        height={40}
+                        style={{ minHeight: "40px", marginBottom: '10px', border: '1px solid black',  }}
                       />
                       {order.PrimerInsulators[0].name}
-                    </li>
+                    </div>
                   )}
                   {order?.Stains[0]?.name && (
-                    <li>
+                    <div
+                    style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px' }} >
                       <img
                         src={order.Stains[0].img}
                         alt={order.Stains[0].name}
-                        width={50}
-                        height={50}
-                        style={{ minHeight: "50px" }}
+                        width={40}
+                        height={40}
+                        style={{ minHeight: "40px", marginBottom: '10px', border: '1px solid black',  }}
                       />
                       {order.Stains[0].name}
-                    </li>
+                    </div>
                   )}
-                </ol>
+                </div>
 
-                <button onClick={() => formHandler(order.id)}>Отправить</button>
+                <Button
+              size="xs"
+              bg="purple.700" // Красивый зеленый цвет
+              color="white" // Белый цвет текста
+              _hover={{ bg: 'purple.800' }} // Темнее при наведении
+              _active={{ bg: 'purple.900' }} // Темнее при нажатии
+                onClick={() => formHandler(order.id)}>Отправить</Button>
               </div>
             ))}
         </div>
+
+
+{/* <div> */}
         <div className={styles.column}>
           <h3>Отправленные заказы</h3>
           {orders
-            .filter((order) => order.isSent && !order.isAccept)
+            .filter((order) => order.isForm && order.isSent && !order.isAccept)
             .map((order) => (
               <div key={order.id} className={styles.order}>
                 <p>Пользователь : {order.User.login}</p>
                 <p>Адрес: {order.address}</p>
                 <p>Общая цена: {order.allPrice ?? "Не указано"}</p>
                 <p>Статус: отправлен</p>
-                <button onClick={() => formHandler(order.id)}>Завершить</button>
+                <Button
+                size="xs"
+                bg="purple.700" // Красивый зеленый цвет
+                color="white" // Белый цвет текста
+                _hover={{ bg: 'purple.800' }} // Темнее при наведении
+                _active={{ bg: 'purple.900' }} // Темнее при нажатии
+                onClick={() => formHandler(order.id)}>Завершить</Button>
               </div>
             ))}
         </div>
@@ -195,10 +223,19 @@ export default function Orders() {
                 <p>Адрес: {order.address}</p>
                 <p>Общая цена: {order.allPrice ?? "Не указано"}</p>
                 <p>Статус: завершен</p>
-                <button onClick={() => deleteOrder(order.id)}>Удалить</button>
+                <Button 
+                size="xs"
+                bg="purple.700" // Красивый зеленый цвет
+                color="white" // Белый цвет текста
+                _hover={{ bg: 'purple.800' }} // Темнее при наведении
+                _active={{ bg: 'purple.900' }} // Темнее при нажатии
+                onClick={() => deleteOrder(order.id)}>Удалить</Button>
               </div>
             ))}
         </div>
+        {/* </div> */}
+
+
       </div>
     </div>
   );

@@ -1,4 +1,4 @@
-const { Router } = require('express');
+const { Router } = require("express");
 const orderRouter = new Router();
 
 const {
@@ -17,9 +17,9 @@ const {
   OrdersPatina,
   OrdersPrimerInsulator,
   OrdersStain,
-} = require('../db/models');
+} = require("../db/models");
 
-orderRouter.post('/', async (req, res) => {
+orderRouter.post("/", async (req, res) => {
   const { user, allPrice, address } = req.body;
   console.log(user);
   const user_id = user.userId;
@@ -27,20 +27,20 @@ orderRouter.post('/', async (req, res) => {
     const newOrder = await Order.create({
       allPrice,
       user_id,
-      isForm: false,
+      isForm: true,
       isSent: false,
-      isAccept: true,
+      isAccept: false,
       address,
     });
 
     res.status(201).json(newOrder);
   } catch (error) {
-    console.error('Error creating order:', error);
-    res.status(500).json({ error: 'Error creating order' });
+    console.error("Error creating order:", error);
+    res.status(500).json({ error: "Error creating order" });
   }
 });
 
-orderRouter.post('/product', async (req, res) => {
+orderRouter.post("/product", async (req, res) => {
   const { order, id } = req.body;
   const order_id = id;
   const { itemsSquare, itemsVolume } = order;
@@ -50,43 +50,43 @@ orderRouter.post('/product', async (req, res) => {
       const { model, id: productId, count } = product;
 
       switch (model) {
-        case 'Lak':
+        case "Lak":
           return OrdersLak.create({
             lak_id: productId,
             order_id,
             quantity: count,
           });
-        case 'AcrylicPrimer':
+        case "AcrylicPrimer":
           return OrdersAcrylicPrimer.create({
             acrylicPrimer_id: productId,
             order_id,
             quantity: count,
           });
-        case 'Ground':
+        case "Ground":
           return OrdersGround.create({
             ground_id: productId,
             order_id,
             quantity: count,
           });
-        case 'Paint':
+        case "Paint":
           return OrdersPaint.create({
             paint_id: productId,
             order_id,
             quantity: count,
           });
-        case 'Patina':
+        case "Patina":
           return OrdersPatina.create({
             patina_id: productId,
             order_id,
             quantity: count,
           });
-        case 'PrimerInsulator':
+        case "PrimerInsulator":
           return OrdersPrimerInsulator.create({
             primerInsulator_id: productId,
             order_id,
             quantity: count,
           });
-        case 'Stain':
+        case "Stain":
           return OrdersStain.create({
             stain_id: productId,
             order_id,
@@ -101,50 +101,50 @@ orderRouter.post('/product', async (req, res) => {
       const { model, id: productId, square } = product;
       const count = Math.ceil(square / 4);
       switch (model) {
-        case 'Lak':
+        case "Lak":
           return OrdersLak.create({
             lak_id: productId,
             order_id,
             quantity: count,
           });
-        case 'AcrylicPrimer':
+        case "AcrylicPrimer":
           return OrdersAcrylicPrimer.create({
             acrylicPrimer_id: productId,
             order_id,
             quantity: count,
           });
-        case 'Ground':
+        case "Ground":
           return OrdersGround.create({
             ground_id: productId,
             order_id,
             quantity: count,
           });
-        case 'Paint':
+        case "Paint":
           return OrdersPaint.create({
             paint_id: productId,
             order_id,
             quantity: count,
           });
-        case 'Patina':
+        case "Patina":
           return OrdersPatina.create({
             patina_id: productId,
             order_id,
             quantity: count,
           });
-        case 'PrimerInsulator':
+        case "PrimerInsulator":
           return OrdersPrimerInsulator.create({
             primerInsulator_id: productId,
             order_id,
             quantity: count,
           });
-        case 'Stain':
+        case "Stain":
           return OrdersStain.create({
             stain_id: productId,
             order_id,
             quantity: count,
           });
         default:
-          return null; 
+          return null;
       }
     });
 
@@ -152,10 +152,10 @@ orderRouter.post('/product', async (req, res) => {
     await Promise.all(volumePromises);
     await Promise.all(squarePromises);
 
-    res.status(201).json({ message: 'Orders created successfully' });
+    res.status(201).json({ message: "Orders created successfully" });
   } catch (error) {
-    console.error('Error creating orders:', error);
-    res.status(500).json({ error: 'Error creating orders' });
+    console.error("Error creating orders:", error);
+    res.status(500).json({ error: "Error creating orders" });
   }
 });
 
