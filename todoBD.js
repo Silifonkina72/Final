@@ -137,7 +137,7 @@ const getComputerWithOwnerInfoById = async (owner_id) => {
           attributes: ["id", "model"],
         },
       });
-      const student = response.get({ plain: true });
+      const student = response.get({ row: true });
       console.log("result ", student);
     } catch (error) {
       console.log("error ", error);

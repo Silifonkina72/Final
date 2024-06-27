@@ -2,7 +2,7 @@ import {} from './Basket.css';
 
 const Success = () => {
   return (
-    <div className='message'>
+    <div className='messageBasket'>
       <p>Благодарим за заказ!</p>
       <br></br>
       <p>Мы пришлем вам письмо,

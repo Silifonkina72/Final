@@ -1,35 +1,90 @@
 .box {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 100%;
-    height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  /* justify-content: space-between;
+  width: 100%;
+  height: 100%; */
 }
 
 .about {
-    width: 100%;
+  width: 100%;
+  margin: 30px 100px 50px;
+  text-align: center;
 }
 
-.container {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
+.containerCatalog {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-around; */
+  /* gap: 40px; */
+  width: 90%;
+  flex-wrap: wrap;
 }
 
-.map, .chat {
-    width: 50%;
+.map {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-input {
-    border: 1px, solid, grey;
-    border-radius: 3px;
+.map,
+.chat {
+  width: 40vw;
+  height: 30vw;
+  min-width: 600px;
+}
+
+.inputCatalog {
+  border: 1px, solid, grey;
+  border-radius: 3px;
 }
 
 .borderChat {
-    border-radius: 5px;
+  border-radius: 5px;
 }
-/* .map {
-    width: 600px; 
-    height: 400px
-} */
+
+.responsive-map {
+  width: 100%;
+  max-width: 500px;
+  height: 0;
+  padding-bottom: 76%; /* Aspect ratio (380px/500px = 76%) */
+  position: relative;
+}
+
+.responsive-map iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.botText {
+  border: 1px solid #3062b4;
+  padding: 10px;
+  border-radius: 15px;
+  margin-left: 120px;
+}
+
+.circul {
+  border: 1px solid #3062b4;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  z-index: 1;
+  top: 20px;
+  right: 60px;
+}
+
+.circul2 {
+  border: 1px solid #3062b4;
+  border-radius: 50%;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  z-index: 1;
+  top: 55px;
+  right: 40px;
+}

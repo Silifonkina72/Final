@@ -22,11 +22,6 @@ ol {
   margin-bottom: 25px;
   margin-top: 25px;
 }
-h2 {
-  color: black;
-  text-align: center;
-  font-weight: 300;
-}
 
 .textHeading {
   text-align: center;
@@ -38,4 +33,70 @@ h2 {
 .raschet {
   margin: 50px;
   align-self: center;
+}
+
+/* .buttonComponent {
+  width: 200px;
+  height: 200px;
+} */
+
+.buttonComponent {
+  border-radius: 4px;
+  border: 1px solid grey;
+}
+
+.buttonComponent:active {
+  transform: scale(1.03);
+}
+
+.buttonComponent:hover {
+  transform: scale(1.03);
+}
+
+.buttonPaints:hover {
+  transform: scale(1.03);
+}
+
+.buttonBasket {
+  width: fit-content;
+}
+
+.containerKardMapSquare {
+  display: flex;
+  flex-wrap: wrap;
+  /* gap: 50px; */
+  flex-direction: column;
+}
+
+.oneComponentKardMapSquare {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.twoComponentKardMapSquare {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.buttonsubmitHandler {
+  margin-top: 20px;
+}
+
+.containerKardMapVolume {
+  display: flex;
+  flex-wrap: wrap;
+ 
+  flex-direction: column;
+}
+
+.oneComponentKardMapVolume {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.twoComponentKardMapVolume {
+  text-align: center;
+  margin-bottom: 30px;
 }
