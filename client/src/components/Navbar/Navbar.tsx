@@ -37,9 +37,6 @@ export const Navbar = () => {
   useEffect(() => {
     if (isAuth() && isAdmin()) {
       navigate('/orders');
-      console.log(')))))', (isAuth() && isAdmin()));
-      console.log('фдм', (isAdmin()));
-      console.log('зарег', (isAuth() ));
       
     //     setErer({text: ''})
       

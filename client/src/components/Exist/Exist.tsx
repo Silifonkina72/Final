@@ -31,15 +31,15 @@ const AcrylicPrimersList: React.FC = () => {
   });
 
   const [primers, setPrimers] = useState({
-    AcrylicPrimers: [],
-    Grounds: [],
-    Laks: [],
-    Paints: [],
-    Patinas: [],
-    PrimerInsulators: [],
-    Stains: []
+    AcrylicPrimer: [],
+    Ground: [],
+    Lak: [],
+    Paint: [],
+    Patina: [],
+    PrimerInsulator: [],
+    Stain: []
   });
-  console.log(primers);
+ 
   
   useEffect(() => {
     axios
@@ -50,7 +50,7 @@ const AcrylicPrimersList: React.FC = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, []); // добавила
 
   const handleDelete = (model, id: number) => {
     axios
@@ -84,6 +84,7 @@ const AcrylicPrimersList: React.FC = () => {
         } else if (field === "priceVolume") {
           setEditPriceVolume({ ...editPriceVolume, [id]: "" });
         }
+        console.log('>>>>>>', primers);
       })
       .catch((error) => {
         console.log(error);
@@ -94,7 +95,15 @@ const AcrylicPrimersList: React.FC = () => {
     axios
       .post("http://localhost:3000/changer", newIngredient)
       .then((response) => {
-        setPrimers([...primers, response.data]);
+        setPrimers({
+          ...primers,
+          [newIngredient.model]: [
+            ...primers[newIngredient.model],
+            response.data
+          ]
+        });
+        console.log(primers[newIngredient.model]);
+        console.log(response.data);
         setNewIngredient({
           model: "AcrylicPrimer",
           priceArea: "",
@@ -110,8 +119,8 @@ const AcrylicPrimersList: React.FC = () => {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.addNew}>
+    <div className={styles.containerNal}>
+      <div className={styles.addNewProd}>
         <h3>Добавить новый ингредиент</h3>
         <select
           value={newIngredient.model}
@@ -119,13 +128,13 @@ const AcrylicPrimersList: React.FC = () => {
             setNewIngredient({ ...newIngredient, model: e.target.value })
           }
         >
-          <option value="AcrylicPrimer">AcrylicPrimer</option>
-          <option value="Ground">Ground</option>
-          <option value="Lak">Lak</option>
-          <option value="Paint">Paint</option>
-          <option value="Patina">Patina</option>
-          <option value="PrimerInsulator">PrimerInsulator</option>
-          <option value="Stain">Stain</option>
+          <option value="AcrylicPrimer">AcrylicPrimers</option>
+          <option value="Ground">Grounds</option>
+          <option value="Lak">Laks</option>
+          <option value="Paint">Paints</option>
+          <option value="Patina">Patinas</option>
+          <option value="PrimerInsulator">PrimerInsulators</option>
+          <option value="Stain">Stains</option>
         </select>
         <input
           type="text"
@@ -174,7 +183,8 @@ const AcrylicPrimersList: React.FC = () => {
       </div>
       <div>
       </div>
-      <div>
+      {/* <div> */}
+      <div className={styles.nalichie}>
       <Tabs>
       <TabList>
         <Tab>AcrylicPrimers</Tab>
@@ -188,77 +198,77 @@ const AcrylicPrimersList: React.FC = () => {
 
       <TabPanels>
         <TabPanel>
-          {primers.AcrylicPrimers.map(primer => (
+          {primers.AcrylicPrimer.map(primer => (
             <ItemComponent
               key={primer.id}
               primer={primer}
-              model={'AcrylicPrimers'}
+              model={'AcrylicPrimer'}
               onUpdate={handleUpdate}
               onDelete={handleDelete}
             />
           ))}
         </TabPanel>
         <TabPanel>
-          {primers.Grounds.map(primer => (
+          {primers.Ground.map(primer => (
             <ItemComponent
               key={primer.id}
               primer={primer}
-              model={'Grounds'}
+              model={'Ground'}
               onUpdate={handleUpdate}
               onDelete={handleDelete}
             />
           ))}
         </TabPanel>
         <TabPanel>
-          {primers.Laks.map(primer => (
+          {primers.Lak.map(primer => (
             <ItemComponent
               key={primer.id}
               primer={primer}
-              model={'Laks'}
+              model={'Lak'}
               onUpdate={handleUpdate}
               onDelete={handleDelete}
             />
           ))}
         </TabPanel>
         <TabPanel>
-          {primers.Paints.map(primer => (
+          {primers.Paint.map(primer => (
             <ItemComponent
               key={primer.id}
               primer={primer}
-              model={'Paints'}
+              model={'Paint'}
               onUpdate={handleUpdate}
               onDelete={handleDelete}
             />
           ))}
         </TabPanel>
         <TabPanel>
-          {primers.Patinas.map(primer => (
+          {primers.Patina.map(primer => (
             <ItemComponent
               key={primer.id}
               primer={primer}
-              model={'Patinas'}
+              model={'Patina'}
               onUpdate={handleUpdate}
               onDelete={handleDelete}
             />
           ))}
         </TabPanel>
         <TabPanel>
-          {primers.PrimerInsulators.map(primer => (
+          {primers.PrimerInsulator.map(primer => (
             <ItemComponent
               key={primer.id}
               primer={primer}
-              model={'PrimerInsulators'}
+              model={'PrimerInsulator'}
               onUpdate={handleUpdate}
               onDelete={handleDelete}
             />
           ))}
         </TabPanel>
         <TabPanel>
-          {primers.Stains.map(primer => (
+          {primers.Stain.map(primer => (
             <ItemComponent
               key={primer.id}
               primer={primer}
-              model={'Stains'}
+              model={'Stain'}
               onUpdate={handleUpdate}
               onDelete={handleDelete}
             />
