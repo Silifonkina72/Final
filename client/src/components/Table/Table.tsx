@@ -8,39 +8,16 @@ import {
   Td,
   TableContainer,
   Heading,
+  useMediaQuery,
+  Box,
+  Image,
 } from "@chakra-ui/react";
-import axios from "axios";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { useStartEffectMdf } from "../../utils/hooks/useStartEffectMdf";
-import { useStartEffect } from "../../utils/hooks/useStartEffect";
 import { StainsThunk } from "../../store/thunkActions/StainThunk";
-// interface Elements {
-//   id: number;
-//   priceArea: number;
-//   priceVolume: number;
-//   name: string;
-//   number: number;
-//   img: string;
-//   model: string; // Добавьте это поле, если необходимо
-// }
 
 const AdminTable: React.FC = () => {
-  // const [data, setData] = useState<Elements[]>([]);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await axios.get<Elements[]>('http://localhost:3000/availability');
-  //       setData(response.data);
-  //     } catch (error) {
-  //       console.error('Ошибка при получении данных', error);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
-
   //? достаем данные
-
   useStartEffectMdf();
   const dispatch = useAppDispatch();
   const primerInsulators = useAppSelector(
@@ -57,7 +34,7 @@ const AdminTable: React.FC = () => {
 
   useEffect(() => {
     void dispatch(StainsThunk());
-  }, []);
+  }, [dispatch]);
 
   const primerInsulatorsRes = primerInsulators
     .filter((el) => el.number < 15)
@@ -94,35 +71,60 @@ const AdminTable: React.FC = () => {
 
   const dataRes = data.sort((a, b) => a.number - b.number);
 
+  const [isLargerThan700] = useMediaQuery("(min-width: 700px)");
+
   return (
     <>
-      <TableContainer border="1px solid black" margin="50px">
-        <Heading as="h2" size="lg" textAlign="center" mb={4} color="teal">
+      <Box
+        width={isLargerThan700 ? "80%" : "90vw"}
+        margin="50px auto"
+        border="1px solid black"
+        borderRadius="lg"
+        overflow="hidden"
+      >
+        <Heading
+          as="h2"
+          size={isLargerThan700 ? "lg" : "md"}
+          textAlign="center"
+          mb={4}
+          color="teal"
+          p={4}
+        >
           Количество оставшегося материала на складе:
         </Heading>
-        <Table variant="simple">
-          <Thead>
-            <Tr>
-              <Th>Категория</Th>
-              <Th>Наименование</Th>
-              <Th>К-во на складе</Th>
-              <Th>Фото</Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {dataRes.map((item) => (
-              <Tr key={item.id}>
-                <Td>{item.model}</Td>
-                <Td>{item.name}</Td>
-                <Td>{item.number}</Td>
-                <Td>
-                  <img src={item.img} width={50} height={50} style={{ minHeight: '50px' }}  alt="Slide" />
-                </Td>
+        <TableContainer>
+          <Table variant="simple" size={isLargerThan700 ? "md" : "sm"}>
+            <Thead bg="gray.200">
+              <Tr>
+                <Th fontSize={isLargerThan700 ? "lg" : "sm"}>Категория</Th>
+                <Th fontSize={isLargerThan700 ? "lg" : "sm"}>Наименование</Th>
+                <Th fontSize={isLargerThan700 ? "lg" : "sm"}>К-во</Th>
+                <Th fontSize={isLargerThan700 ? "lg" : "sm"}>Фото</Th>
               </Tr>
-            ))}
-          </Tbody>
-        </Table>
-      </TableContainer>
+            </Thead>
+            <Tbody>
+              {dataRes.map((item) => (
+                <Tr key={item.id}>
+                  <Td fontSize={isLargerThan700 ? "md" : "sm"}>{item.model}</Td>
+                  <Td fontSize={isLargerThan700 ? "md" : "sm"}>{item.name}</Td>
+                  <Td fontSize={isLargerThan700 ? "md" : "sm"}>{item.number}</Td>
+                  <Td>
+                    <Image
+                      src={item.img}
+                      width="50px"
+                      height="50px"
+                      objectFit="cover"
+                      objectPosition="center"
+                      alt="Slide"
+                      borderRadius="md"
+                    />
+                  </Td>
+                </Tr>
+              ))}
+            </Tbody>
+          </Table>
+        </TableContainer>
+      </Box>
     </>
   );
 };

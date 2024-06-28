@@ -147,15 +147,15 @@ const basketSlice = createSlice({
       const newState = (state.allPrice = state.allPrice.map((el) => {
         if (el.id === countEl?.id && el.model === countEl.model) {
           if (el.count) {
-            el.count += 1;
+            el.count += 0.1;
           } else {
-            el.count = 1;
+            el.count = 0.1;
           }
         }
         return el;
       }));
 
-      state.allPrice = newState;
+      state.allPrice = newState
     },
 
     countPriceRem: (state, action: PayloadAction<ProductVolume>) => {
@@ -171,7 +171,7 @@ const basketSlice = createSlice({
       const newState = (state.allPrice = state.allPrice.map((el) => {
         if (el.id === countEl.id && el.model === countEl.model) {
           if (el.count) {
-            el.count -= 1;
+            el.count -= 0.1;
           } else {
             el.count = 0;
           }
@@ -181,7 +181,8 @@ const basketSlice = createSlice({
         return el;
       }));
 
-      state.allPrice = newState;
+    
+      state.allPrice =  newState
     },
   },
 });

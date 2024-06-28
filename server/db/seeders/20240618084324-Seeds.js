@@ -31,36 +31,36 @@ module.exports = {
       {}
     );
 
-    await queryInterface.bulkInsert(
-      "Orders",
-      [
-        {
-          allPrice: null,
-          user_id: 1,
-          isForm: true,
-          isSent: false,
-          isAccept: false,
-          address: "Тюмень",
-        },
-        {
-          allPrice: null,
-          user_id: 2,
-          isForm: null,
-          isSent: null,
-          isAccept: null,
-          address: "Алматы",
-        },
-        {
-          allPrice: null,
-          user_id: 2,
-          isForm: true,
-          isSent: false,
-          isAccept: false,
-          address: "Tbilisy",
-        },
-      ],
-      {}
-    );
+    // await queryInterface.bulkInsert(
+    //   "Orders",
+    //   [
+    //     {
+    //       allPrice: null,
+    //       user_id: 1,
+    //       isForm: true,
+    //       isSent: false,
+    //       isAccept: false,
+    //       address: "Тюмень",
+    //     },
+    //     {
+    //       allPrice: null,
+    //       user_id: 2,
+    //       isForm: null,
+    //       isSent: null,
+    //       isAccept: null,
+    //       address: "Алматы",
+    //     },
+    //     {
+    //       allPrice: null,
+    //       user_id: 2,
+    //       isForm: true,
+    //       isSent: false,
+    //       isAccept: false,
+    //       address: "Tbilisy",
+    //     },
+    //   ],
+    //   {}
+    // );
 
     await queryInterface.bulkInsert(
       "PrimerInsulators",
@@ -830,45 +830,45 @@ module.exports = {
       {}
     );
 
-    await queryInterface.bulkInsert(
-      "OrdersAcrylicPrimers",
-      [
-        // Для первого заказа
-        {
-          order_id: 1,
-          acrylicPrimer_id: 1,
-          quantity: 1,
-        },
+    // await queryInterface.bulkInsert(
+    //   "OrdersAcrylicPrimers",
+    //   [
+    //     // Для первого заказа
+    //     {
+    //       order_id: 1,
+    //       acrylicPrimer_id: 1,
+    //       quantity: 1,
+    //     },
        
-       // Для второго заказа
-        {
-          order_id: 1,
-          acrylicPrimer_id: 1,
-          quantity: 1,
-        },
-      ],
-      {}
-    );
+    //    // Для второго заказа
+    //     {
+    //       order_id: 1,
+    //       acrylicPrimer_id: 1,
+    //       quantity: 1,
+    //     },
+    //   ],
+    //   {}
+    // );
 
-    await queryInterface.bulkInsert(
-      "OrdersLaks",
-      [
-        // Для первого заказа
-        {
-          order_id: 1,
-          lak_id: 1,
-          quantity: 1,
-        },
+    // await queryInterface.bulkInsert(
+    //   "OrdersLaks",
+    //   [
+    //     // Для первого заказа
+    //     {
+    //       order_id: 1,
+    //       lak_id: 1,
+    //       quantity: 1,
+    //     },
        
-        //Для второго заказа
-        {
-          order_id: 2,
-          lak_id: 2,
-          quantity: 1,
-        },
-      ],
-      {}
-    );
+    //     //Для второго заказа
+    //     {
+    //       order_id: 2,
+    //       lak_id: 2,
+    //       quantity: 1,
+    //     },
+    //   ],
+    //   {}
+    // );
   },
 
   async down(queryInterface, Sequelize) {

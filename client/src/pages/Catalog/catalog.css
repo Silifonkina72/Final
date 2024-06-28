@@ -88,3 +88,66 @@
   top: 55px;
   right: 40px;
 }
+
+@media (max-width: 700px) {
+  .box {
+    /* background-color: lightblue; */
+  }
+
+  .map {
+    display: flex;
+    flex-direction: column;
+    
+    gap: 20px;
+  }
+
+
+.first {
+  order: 2;
+}
+
+.second {
+  order: 1;
+}
+
+  .containerCatalog {
+    display: flex;
+    flex-direction: row;
+    /* justify-content: space-around; */
+    gap: 280px;
+    width: 90%;
+    flex-wrap: wrap-reverse;
+  }
+
+  .chat-container {
+    min-width: 550px;
+    width: 550px;
+  }
+
+  .borderChat {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+    min-width: 450px;
+    width: 650px;
+    height: 400px;
+    overflow-y: auto;
+  }
+
+  .box {
+    font-size: 15px;
+  }
+
+  .about {
+    font-size: 15px;
+    padding: 0 20px;
+    margin: 30px 30px 30px;
+  }
+
+  .inputCatalog,
+  .inputBot {
+    max-width: 320px;
+  }
+
+  
+}

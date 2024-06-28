@@ -1,12 +1,23 @@
 stain - морилка;
-solvent - растворитель;
+
 ground - грунт;
 lak - лак;
 primer_insulator - грунтовка-изолятор
 paint - краска
-high_grade - высокопробная
+// high_grade - высокопробная
 acrylic_primer - акриловый грунт
 patina - патина
+
+stainPriceArea = priceVolume*0.025
+groundPriceArea = priceVolume*0.25
+lakPriceArea = priceVolume*0.25
+primer_insulatorPriceArea = priceVolume*0.25
+paintPriceArea = priceVolume*0.25
+acrylic_primerPriceArea = priceVolume*0.13
+patinaPriceArea = priceVolume*0.1
+
+
+
 
 
 ['массив'], ['мдф'], ['морилка'], ['растворитель'], ['грунт'], ['лак'],  ['грунтовка-изолятор'], ['краска'], ['высокопробная', 'краска'], ['акриловый'], ['патина'], ['технология', 'покраски']

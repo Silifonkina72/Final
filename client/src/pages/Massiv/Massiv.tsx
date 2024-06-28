@@ -30,7 +30,12 @@ import {
   Tr,
   Th,
   Td,
+  Icon,
+  Image,
+  Text
 } from "@chakra-ui/react";
+import { FaRegSmile } from 'react-icons/fa';
+import { Link } from 'react-router-dom'; 
 import KardMapVolume from "../../components/KardMapVolume/KardMapVolume";
 import KardMapSquare from "../../components/KardMapSquare/KardMapSquare";
 import { useStartEffect } from "../../utils/hooks/useStartEffect";
@@ -42,6 +47,9 @@ const Massiv = () => {
   const [boxVisible, setBoxVisible] = useState<boolean>(false);
   const [boxVisible2, setBoxVisible2] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
+  const [isOpenReg, setIsOpenReg] = useState<boolean>(false);
+
+
 
   //? достаем данные для карусели
 
@@ -54,18 +62,37 @@ const Massiv = () => {
   const { allPrice: itemPrice } = useAppSelector((state) => state.basketSlice);
 
   //? модальное окно
+
+  const user = useAppSelector((state) => state.logSlice.user); // Правильный путь к пользователю
+  const isAdmin = () => user?.isAdmin ?? false;
+  const isAuth = () => !!user?.logDone;
+
+  const closeHendler = ()=> {
+    setIsOpenReg(false)
+  }
+
+const closeModalReg = useCallback(() => {
+    setIsOpenReg(false);
+  }, []);
+
+
   const closeModal = useCallback(() => {
     setIsOpen(false);
   }, []);
 
   const openModal = useCallback(() => {
-    setIsOpen(true);
-    setTimeout(() => {
-      if (inputRef.current) {
-        inputRef.current.focus();
-        inputRef.current.setSelectionRange(0, 0);
-      }
-    }, 1);
+    if (isAuth()) {
+      setIsOpen(true);
+      setTimeout(() => {
+        if (inputRef.current) {
+          inputRef.current.focus();
+          inputRef.current.setSelectionRange(0, 0);
+        }
+      }, 1);
+    } else {
+      setIsOpenReg(true)
+    }
+   
   }, [inputRef]);
 
   //! полная стоимость (по площади)
@@ -95,7 +122,8 @@ const Massiv = () => {
 
   //? отправка в корзину товаров по площади (передача данных в itemsSquare, itemsVolume), очищаем allPrice
   const submitHandler = () => {
-    const itemsSquare = itemPrice
+    // if (isAuth()) {
+      const itemsSquare = itemPrice
       .filter((el, i, arr) => {
         const findIndex = arr.findIndex(
           (findElem) => findElem.id === el.id && findElem.name === el.name
@@ -111,18 +139,27 @@ const Massiv = () => {
     setBoxVisible(false);
     dispatch(resetBasket());
     // localStorage.removeItem('basketItemsPrice');
+    // } else {
+    //   setIsOpenReg(true)
+    // }
+    
   };
 
   //? отправка в корзину товаров по колличеству (передача данных в itemsSquare, itemsVolume), очищаем allPrice
   const submitHandler2 = () => {
-    const itemsVolume = itemPrice.map((item) => ({
-      ...item,
-      count: item.count ?? input,
-    }));
-
-    dispatch(addItemsVolume(itemsVolume));
-    setBoxVisible2(false);
-    dispatch(resetBasket());
+    // if (isAuth()) {
+      const itemsVolume = itemPrice.map((item) => ({
+        ...item,
+        count: item.count ?? input,
+      }));
+  
+      dispatch(addItemsVolume(itemsVolume));
+      setBoxVisible2(false);
+      dispatch(resetBasket());
+    // } else {
+    //   setIsOpenReg(true)
+    // }
+    
   };
 
   const onKeyDownHandler = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
@@ -149,9 +186,9 @@ const Massiv = () => {
 
   return (
     <>
-      
+     
         <Box className="textHeading">
-          <div>
+          <div className="infoText">
             Если вы хотите придать древесине цвет, вам нужно выбрать 3
             компонента: морилка, грунт и лак. Если такой необходимости нет, то
             используйте грунт и лак.
@@ -221,6 +258,8 @@ const Massiv = () => {
             {grounds.map((el) => (
               <li>
                 <Button
+                 fontSize={{ base: '12px', md: '16px', lg: '20px' }}
+                 padding={{ base: '-2px', md: '12px', lg: '16px' }}
                  onClick={() => handleAddToBasket(el, 'Ground' )}
                 className="buttonComponent">{el.name}</Button>
               </li>
@@ -243,6 +282,8 @@ const Massiv = () => {
             {laks.map((el) => (
               <li>
                 <Button
+                 fontSize={{ base: '12px', md: '16px', lg: '20px' }}
+                 padding={{ base: '-2px', md: '12px', lg: '16px' }}
                  onClick={() => handleAddToBasket(el, 'Lak' )}
                 className="buttonComponent">{el.name}</Button>
               </li>
@@ -379,6 +420,66 @@ const Massiv = () => {
 </div>
 
       </div>
+
+      <Modal isOpen={isOpenReg} onClose={closeModalReg}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader display="flex" alignItems="center" justifyContent="center">
+            <Icon as={FaRegSmile} boxSize={8} mr={2} />
+            Регистрация
+          </ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Box textAlign="center">
+              <Image
+                src="https://strojdvor.ru/wp-content/uploads/2021/07/e52308fe100d630158e7d5c28e3e93a1.png"
+                alt="Reminder Image"
+                mx="auto"
+                mb={4}
+                borderRadius="full"
+              />
+              <Text fontSize="xl" fontWeight="bold" mb={2}>
+              Не забудьте зарегистрироваться!
+              </Text>
+              <Text color="gray.600">
+              Зарегистрируйтесь прямо сейчас, чтобы получить доступ к эксклюзивным функциям и быть в курсе наших последних новостей и предложений.
+              </Text>
+            </Box>
+          </ModalBody>
+
+          <ModalFooter display="flex" justifyContent="center">
+            <Button colorScheme="teal" mr={3} onClick={closeHendler}>
+              Закрыть
+            </Button>
+            <Button as={Link} to="/registration" colorScheme="blue">
+              Зарегистрироваться сейчас
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
+
+      {/* <Modal isOpen={isOpenReg} onClose={closeModalReg}>
+          <ModalOverlay />
+          <ModalContent>
+            <ModalHeader>
+              REGISTRATION
+            </ModalHeader>
+            <ModalCloseButton />
+            <ModalBody>
+              
+            </ModalBody>
+
+            <ModalFooter display="flex" justifyContent="center">
+              <Button colorScheme="blue" mr={3} onClick={closeHendler}>
+                close
+              </Button>
+            
+            </ModalFooter>
+          </ModalContent>
+        </Modal> */}
+
+
     </>
   );
 };
