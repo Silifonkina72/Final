@@ -70,12 +70,12 @@ export default function Orders() {
       <h2>Заказы тут:</h2>
       <div className={styles.columns}>
         <div className={styles.column}>
-          <h3>Заказы ожидающие оформления</h3>
+          <h3>Заказы, ожидающие оформления</h3>
           {orders
             .filter((order) => !order.isSent && !order.isAccept)
             .map((order) => (
               <div key={order.id} className={styles.order}>
-                <p>Пользователь : {order.User.login}</p>
+                <p>Пользователь: {order.User.login}</p>
                 <p>Адрес: {order.address}</p>
                 <p>Общая цена: {order.allPrice ?? "Не указано"}</p>
                 <p>Статус: оформлен</p>
@@ -177,7 +177,7 @@ export default function Orders() {
             .filter((order) => order.isSent && !order.isAccept)
             .map((order) => (
               <div key={order.id} className={styles.order}>
-                <p>Пользователь : {order.User.login}</p>
+                <p>Пользователь: {order.User.login}</p>
                 <p>Адрес: {order.address}</p>
                 <p>Общая цена: {order.allPrice ?? "Не указано"}</p>
                 <p>Статус: отправлен</p>
@@ -186,12 +186,12 @@ export default function Orders() {
             ))}
         </div>
         <div className={styles.column}>
-          <h3>Завеншенные заказы</h3>
+          <h3>Завершенные заказы</h3>
           {orders
             .filter((order) => order.isAccept)
             .map((order) => (
               <div key={order.id} className={styles.order}>
-                <p>Пользователь : {order.User.login}</p>
+                <p>Пользователь: {order.User.login}</p>
                 <p>Адрес: {order.address}</p>
                 <p>Общая цена: {order.allPrice ?? "Не указано"}</p>
                 <p>Статус: завершен</p>

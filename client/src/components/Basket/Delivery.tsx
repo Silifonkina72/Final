@@ -72,7 +72,7 @@ import Test from "../test";
     };
   
     const handleToCreate = () => {
-      dispatch(createOrderThunk({ user, allPrice: totalPrice, address, itemsSquare, itemsVolume }));
+      dispatch(createOrderThunk({ user, allPrice: totalPriceWithDiscount, address, itemsSquare, itemsVolume }));
       dispatch(clearBasket())
       navigate('/success');
     };

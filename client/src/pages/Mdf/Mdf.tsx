@@ -391,7 +391,7 @@ export default function Mdf() {
           <ModalOverlay />
           <ModalContent>
             <ModalHeader>
-              Как вы хотите расчитать стоимость? Исходя из площади или из
+              Как вы хотите рассчитать стоимость? Исходя из площади или из
               объема?
             </ModalHeader>
             <ModalCloseButton />
@@ -425,10 +425,10 @@ export default function Mdf() {
 
             <ModalFooter display="flex" justifyContent="center">
               <Button colorScheme="blue" mr={3} onClick={allSquareHandler}>
-                посчитать по площади
+                Посчитать по площади
               </Button>
               <Button colorScheme="teal" mr={3} onClick={allVolumeHandler}>
-                посчитать по объему
+                Посчитать по объему
               </Button>
             </ModalFooter>
           </ModalContent>
@@ -440,7 +440,7 @@ export default function Mdf() {
           width={200}
           onClick={openModal}
         >
-          рассчитать стоимость
+          Рассчитать стоимость
         </Button>
 
         <div className="containerKardMapSquare">
@@ -479,7 +479,7 @@ export default function Mdf() {
                   className="buttonsubmitHandler"
                   onClick={submitHandler}
                 >
-                  отложить в корзину
+                  Отложить в корзину
                 </Button>
               </>
             )}
@@ -515,7 +515,7 @@ export default function Mdf() {
                   className="buttonBasket"
                   onClick={submitHandler2}
                 >
-                  отложить в корзину
+                  Отложить в корзину
                 </Button>
               </>
             )}

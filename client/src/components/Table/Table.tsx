@@ -98,7 +98,7 @@ const AdminTable: React.FC = () => {
     <>
       <TableContainer border="1px solid black" margin="50px">
         <Heading as="h2" size="lg" textAlign="center" mb={4} color="teal">
-          Кол-во оставшегося материала на складе:
+          Количество оставшегося материала на складе:
         </Heading>
         <Table variant="simple">
           <Thead>

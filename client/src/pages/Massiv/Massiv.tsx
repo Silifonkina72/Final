@@ -152,9 +152,9 @@ const Massiv = () => {
       
         <Box className="textHeading">
           <div>
-            Если вы хотите придать дривесине цвет, вам необходимо выбрать 3
+            Если вы хотите придать древесине цвет, вам нужно выбрать 3
             компонента: морилка, грунт и лак. Если такой необходимости нет, то
-            необходим грунт и лак.
+            используйте грунт и лак.
           </div>
         </Box>
 
@@ -258,7 +258,7 @@ const Massiv = () => {
           <ModalOverlay />
           <ModalContent>
             <ModalHeader>
-              Как вы хотите расчитать стоимость? Исходя из площади или из
+              Как вы хотите рассчитать стоимость? Исходя из площади или из
               объема?
             </ModalHeader>
             <ModalCloseButton />
@@ -291,10 +291,10 @@ const Massiv = () => {
             </ModalBody>
             <ModalFooter display="flex" justifyContent="center">
               <Button colorScheme="blue" mr={3} onClick={allSquareHandler}>
-                посчитать по площади
+                Посчитать по площади
               </Button>
               <Button colorScheme="teal" mr={3} onClick={allVolumeHandler}>
-                посчитать по объему
+                Посчитать по объему
               </Button>
             </ModalFooter>
           </ModalContent>
@@ -304,7 +304,7 @@ const Massiv = () => {
         colorScheme="teal"
         width={200}
         onClick={openModal}
-        >рассчитать стоимость</Button>
+        >Рассчитать стоимость</Button>
 
 <div className="containerKardMapSquare">
   <div className="oneComponentKardMapSquare">
@@ -337,7 +337,7 @@ const Massiv = () => {
               transform: 'scale(1.1)', 
             }}
             transition="transform 0.2s, background-color 0.2s"
-             className="buttonsubmitHandler" onClick={submitHandler}>отложить в корзину</Button>
+             className="buttonsubmitHandler" onClick={submitHandler}>Отложить в корзину</Button>
           </>
         )}
         </div>
@@ -372,7 +372,7 @@ const Massiv = () => {
                transform: 'scale(1.1)', 
              }}
              transition="transform 0.2s, background-color 0.2s"
-            className="buttonBasket" onClick={submitHandler2}>отложить в корзину</Button>
+            className="buttonBasket" onClick={submitHandler2}>Отложить в корзину</Button>
           </>
         )}
       </div>
