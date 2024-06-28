@@ -131,11 +131,11 @@ export default function Orders() {
                           border: "1px solid black",
                         }}
                       />
-                       <span>
-                       {order.AcrylicPrimers[0].name}, колличество:{" "}
-                        {order.AcrylicPrimers[0]?.AcrylicPrimer?.quantity}л.
+                      <span>
+                        {order.AcrylicPrimers[0].name}, колличество:{" "}
+                        {order.AcrylicPrimers[0]?.OrdersAcrylicPrimer?.quantity}
+                        л.
                       </span>
-                     
                     </div>
                   )}
                   {order?.Grounds[0]?.name && (
@@ -212,11 +212,10 @@ export default function Orders() {
                           border: "1px solid black",
                         }}
                       />
-                       <span>
-                       {order.Patinas[0].name}, колличество:{" "}
+                      <span>
+                        {order.Patinas[0].name}, колличество:{" "}
                         {order.Patinas[0]?.OrdersPatina?.quantity}л.
                       </span>
-                     
                     </div>
                   )}
                   {order?.PrimerInsulators[0]?.name && (
@@ -239,11 +238,14 @@ export default function Orders() {
                           border: "1px solid black",
                         }}
                       />
-                       <span>
-                       {order.PrimerInsulators[0].name}, колличество:{" "}
-                        {order.PrimerInsulators[0]?.OrdersPrimerInsulator?.quantity}л.
+                      <span>
+                        {order.PrimerInsulators[0].name}, колличество:{" "}
+                        {
+                          order.PrimerInsulators[0]?.OrdersPrimerInsulator
+                            ?.quantity
+                        }
+                        л.
                       </span>
-                      
                     </div>
                   )}
                   {order?.Stains[0]?.name && (
@@ -266,11 +268,10 @@ export default function Orders() {
                           border: "1px solid black",
                         }}
                       />
-                       <span>
-                       {order.Stains[0].name}, колличество:{" "}
+                      <span>
+                        {order.Stains[0].name}, колличество:{" "}
                         {order.Stains[0]?.OrdersStain?.quantity}л.
                       </span>
-                    
                     </div>
                   )}
                 </div>

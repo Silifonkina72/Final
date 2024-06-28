@@ -116,7 +116,7 @@ ordersRouter.get("/", async (req, res) => {
     const orders2 = orders.map((order) =>
       order.get({ plain: true, nested: true })
     );
-     console.log(686889, orders2);
+    //  console.log(686889, orders2);
     // console.log("ple", orders2[0].Laks[0].name);
     // console.log("ple2", orders2);
     res.json(orders2);
@@ -143,13 +143,15 @@ ordersRouter.patch("/:id", async (req, res) => {
  
   try {
     const order = await Order.findByPk(id);
-    console.log('+-+-+', order.user_id);
+    // console.log('+-+-+', order.user_id);
     const user = await User.findByPk(order.user_id);
+    // console.log('????', user);
     if (!order) {
       return res.status(404).json({ error: "Заказ не найден" });
     }
 
     if (order.isSent === false&& order.isAccept === false) {
+console.log('LOGGGGG');
       order.isSent = true;
       await transporter.sendMail({
         from: "chectb@mail.ru",
@@ -175,7 +177,7 @@ ordersRouter.patch("/:id", async (req, res) => {
     } else  {
       order.isAccept = true;
     }
-// console.log('ORDER', order);
+console.log('ORDER', order);
     await order.save();
     res.json(order);
   } catch (error) {

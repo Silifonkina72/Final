@@ -54,43 +54,43 @@ orderRouter.post("/product", async (req, res) => {
           return OrdersLak.create({
             lak_id: productId,
             order_id,
-            quantity: count,
+            quantity: count.toFixed(2),
           });
         case "AcrylicPrimer":
           return OrdersAcrylicPrimer.create({
             acrylicPrimer_id: productId,
             order_id,
-            quantity: count,
+            quantity: count.toFixed(2),
           });
         case "Ground":
           return OrdersGround.create({
             ground_id: productId,
             order_id,
-            quantity: count,
+            quantity: count.toFixed(2),
           });
         case "Paint":
           return OrdersPaint.create({
             paint_id: productId,
             order_id,
-            quantity: count,
+            quantity: count.toFixed(2),
           });
         case "Patina":
           return OrdersPatina.create({
             patina_id: productId,
             order_id,
-            quantity: count,
+            quantity: count.toFixed(2),
           });
         case "PrimerInsulator":
           return OrdersPrimerInsulator.create({
             primerInsulator_id: productId,
             order_id,
-            quantity: count,
+            quantity: count.toFixed(2),
           });
         case "Stain":
           return OrdersStain.create({
             stain_id: productId,
             order_id,
-            quantity: count,
+            quantity: count.toFixed(2),
           });
         default:
           return null;
@@ -99,49 +99,49 @@ orderRouter.post("/product", async (req, res) => {
 
     const squarePromises = itemsSquare.map((product) => {
       const { model, id: productId, square } = product;
-      const count = Math.ceil(square / 4);
+      // const count = Math.ceil(square / 4);
       switch (model) {
         case "Lak":
           return OrdersLak.create({
             lak_id: productId,
             order_id,
-            quantity: count,
+            quantity: (square * 0.25).toFixed(2), // 4
           });
         case "AcrylicPrimer":
           return OrdersAcrylicPrimer.create({
             acrylicPrimer_id: productId,
             order_id,
-            quantity: count,
+            quantity: (square * 0.13).toFixed(2),
           });
         case "Ground":
           return OrdersGround.create({
             ground_id: productId,
             order_id,
-            quantity: count,
+            quantity: (square * 0.25).toFixed(2), // 4
           });
         case "Paint":
           return OrdersPaint.create({
             paint_id: productId,
             order_id,
-            quantity: count,
+            quantity: (square * 0.25).toFixed(2),
           });
         case "Patina":
           return OrdersPatina.create({
             patina_id: productId,
             order_id,
-            quantity: count,
+            quantity: (square * 0.1).toFixed(2),
           });
         case "PrimerInsulator":
           return OrdersPrimerInsulator.create({
             primerInsulator_id: productId,
             order_id,
-            quantity: count,
+            quantity: (square * 0.25).toFixed(2),
           });
         case "Stain":
           return OrdersStain.create({
             stain_id: productId,
             order_id,
-            quantity: count,
+            quantity: (square * 0.025).toFixed(2), // 2.5
           });
         default:
           return null;

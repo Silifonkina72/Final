@@ -56,7 +56,8 @@ const basketSlice = createSlice({
         (item) => item.model === model && item.id === id
       );
       if (item) {
-        item.count += 1;
+        item.count += 0.1;
+        item.count = parseFloat(item.count.toFixed(1));
       }
     },
 
@@ -69,7 +70,8 @@ const basketSlice = createSlice({
         (item) => item.model === model && item.id === id
       );
       if (item) {
-        item.count -= 1;
+        item.count -= 0.1;
+        item.count = parseFloat(item.count.toFixed(1));
       }
     },
 
@@ -96,7 +98,8 @@ const basketSlice = createSlice({
       action: PayloadAction<{ model: string; id: number; square: number }>
     ) => {
       state.itemsSquare.forEach((item) => {
-        item.square += 1;
+        item.square += 0.1;
+        item.square = parseFloat(item.square.toFixed(1));
       });
     },
 
@@ -105,7 +108,8 @@ const basketSlice = createSlice({
       action: PayloadAction<{ model: string; id: number; square: number }>
     ) => {
       state.itemsSquare.forEach((item) => {
-        item.square -= 1;
+        item.square -= 0.1;
+        item.square = parseFloat(item.square.toFixed(1));
       });
     },
 
@@ -143,15 +147,15 @@ const basketSlice = createSlice({
       const newState = (state.allPrice = state.allPrice.map((el) => {
         if (el.id === countEl?.id && el.model === countEl.model) {
           if (el.count) {
-            el.count += 1;
+            el.count += 0.1;
           } else {
-            el.count = 1;
+            el.count = 0.1;
           }
         }
         return el;
       }));
 
-      state.allPrice = newState;
+      state.allPrice = newState
     },
 
     countPriceRem: (state, action: PayloadAction<ProductVolume>) => {
@@ -167,7 +171,7 @@ const basketSlice = createSlice({
       const newState = (state.allPrice = state.allPrice.map((el) => {
         if (el.id === countEl.id && el.model === countEl.model) {
           if (el.count) {
-            el.count -= 1;
+            el.count -= 0.1;
           } else {
             el.count = 0;
           }
@@ -177,7 +181,8 @@ const basketSlice = createSlice({
         return el;
       }));
 
-      state.allPrice = newState;
+    
+      state.allPrice =  newState
     },
   },
 });

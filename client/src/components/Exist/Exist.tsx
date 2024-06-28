@@ -22,7 +22,7 @@ const AcrylicPrimersList: React.FC = () => {
     [key: number]: string;
   }>({});
   const [newIngredient, setNewIngredient] = useState({
-    model: "AcrylicPrimer",
+    model: "Model",
     priceArea: "",
     priceVolume: "",
     name: "",
@@ -105,7 +105,7 @@ const AcrylicPrimersList: React.FC = () => {
         console.log(primers[newIngredient.model]);
         console.log(response.data);
         setNewIngredient({
-          model: "AcrylicPrimer",
+          model: "Model",
           priceArea: "",
           priceVolume: "",
           name: "",
@@ -118,82 +118,108 @@ const AcrylicPrimersList: React.FC = () => {
       });
   };
 
+  const handleModelChange = (e) => {
+    const model = e.target.value;
+    setNewIngredient({ ...newIngredient, model });
+  };
+  
+  const handlePriceVolumeChange = (e) => {
+    const priceVolume = e.target.value;
+    let priceArea;
+  
+    switch (newIngredient.model) {
+      case "Stain":
+        priceArea = priceVolume * 0.025;
+        break;
+      case "Ground":
+      case "Lak":
+      case "PrimerInsulator":
+      case "Paint":
+        priceArea = priceVolume * 0.25;
+        break;
+      case "AcrylicPrimer":
+        priceArea = priceVolume * 0.13;
+        break;
+      case "Patina":
+        priceArea = priceVolume * 0.1;
+        break;
+      default:
+        priceArea = "";
+    }
+  
+    setNewIngredient({ ...newIngredient, priceVolume, priceArea });
+  };
+
   return (
     <div className={styles.containerNal}>
-      <div className={styles.addNewProd}>
-        <h3>Добавить новый ингредиент</h3>
-        <select
-          value={newIngredient.model}
-          onChange={(e) =>
-            setNewIngredient({ ...newIngredient, model: e.target.value })
-          }
-        >
-          <option value="AcrylicPrimer">AcrylicPrimers</option>
-          <option value="Ground">Grounds</option>
-          <option value="Lak">Laks</option>
-          <option value="Paint">Paints</option>
-          <option value="Patina">Patinas</option>
-          <option value="PrimerInsulator">PrimerInsulators</option>
-          <option value="Stain">Stains</option>
-        </select>
+    <div className={styles.addNewProd}>
+      <h3>Добавить новый ингредиент</h3>
+      <select
+        value={newIngredient.model}
+        onChange={handleModelChange}
+      >
+        <option value="Model">Выберите категорию</option>
+        <option value="AcrylicPrimer">Акриловый грунт</option>
+        <option value="Ground">Грунт</option>
+        <option value="Lak">Лак</option>
+        <option value="Paint">Эмаль</option>
+        <option value="Patina">Патина</option>
+        <option value="PrimerInsulator">Грунт-изолятор</option>
+        <option value="Stain">Морилка</option>
+      </select>
+      <input
+        type="text"
+        placeholder="Цена (объем)"
+        value={newIngredient.priceVolume}
+        onChange={handlePriceVolumeChange}
+      />
+      <input
+        type="text"
+        placeholder="Цена (площадь)"
+        value={newIngredient.priceArea}
+        readOnly
+      />
+      <input
+        type="text"
+        placeholder="Название"
+        value={newIngredient.name}
+        onChange={(e) =>
+          setNewIngredient({ ...newIngredient, name: e.target.value })
+        }
+      />
+      <input
+        type="text"
+        placeholder="Количество"
+        value={newIngredient.number}
+        onChange={(e) =>
+          setNewIngredient({ ...newIngredient, number: e.target.value })
+        }
+      />
         <input
           type="text"
-          placeholder="Name"
-          value={newIngredient.name}
-          onChange={(e) =>
-            setNewIngredient({ ...newIngredient, name: e.target.value })
-          }
-        />
-        <input
-          type="text"
-          placeholder="Number"
-          value={newIngredient.number}
-          onChange={(e) =>
-            setNewIngredient({ ...newIngredient, number: e.target.value })
-          }
-        />
-        <input
-          type="text"
-          placeholder="Price Area"
-          value={newIngredient.priceArea}
-          onChange={(e) =>
-            setNewIngredient({ ...newIngredient, priceArea: e.target.value })
-          }
-        />
-        <input
-          type="text"
-          placeholder="Price Volume"
-          value={newIngredient.priceVolume}
-          onChange={(e) =>
-            setNewIngredient({
-              ...newIngredient,
-              priceVolume: e.target.value,
-            })
-          }
-        />
-        <input
-          type="text"
-          placeholder="Image URL"
+          placeholder="Изображение URL"
           value={newIngredient.img}
           onChange={(e) =>
             setNewIngredient({ ...newIngredient, img: e.target.value })
           }
         />
+        {newIngredient.img ? (
+          <img src={newIngredient.img || "img"} alt={newIngredient.name} className={styles.primerImage} />
+        ) : null}
         <button onClick={handleAddNewIngredient}>Добавить</button>
       </div>
       <div>
       </div>
-      {/* <div> */}
       <div className={styles.nalichie}>
       <Tabs>
       <TabList>
-        <Tab>AcrylicPrimers</Tab>
-        <Tab>Grounds</Tab>
-        <Tab>Laks</Tab>
-        <Tab>Paints</Tab>
-        <Tab>Patinas</Tab>
-        <Tab>PrimerInsulators</Tab>
-        <Tab>Stains</Tab>
+        <Tab>Акриловый грунт</Tab>
+        <Tab>Грунт</Tab>
+        <Tab>Лак</Tab>
+        <Tab>Эмаль</Tab>
+        <Tab>Патина</Tab>
+        <Tab>Грунт-изолятор</Tab>
+        <Tab>Морилка</Tab>
       </TabList>
 
       <TabPanels>

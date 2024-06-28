@@ -28,12 +28,14 @@ import { useEffect } from 'react';
       onPriceUpdate();
     };
 
-    const price = count*priceVolume;
+    // const price = count*priceVolume;
+    const price = parseFloat((count*priceVolume).toFixed(1));
 
     useEffect(() => {
       onPriceUpdate();
     }, [count]);
 
+    let totalCount = parseFloat((count).toFixed(1));
   
     return (
       <div className='card'>
@@ -41,7 +43,7 @@ import { useEffect } from 'react';
         <p>{name}</p>
         <div className='box'>
           <IconButton aria-label='+' icon={<AddIcon />} onClick={handleСhangeVolumePlus} />
-          <Text>{count}</Text>
+          <Text>{totalCount}</Text>
           <IconButton aria-label='-' icon={<MinusIcon />} onClick={handleСhangeVolumeMinus} />
         </div>
         <p>{price}</p>
