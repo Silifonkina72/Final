@@ -28,7 +28,8 @@ export const OneProductSquare = ({ item, onPriceUpdate }): JSX.Element => {
     onPriceUpdate();
   };
 
-  const price = square*priceArea;
+  const price = parseFloat((square*priceArea).toFixed(1));
+  // item.count = parseFloat(item.count.toFixed(1));
 
   useEffect(() => {
     onPriceUpdate(price);

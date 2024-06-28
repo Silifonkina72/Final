@@ -28,7 +28,8 @@ import { useEffect } from 'react';
       onPriceUpdate();
     };
 
-    const price = count*priceVolume;
+    // const price = count*priceVolume;
+    const price = parseFloat((count*priceVolume).toFixed(1));
 
     useEffect(() => {
       onPriceUpdate();

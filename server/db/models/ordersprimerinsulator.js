@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   OrdersPrimerInsulator.init({
     order_id: DataTypes.INTEGER,
     primerInsulator_id: DataTypes.INTEGER,
-    quantity: DataTypes.INTEGER
+    quantity: DataTypes.NUMERIC
   }, {
     sequelize,
     modelName: 'OrdersPrimerInsulator',

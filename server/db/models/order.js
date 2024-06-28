@@ -47,7 +47,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Order.init({
-    allPrice: DataTypes.INTEGER,
+    allPrice: DataTypes.NUMERIC,
     user_id: DataTypes.INTEGER,
     isForm: DataTypes.BOOLEAN,
     isSent: DataTypes.BOOLEAN,

@@ -22,7 +22,7 @@ const AcrylicPrimersList: React.FC = () => {
     [key: number]: string;
   }>({});
   const [newIngredient, setNewIngredient] = useState({
-    model: "AcrylicPrimer",
+    model: "Model",
     priceArea: "",
     priceVolume: "",
     name: "",
@@ -105,7 +105,7 @@ const AcrylicPrimersList: React.FC = () => {
         console.log(primers[newIngredient.model]);
         console.log(response.data);
         setNewIngredient({
-          model: "AcrylicPrimer",
+          model: "Model",
           priceArea: "",
           priceVolume: "",
           name: "",
@@ -118,59 +118,83 @@ const AcrylicPrimersList: React.FC = () => {
       });
   };
 
+  const handleModelChange = (e) => {
+    const model = e.target.value;
+    setNewIngredient({ ...newIngredient, model });
+  };
+  
+  const handlePriceVolumeChange = (e) => {
+    const priceVolume = e.target.value;
+    let priceArea;
+  
+    switch (newIngredient.model) {
+      case "Stain":
+        priceArea = priceVolume * 0.025;
+        break;
+      case "Ground":
+      case "Lak":
+      case "PrimerInsulator":
+      case "Paint":
+        priceArea = priceVolume * 0.25;
+        break;
+      case "AcrylicPrimer":
+        priceArea = priceVolume * 0.13;
+        break;
+      case "Patina":
+        priceArea = priceVolume * 0.1;
+        break;
+      default:
+        priceArea = "";
+    }
+  
+    setNewIngredient({ ...newIngredient, priceVolume, priceArea });
+  };
+
   return (
     <div className={styles.containerNal}>
-      <div className={styles.addNewProd}>
-        <h3>Добавить новый ингредиент</h3>
-        <select
-          value={newIngredient.model}
-          onChange={(e) =>
-            setNewIngredient({ ...newIngredient, model: e.target.value })
-          }
-        >
-          <option value="AcrylicPrimer">Акриловый грунт</option>
-          <option value="Ground">Грунт</option>
-          <option value="Lak">Лак</option>
-          <option value="Paint">Эмаль</option>
-          <option value="Patina">Патина</option>
-          <option value="PrimerInsulator">Грунт-изолятор</option>
-          <option value="Stain">Морилка</option>
-        </select>
-        <input
-          type="text"
-          placeholder="Название"
-          value={newIngredient.name}
-          onChange={(e) =>
-            setNewIngredient({ ...newIngredient, name: e.target.value })
-          }
-        />
-        <input
-          type="text"
-          placeholder="Количество"
-          value={newIngredient.number}
-          onChange={(e) =>
-            setNewIngredient({ ...newIngredient, number: e.target.value })
-          }
-        />
-        <input
-          type="text"
-          placeholder="Цена (площадь)"
-          value={newIngredient.priceArea}
-          onChange={(e) =>
-            setNewIngredient({ ...newIngredient, priceArea: e.target.value })
-          }
-        />
-        <input
-          type="text"
-          placeholder="Цена (объем)"
-          value={newIngredient.priceVolume}
-          onChange={(e) =>
-            setNewIngredient({
-              ...newIngredient,
-              priceVolume: e.target.value,
-            })
-          }
-        />
+    <div className={styles.addNewProd}>
+      <h3>Добавить новый ингредиент</h3>
+      <select
+        value={newIngredient.model}
+        onChange={handleModelChange}
+      >
+        <option value="Model">Выберите категорию</option>
+        <option value="AcrylicPrimer">Акриловый грунт</option>
+        <option value="Ground">Грунт</option>
+        <option value="Lak">Лак</option>
+        <option value="Paint">Эмаль</option>
+        <option value="Patina">Патина</option>
+        <option value="PrimerInsulator">Грунт-изолятор</option>
+        <option value="Stain">Морилка</option>
+      </select>
+      <input
+        type="text"
+        placeholder="Цена (объем)"
+        value={newIngredient.priceVolume}
+        onChange={handlePriceVolumeChange}
+      />
+      <input
+        type="text"
+        placeholder="Цена (площадь)"
+        value={newIngredient.priceArea}
+        readOnly
+      />
+      <input
+        type="text"
+        placeholder="Название"
+        value={newIngredient.name}
+        onChange={(e) =>
+          setNewIngredient({ ...newIngredient, name: e.target.value })
+        }
+      />
+      <input
+        type="text"
+        placeholder="Количество"
+        value={newIngredient.number}
+        onChange={(e) =>
+          setNewIngredient({ ...newIngredient, number: e.target.value })
+        }
+      />
         <input
           type="text"
           placeholder="Изображение URL"
