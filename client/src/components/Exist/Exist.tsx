@@ -128,17 +128,17 @@ const AcrylicPrimersList: React.FC = () => {
             setNewIngredient({ ...newIngredient, model: e.target.value })
           }
         >
-          <option value="AcrylicPrimer">AcrylicPrimers</option>
-          <option value="Ground">Grounds</option>
-          <option value="Lak">Laks</option>
-          <option value="Paint">Paints</option>
-          <option value="Patina">Patinas</option>
-          <option value="PrimerInsulator">PrimerInsulators</option>
-          <option value="Stain">Stains</option>
+          <option value="AcrylicPrimer">Акриловый грунт</option>
+          <option value="Ground">Грунт</option>
+          <option value="Lak">Лак</option>
+          <option value="Paint">Эмаль</option>
+          <option value="Patina">Патина</option>
+          <option value="PrimerInsulator">Грунт-изолятор</option>
+          <option value="Stain">Морилка</option>
         </select>
         <input
           type="text"
-          placeholder="Name"
+          placeholder="Название"
           value={newIngredient.name}
           onChange={(e) =>
             setNewIngredient({ ...newIngredient, name: e.target.value })
@@ -146,7 +146,7 @@ const AcrylicPrimersList: React.FC = () => {
         />
         <input
           type="text"
-          placeholder="Number"
+          placeholder="Количество"
           value={newIngredient.number}
           onChange={(e) =>
             setNewIngredient({ ...newIngredient, number: e.target.value })
@@ -154,7 +154,7 @@ const AcrylicPrimersList: React.FC = () => {
         />
         <input
           type="text"
-          placeholder="Price Area"
+          placeholder="Цена (площадь)"
           value={newIngredient.priceArea}
           onChange={(e) =>
             setNewIngredient({ ...newIngredient, priceArea: e.target.value })
@@ -162,7 +162,7 @@ const AcrylicPrimersList: React.FC = () => {
         />
         <input
           type="text"
-          placeholder="Price Volume"
+          placeholder="Цена (объем)"
           value={newIngredient.priceVolume}
           onChange={(e) =>
             setNewIngredient({
@@ -173,27 +173,29 @@ const AcrylicPrimersList: React.FC = () => {
         />
         <input
           type="text"
-          placeholder="Image URL"
+          placeholder="Изображение URL"
           value={newIngredient.img}
           onChange={(e) =>
             setNewIngredient({ ...newIngredient, img: e.target.value })
           }
         />
+        {newIngredient.img ? (
+          <img src={newIngredient.img || "img"} alt={newIngredient.name} className={styles.primerImage} />
+        ) : null}
         <button onClick={handleAddNewIngredient}>Добавить</button>
       </div>
       <div>
       </div>
-      {/* <div> */}
       <div className={styles.nalichie}>
       <Tabs>
       <TabList>
-        <Tab>AcrylicPrimers</Tab>
-        <Tab>Grounds</Tab>
-        <Tab>Laks</Tab>
-        <Tab>Paints</Tab>
-        <Tab>Patinas</Tab>
-        <Tab>PrimerInsulators</Tab>
-        <Tab>Stains</Tab>
+        <Tab>Акриловый грунт</Tab>
+        <Tab>Грунт</Tab>
+        <Tab>Лак</Tab>
+        <Tab>Эмаль</Tab>
+        <Tab>Патина</Tab>
+        <Tab>Грунт-изолятор</Tab>
+        <Tab>Морилка</Tab>
       </TabList>
 
       <TabPanels>

@@ -8,6 +8,9 @@
   } */
   
   .primer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     width: 100%;
     background-color: #fffaf0;
     border: 1px solid #ffa500;
@@ -16,16 +19,42 @@
     margin: 10px 0;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   }
+
+  .primerHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .primerImage {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+
+  .primerDetails {
+    display: flex;
+    flex-direction: column;
+  }
   
-  .primer p {
+  .primerField {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
     margin: 10px 0;
   }
+  
+  /* .primer p {
+    margin: 10px 0;
+  } */
   
   .primer input {
     padding: 5px;
     border: 1px solid #ffa500;
     border-radius: 5px;
     margin-left: 10px;
+    width: 80px;
   }
   
   .primer button {
@@ -51,7 +80,7 @@
     display: flex;
     width: 100%; /* или укажите конкретную ширину, например, 50% */
     max-width: 700px;
-    height: 400px;
+    height: 100%;
     flex-direction: column;
     background-color: white;
     border: 1px solid #00695c;

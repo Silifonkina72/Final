@@ -12,7 +12,8 @@
 
 .types {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    width: 50%;
 }
 
 .messageBasket {
@@ -25,9 +26,45 @@
 
 .product {
   border: 1px solid #ccc;
+  /* width: 50%; */
   border-radius: 10px;
   padding: 20px;
-  width: 600px;
+  /* width: 600px; */
   background-color: #fff;
-  margin: 40px;
+  margin: 20px;
+}
+
+.delBox {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  width: 50%;
+  background-color: #fff;
+  margin: 20px;
+}
+
+.delBody {
+    display: flex;
+    height: 500px;
+}
+
+@media (max-width: 1176px) {
+    .delBody {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .types {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    .delBox {
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 20px;
+        width: 94%;
+        background-color: #fff;
+        margin: 20px;
+      }
 }
