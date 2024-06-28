@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
   OrdersGround.init({
     order_id: DataTypes.INTEGER,
     ground_id: DataTypes.INTEGER,
-    quantity: DataTypes.INTEGER
+    quantity: DataTypes.NUMERIC
   }, {
     sequelize,
     modelName: 'OrdersGround',

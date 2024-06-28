@@ -91,16 +91,14 @@ import Test from "../test";
       setСostDelivery(cost);
   };
 
-    
-    
     const discountThreshold = 30000;
     const discountRate = 0.1;
     const isDiscountApplicable = totalPrice > discountThreshold;
-    const discountAmount = isDiscountApplicable ? totalPrice * discountRate : 0;
+    const discountAmount = isDiscountApplicable ? Math.floor(totalPrice * discountRate) : 0;
     const totalPriceWithDiscount = totalPrice - discountAmount;
   return (
-    <Box p={5} maxWidth='500px' mx='auto'>
-      <FormControl mb={5}>
+    <Box className="delBox">
+      <FormControl>
         <FormLabel>Адрес доставки</FormLabel>
         <Input
           value={address}
@@ -116,7 +114,7 @@ import Test from "../test";
         
       </FormControl>
 
-      <Text mb={5}>Цена товара: {totalPrice}</Text>
+      <Text mb={5} fontWeight='bold'>Цена товара: {totalPrice}</Text>
 
       <Text mb={5}>При покупке больше 30000 скидка 10%</Text>
       {isDiscountApplicable ? (
@@ -140,7 +138,7 @@ import Test from "../test";
         Общая цена: 200
       </Text> */}
 
-      <Button colorScheme='teal' onClick={handleToCreate}>
+      <Button colorScheme='teal' onClick={handleToCreate} margin='20px'>
         Оформить заказ
       </Button>
     </Box>

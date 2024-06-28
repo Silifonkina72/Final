@@ -56,7 +56,8 @@ const basketSlice = createSlice({
         (item) => item.model === model && item.id === id
       );
       if (item) {
-        item.count += 1;
+        item.count += 0.1;
+        item.count = parseFloat(item.count.toFixed(1));
       }
     },
 
@@ -69,7 +70,8 @@ const basketSlice = createSlice({
         (item) => item.model === model && item.id === id
       );
       if (item) {
-        item.count -= 1;
+        item.count -= 0.1;
+        item.count = parseFloat(item.count.toFixed(1));
       }
     },
 
@@ -96,7 +98,8 @@ const basketSlice = createSlice({
       action: PayloadAction<{ model: string; id: number; square: number }>
     ) => {
       state.itemsSquare.forEach((item) => {
-        item.square += 1;
+        item.square += 0.1;
+        item.square = parseFloat(item.square.toFixed(1));
       });
     },
 
@@ -105,7 +108,8 @@ const basketSlice = createSlice({
       action: PayloadAction<{ model: string; id: number; square: number }>
     ) => {
       state.itemsSquare.forEach((item) => {
-        item.square -= 1;
+        item.square -= 0.1;
+        item.square = parseFloat(item.square.toFixed(1));
       });
     },
 

@@ -24,7 +24,7 @@ module.exports = {
         },
       },
       quantity: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.NUMERIC,
       },
       createdAt: {
         allowNull: false,

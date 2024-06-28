@@ -1,14 +1,3 @@
-import {
-  Box,
-  Button,
-  FormControl,
-  FormLabel,
-  Input,
-  Radio,
-  RadioGroup,
-  Stack,
-  Text,
-} from '@chakra-ui/react';
 import { addItem, clearBasket } from '../../store/slices/basketSlice';
 import { Product } from '../../types/basketTypes';
 import { OneProduct } from '../../components/Basket/OneProduct';
@@ -76,7 +65,7 @@ const Basket = () => {
   };
 
   return (
-    <>
+    <div className='delBody'>
    
       <div className='types'>
         <div className='product'>
@@ -119,7 +108,7 @@ const Basket = () => {
           totalPrice={totalPrice}
         />
       </YMaps>
-    </>
+    </ div>
   );
 };
 
