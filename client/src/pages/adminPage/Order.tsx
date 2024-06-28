@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./order.module.css";
 import { useAppDispatch } from "../../hooks";
 import { orderThunk } from "../../store/thunkActions/orderThunk";
-import { Button } from "@chakra-ui/react";
+import { Button, Box, useMediaQuery } from "@chakra-ui/react";
 
 export default function Orders() {
   const [orders, setOrders] = useState([]);
@@ -29,30 +29,6 @@ export default function Orders() {
     }
   };
 
-  // const updateOrderStatus = async (id, status) => {
-  //   try {
-  //     const updatedOrder = orders.find((order) => order.id === id);
-  //     if (status === "isSent") {
-  //       updatedOrder.isForm = false;
-  //       updatedOrder.isSent = true;
-  //     } else if (status === "isAccept") {
-  //       updatedOrder.isSent = false;
-  //       updatedOrder.isAccept = true;
-  //     }
-  //     await fetch(`http://localhost:3000/orders/${id}`, {
-  //       method: "PUT",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //       },
-  //       body: JSON.stringify(updatedOrder),
-  //     });
-  //     console.log(updatedOrder);
-  //     fetchOrders();
-  //   } catch (error) {
-  //     console.error("Ошибка при обновлении статуса заказа:", error);
-  //   }
-  // };
-
   const deleteOrder = async (id) => {
     try {
       await fetch(`http://localhost:3000/orders/${id}`, {
@@ -64,178 +40,339 @@ export default function Orders() {
     }
   };
 
-  console.log(orders);
+  console.log("?!?!", orders);
+  const [isLargerThan700] = useMediaQuery("(min-width: 700px)");
 
   return (
     <div className={styles.container}>
-      <h2>Здесь мы можем отслеживать статус заказов:</h2>
       <div className={styles.columns}>
-        <div className={styles.column}>
-          <h3>Заказы ожидающие оформления</h3>
+        <div className={styles.column} style={{ minHeight: "unset" }}>
+          <Box
+            style={{
+              fontWeight: "bold",
+              marginBottom: isLargerThan700 ? "30px" : "5px",
+            }}
+            className="orderText"
+          >
+            Заказы ожидающие отправки
+          </Box>
           {orders
             .filter((order) => !order.isSent && !order.isAccept)
             .map((order) => (
               <div key={order.id} className={styles.order}>
-
-               
-
-                <p> <span  style={{ fontWeight: "bold" }}>Пользователь :</span> {order.User.login}</p>
-                <p><span  style={{ fontWeight: "bold" }}>Адрес:</span> {order.address}</p>
-                <p><span  style={{ fontWeight: "bold" }}>Общая цена:</span> {order.allPrice ?? "Не указано"}</p>
-                <p><span  style={{ fontWeight: "bold" }}>Статус:</span> оформлен</p>
-                <p> <span  style={{ fontWeight: "bold" }}>Компоненты:</span></p>
+                <p>
+                  {" "}
+                  <span style={{ fontWeight: "bold" }}>
+                    Пользователь :
+                  </span>{" "}
+                  {order.User.login}
+                </p>
+                <p>
+                  <span style={{ fontWeight: "bold" }}>Адрес:</span>{" "}
+                  {order.address}
+                </p>
+                <p>
+                  <span style={{ fontWeight: "bold" }}>Общая цена:</span>{" "}
+                  {order.allPrice ?? "Не указано"}
+                </p>
+                <p>
+                  <span style={{ fontWeight: "bold" }}>Статус:</span> оформлен
+                </p>
+                <p>
+                  {" "}
+                  <span style={{ fontWeight: "bold" }}>Компоненты:</span>
+                </p>
                 <div>
                   {order?.Laks[0]?.name && (
                     <div
-                     style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px' }} 
-                    className="containerImg">
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        gap: "10px",
+                      }}
+                      className="containerImg"
+                    >
                       <img
-                      className="imgOrder"
+                        className="imgOrder"
                         src={order.Laks[0].img}
                         alt={order.Laks[0].name}
                         width={40}
                         height={40}
-                        style={{ minHeight: "40px", marginBottom: '10px', border: '1px solid black',  }}
+                        style={{
+                          minHeight: "40px",
+                          marginBottom: "10px",
+                          border: "1px solid black",
+                        }}
                       />
-                      <span className="nameOrder">{order.Laks[0].name}</span> 
+                      <span className="nameOrder">
+                        {order.Laks[0].name}, колличество:{" "}
+                        {order.Laks[0]?.OrdersLak?.quantity}л.
+                      </span>
                     </div>
                   )}
                   {order?.AcrylicPrimers[0]?.name && (
                     <div
-                    style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px' }} >
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        gap: "10px",
+                      }}
+                    >
                       <img
-                      
                         src={order.AcrylicPrimers[0].img}
                         alt={order.AcrylicPrimers[0].name}
                         width={40}
                         height={40}
-                        style={{ minHeight: "40px", marginBottom: '10px', border: '1px solid black',  }}
+                        style={{
+                          minHeight: "40px",
+                          marginBottom: "10px",
+                          border: "1px solid black",
+                        }}
                       />
-                      {order.AcrylicPrimers[0].name}
+                       <span>
+                       {order.AcrylicPrimers[0].name}, колличество:{" "}
+                        {order.AcrylicPrimers[0]?.AcrylicPrimer?.quantity}л.
+                      </span>
+                     
                     </div>
                   )}
                   {order?.Grounds[0]?.name && (
-                    <div  style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px' }} >
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        gap: "10px",
+                      }}
+                    >
                       <img
                         src={order.Grounds[0].img}
                         alt={order.Grounds[0].name}
                         width={40}
                         height={40}
-                        style={{ minHeight: "40px", marginBottom: '10px', border: '1px solid black',  }}
+                        style={{
+                          minHeight: "40px",
+                          marginBottom: "10px",
+                          border: "1px solid black",
+                        }}
                       />
-                      {order.Grounds[0].name}
+                      <span>
+                        {order.Grounds[0].name}, колличество:{" "}
+                        {order.Grounds[0]?.OrdersGround?.quantity}л.
+                      </span>
+
+                      <br />
                     </div>
                   )}
                   {order?.Paints[0]?.name && (
                     <div
-                    style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px' }} >
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        gap: "10px",
+                      }}
+                    >
                       <img
                         src={order.Paints[0].img}
                         alt={order.Paints[0].name}
                         width={40}
                         height={40}
-                        style={{ minHeight: "40px", marginBottom: '10px', border: '1px solid black',  }}
+                        style={{
+                          minHeight: "40px",
+                          marginBottom: "10px",
+                          border: "1px solid black",
+                        }}
                       />
-                      {order.Paints[0].name}
+                      <span>
+                        {order.Paints[0].name}, колличество:{" "}
+                        {order.Paints[0]?.OrdersPaint?.quantity}л.
+                      </span>
                     </div>
                   )}
                   {order?.Patinas[0]?.name && (
                     <div
-                    style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px' }} >
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        gap: "10px",
+                      }}
+                    >
                       <img
                         src={order.Patinas[0].img}
                         alt={order.Patinas[0].name}
                         width={40}
                         height={40}
-                        style={{ minHeight: "40px", marginBottom: '10px', border: '1px solid black',  }}
+                        style={{
+                          minHeight: "40px",
+                          marginBottom: "10px",
+                          border: "1px solid black",
+                        }}
                       />
-                      {order.Patinas[0].name}
+                       <span>
+                       {order.Patinas[0].name}, колличество:{" "}
+                        {order.Patinas[0]?.OrdersPatina?.quantity}л.
+                      </span>
+                     
                     </div>
                   )}
                   {order?.PrimerInsulators[0]?.name && (
                     <div
-                    style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px' }} >
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        gap: "10px",
+                      }}
+                    >
                       <img
                         src={order.PrimerInsulators[0].img}
                         alt={order.PrimerInsulators[0].name}
                         width={40}
                         height={40}
-                        style={{ minHeight: "40px", marginBottom: '10px', border: '1px solid black',  }}
+                        style={{
+                          minHeight: "40px",
+                          marginBottom: "10px",
+                          border: "1px solid black",
+                        }}
                       />
-                      {order.PrimerInsulators[0].name}
+                       <span>
+                       {order.PrimerInsulators[0].name}, колличество:{" "}
+                        {order.PrimerInsulators[0]?.OrdersPrimerInsulator?.quantity}л.
+                      </span>
+                      
                     </div>
                   )}
                   {order?.Stains[0]?.name && (
                     <div
-                    style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '10px' }} >
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        gap: "10px",
+                      }}
+                    >
                       <img
                         src={order.Stains[0].img}
                         alt={order.Stains[0].name}
                         width={40}
                         height={40}
-                        style={{ minHeight: "40px", marginBottom: '10px', border: '1px solid black',  }}
+                        style={{
+                          minHeight: "40px",
+                          marginBottom: "10px",
+                          border: "1px solid black",
+                        }}
                       />
-                      {order.Stains[0].name}
+                       <span>
+                       {order.Stains[0].name}, колличество:{" "}
+                        {order.Stains[0]?.OrdersStain?.quantity}л.
+                      </span>
+                    
                     </div>
                   )}
                 </div>
 
                 <Button
-              size="xs"
-              bg="purple.700" // Красивый зеленый цвет
-              color="white" // Белый цвет текста
-              _hover={{ bg: 'purple.800' }} // Темнее при наведении
-              _active={{ bg: 'purple.900' }} // Темнее при нажатии
-                onClick={() => formHandler(order.id)}>Отправить</Button>
+                  size="xs"
+                  bg="teal"
+                  color="white"
+                  _hover={{ bg: "teal.800" }}
+                  _active={{ bg: "teal.900" }}
+                  onClick={() => formHandler(order.id)}
+                >
+                  Отправить
+                </Button>
               </div>
             ))}
         </div>
 
-
-{/* <div> */}
-        <div className={styles.column}>
-          <h3>Отправленные заказы</h3>
+        <div className={styles.column} style={{ minHeight: "unset" }}>
+          <Box
+            style={{
+              fontWeight: "bold",
+              marginBottom: isLargerThan700 ? "30px" : "5px",
+            }}
+            className="orderText"
+          >
+            Отправленные заказы
+          </Box>
           {orders
             .filter((order) => order.isForm && order.isSent && !order.isAccept)
             .map((order) => (
               <div key={order.id} className={styles.order}>
-                <p>Пользователь : {order.User.login}</p>
-                <p>Адрес: {order.address}</p>
-                <p>Общая цена: {order.allPrice ?? "Не указано"}</p>
-                <p>Статус: отправлен</p>
+                <p>
+                  <span style={{ fontWeight: "bold" }}>Пользователь:</span>{" "}
+                  {order.User.login}
+                </p>
+                <p>
+                  <span style={{ fontWeight: "bold" }}>Адрес:</span>{" "}
+                  {order.address}
+                </p>
+                <p>
+                  <span style={{ fontWeight: "bold" }}>Общая цена:</span>{" "}
+                  {order.allPrice ?? "Не указано"}
+                </p>
+                <p>
+                  <span style={{ fontWeight: "bold" }}>Статус:</span> отправлен
+                </p>
                 <Button
-                size="xs"
-                bg="purple.700" // Красивый зеленый цвет
-                color="white" // Белый цвет текста
-                _hover={{ bg: 'purple.800' }} // Темнее при наведении
-                _active={{ bg: 'purple.900' }} // Темнее при нажатии
-                onClick={() => formHandler(order.id)}>Завершить</Button>
+                  size="xs"
+                  bg="teal"
+                  color="white"
+                  _hover={{ bg: "teal.800" }}
+                  _active={{ bg: "teal.900" }}
+                  onClick={() => formHandler(order.id)}
+                >
+                  Доставлен
+                </Button>
               </div>
             ))}
         </div>
-        <div className={styles.column}>
-          <h3>Завеншенные заказы</h3>
+        <div className={styles.column} style={{ minHeight: "unset" }}>
+          <Box
+            style={{
+              fontWeight: "bold",
+              marginBottom: isLargerThan700 ? "30px" : "5px",
+            }}
+            className="orderText"
+          >
+            Завершенные заказы
+          </Box>
           {orders
             .filter((order) => order.isAccept)
             .map((order) => (
               <div key={order.id} className={styles.order}>
-                <p>Пользователь : {order.User.login}</p>
-                <p>Адрес: {order.address}</p>
-                <p>Общая цена: {order.allPrice ?? "Не указано"}</p>
-                <p>Статус: завершен</p>
-                <Button 
-                size="xs"
-                bg="purple.700" // Красивый зеленый цвет
-                color="white" // Белый цвет текста
-                _hover={{ bg: 'purple.800' }} // Темнее при наведении
-                _active={{ bg: 'purple.900' }} // Темнее при нажатии
-                onClick={() => deleteOrder(order.id)}>Удалить</Button>
+                <p>
+                  <span style={{ fontWeight: "bold" }}>Пользователь:</span>{" "}
+                  {order.User.login}
+                </p>
+                <p>
+                  <span style={{ fontWeight: "bold" }}>Адрес:</span>{" "}
+                  {order.address}
+                </p>
+                <p>
+                  <span style={{ fontWeight: "bold" }}>Общая цена:</span>{" "}
+                  {order.allPrice ?? "Не указано"}
+                </p>
+                <p>
+                  <span style={{ fontWeight: "bold" }}>Статус:</span> доставлен
+                </p>
+                <Button
+                  size="xs"
+                  bg="teal"
+                  color="white"
+                  _hover={{ bg: "teal.800" }}
+                  _active={{ bg: "teal.900" }}
+                  onClick={() => deleteOrder(order.id)}
+                >
+                  Удалить
+                </Button>
               </div>
             ))}
         </div>
-        {/* </div> */}
-
-
       </div>
     </div>
   );

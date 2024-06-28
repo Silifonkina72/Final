@@ -10,6 +10,13 @@ const {
   Patina,
   PrimerInsulator,
   Stain,
+  OrdersAcrylicPrimer,
+  OrdersGround,
+  OrdersLak,
+  OrdersPaint,
+  OrdersPatina,
+  OrdersPrimerInsulator,
+  OrdersStain,
 } = require("../db/models"); // Подключаем модель Order
 const { where, Op } = require("sequelize");
 const { User } = require("../db/models");
@@ -26,53 +33,81 @@ ordersRouter.get("/", async (req, res) => {
           model: User,
           attributes: ["login"],
         },
+        // {
+        //   model: OrdersAcrylicPrimer,
+        //   attributes: ["quantity"],
+        // },
+        // {
+        //   model: OrdersGround,
+        //   attributes: ["quantity"],
+        // },
+        // {
+        //   model: OrdersLak,
+        //   attributes: ["quantity"],
+        // },
+        // {
+        //   model: OrdersPaint,
+        //   attributes: ["quantity"],
+        // },
+        // {
+        //   model: OrdersPatina,
+        //   attributes: ["quantity"],
+        // },
+        // {
+        //   model: OrdersPrimerInsulator,
+        //   attributes: ["quantity"],
+        // },
+        // {
+        //   model: OrdersStain,
+        //   attributes: ["quantity"],
+        // },
         {
           model: Lak,
           attributes: ["name", 'img'],
           through: {
-            attributes: [],
+            attributes: ["quantity"],
           },
         },
         {
           model: AcrylicPrimer,
           attributes: ["name", 'img'],
           through: {
-            attributes: [],
+            attributes: ["quantity"],
           },
         },
         {
           model: Ground,
           attributes: ["name", 'img'],
           through: {
-            attributes: [],
+            attributes: ["quantity"],
           },
         },
         {
           model: Paint,
           attributes: ["name", 'img'],
           through: {
-            attributes: [],
+            attributes: ["quantity"],
           },
         },
         {
           model: Patina,
           attributes: ["name", 'img'],
           through: {
-            attributes: [],
+            attributes: ["quantity"],
           },
         },
         {
           model: PrimerInsulator,
           attributes: ["name", 'img'],
           through: {
-            attributes: [],
+            attributes: ["quantity"],
           },
         },
         {
           model: Stain,
           attributes: ["name", 'img'],
           through: {
-            attributes: [],
+            attributes: ["quantity"],
           },
         },
       ],
@@ -81,7 +116,7 @@ ordersRouter.get("/", async (req, res) => {
     const orders2 = orders.map((order) =>
       order.get({ plain: true, nested: true })
     );
-    // console.log(686889, orders2);
+     console.log(686889, orders2);
     // console.log("ple", orders2[0].Laks[0].name);
     // console.log("ple2", orders2);
     res.json(orders2);
@@ -122,7 +157,16 @@ ordersRouter.patch("/:id", async (req, res) => {
         subject: `Заказ отправлен к ${user.login}`,
         text: `Дорогой покупатель`,
         html: `
-          <p><strong>Дорогой покупатель, ${user.login}. Ваш заказ оформлен, спасибо, что выбрали наш сервис!</strong> </p>
+         <p>Здравствуйте, <strong>${user.login}.</strong> </p>
+         <div>Ваш заказ оформлен и отправлен. <div> 
+         <div>Спасибо, что выбрали наш сервис! <div>
+         <br />
+         <br />
+         <p>С уважением,<p>
+         <p>Иван Иванов<p>
+         <p>8 (888) 888-88-88<p>
+         <p>Выгодные лакокрасочные материалы Shop Paints!<p>
+
         `,
       });
 

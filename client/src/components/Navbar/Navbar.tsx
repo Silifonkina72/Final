@@ -98,15 +98,16 @@ export const Navbar = () => {
                   Приветствую,
                   <span className={styles.userName}>{user?.login}!</span>
                 </div>
-                <Link className={styles.link} to="/changer">
-                  Изменение
+                <Link className={styles.link} to="/orders">
+                  Заказы
                 </Link>
                 <Link className={styles.link} to="/availability">
                   Остаток
                 </Link>
-                <Link className={styles.link} to="/orders">
-                  Текущие заказы
+                <Link className={styles.link} to="/changer">
+                  Редактирование
                 </Link>
+               
               </div>
 
               <div className={styles.rightLinks}>

@@ -88,7 +88,24 @@ const MyMap = (): JSX.Element => {
   }, []);
 
   //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  const [mapDimensions, setMapDimensions] = useState({ width: '35vw', height: '30vw' });
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 700) {
+        setMapDimensions({ width: '450px', height: '300px' });
+      } else {
+        setMapDimensions({ width: '35vw', height: '30vw' });
+      }
+    };
 
+    window.addEventListener('resize', handleResize);
+
+    // Call handler right away so state gets updated with initial window size
+    handleResize();
+
+    // Remove event listener on cleanup
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
 
 
@@ -98,8 +115,10 @@ const MyMap = (): JSX.Element => {
         defaultState={{ center: location.center, zoom: location.zoom }}
         // width="500px"
         // height="380px"
-        width="35vw"
-        height="30vw"
+        // width="35vw"
+        // height="30vw"
+        width={mapDimensions.width}
+        height={mapDimensions.height}
        
       >
    
