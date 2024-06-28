@@ -12,7 +12,7 @@ export const orderThunk = createAsyncThunk(
         );
         return response.data;
       } catch (error) {
-        console.log("Ошибка регистрации in Thanks", error);
+        console.log(`ERRRRR ${error}` , error);
       }
     }
   );

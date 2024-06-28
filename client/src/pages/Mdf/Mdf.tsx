@@ -34,7 +34,12 @@ import {
   Td,
   Box,
   Heading,
+  Icon,
+  Image,
+  Text
 } from "@chakra-ui/react";
+import { FaRegSmile } from 'react-icons/fa';
+import { Link } from 'react-router-dom'; 
 import KardMapVolume from "../../components/KardMapVolume/KardMapVolume";
 import KardMapSquare from "../../components/KardMapSquare/KardMapSquare";
 import "./mdfAndMassiv.css";
@@ -45,7 +50,9 @@ export default function Mdf() {
   const [boxVisible, setBoxVisible] = useState<boolean>(false);
   const [boxVisible2, setBoxVisible2] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
-
+   const [isOpenReg, setIsOpenReg] = useState<boolean>(false);
+  
+  
   //? достаем данные для карусели
   useStartEffectMdf();
   const dispatch = useAppDispatch();
@@ -70,11 +77,26 @@ export default function Mdf() {
   };
 
   //? модальное окно
+  const user = useAppSelector((state) => state.logSlice.user); // Правильный путь к пользователю
+  const isAdmin = () => user?.isAdmin ?? false;
+  const isAuth = () => !!user?.logDone;
+
+  const closeHendler = ()=> {
+    setIsOpenReg(false)
+  }
+
+  
+
   const closeModal = useCallback(() => {
     setIsOpen(false);
   }, []);
 
+  const closeModalReg = useCallback(() => {
+    setIsOpenReg(false);
+  }, []);
+
   const openModal = useCallback(() => {
+    if (isAuth()) {
     setIsOpen(true);
     setTimeout(() => {
       if (inputRef.current) {
@@ -82,6 +104,9 @@ export default function Mdf() {
         inputRef.current.setSelectionRange(0, 0);
       }
     }, 1);
+  } else {
+    setIsOpenReg(true)
+  }
   }, [inputRef]);
 
   const onKeyDownHandler = useCallback((e: KeyboardEvent<HTMLInputElement>) => {
@@ -108,7 +133,8 @@ export default function Mdf() {
 
   //? отправка в корзину товаров по площади (передача данных в itemsSquare, itemsVolume), очищаем allPrice
   const submitHandler = () => {
-    const itemsSquare = itemPrice
+    // if (isAuth()) {
+      const itemsSquare = itemPrice
       .filter((el, i, arr) => {
         const findIndex = arr.findIndex(
           (findElem) => findElem.id === el.id && findElem.name === el.name
@@ -125,19 +151,30 @@ export default function Mdf() {
     dispatch(resetBasket());
     setInput(null);
     // localStorage.removeItem('basketItemsPrice');
+    // } else {
+    //   setIsOpenReg(true)
+    // }
+
   };
+
+
 
   //? отправка в корзину товаров по колличеству (передача данных в itemsSquare, itemsVolume), очищаем allPrice
   const submitHandler2 = () => {
-    const itemsVolume = itemPrice.map((item) => ({
-      ...item,
-      count: item.count ?? input,
-    }));
-
-    dispatch(addItemsVolume(itemsVolume));
-    setBoxVisible2(false);
-    dispatch(resetBasket());
-    setInput(null);
+    // if (isAuth()) {
+      const itemsVolume = itemPrice.map((item) => ({
+        ...item,
+        count: item.count ?? input,
+      }));
+  
+      dispatch(addItemsVolume(itemsVolume));
+      setBoxVisible2(false);
+      dispatch(resetBasket());
+      setInput(null);
+    // } else {
+    //   setIsOpenReg(true)
+    // }
+   
   };
 
   //! полная стоимость (по площади)
@@ -163,10 +200,14 @@ export default function Mdf() {
     );
   };
 
+  
+ 
+  
+
   return (
     <>
       <Box className="textHeading">
-        <div>
+        <div className="infoText">
           Если вы хотите придать поверхности эффект старения или изменения
           оттенка, вам необходимо будет выбрать 6 компонентов: грунт-изолятор,
           заполняющий грунт, краску, акриловый грунт, патину и лак. Если такой
@@ -186,6 +227,8 @@ export default function Mdf() {
               <li>
                 <Button
                   onClick={() => handleAddToBasket(el, "PrimerInsulator")}
+                  fontSize={{ base: '12px', md: '16px', lg: '20px' }}
+                  padding={{ base: '-2px', md: '12px', lg: '16px' }}
                   className="buttonComponent"
                 >
                   {el.name}
@@ -267,6 +310,8 @@ export default function Mdf() {
                 <Button
                   onClick={() => handleAddToBasket(el, "AcrylicPrimer")}
                   className="buttonComponent"
+                  fontSize={{ base: '12px', md: '16px', lg: '20px' }}
+                  padding={{ base: '-2px', md: '12px', lg: '16px' }}
                 >
                   {el.name}
                 </Button>
@@ -352,6 +397,8 @@ export default function Mdf() {
                 <Button
                   onClick={() => handleAddToBasket(el, "Lak")}
                   className="buttonComponent"
+                  fontSize={{ base: '12px', md: '16px', lg: '20px' }}
+                  padding={{ base: '-2px', md: '12px', lg: '16px' }}
                 >
                   {el.name}
                 </Button>
@@ -375,6 +422,8 @@ export default function Mdf() {
                 <Button
                   onClick={() => handleAddToBasket(el, "Ground")}
                   className="buttonComponent"
+                  fontSize={{ base: '12px', md: '16px', lg: '20px' }}
+                  padding={{ base: '-2px', md: '12px', lg: '16px' }}
                 >
                   {el.name}
                 </Button>
@@ -522,6 +571,46 @@ export default function Mdf() {
           </div>
         </div>
       </div>
+
+
+      <Modal isOpen={isOpenReg} onClose={closeModalReg}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader display="flex" alignItems="center" justifyContent="center">
+            <Icon as={FaRegSmile} boxSize={8} mr={2} />
+            Registration
+          </ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Box textAlign="center">
+              <Image
+                src="https://strojdvor.ru/wp-content/uploads/2021/07/e52308fe100d630158e7d5c28e3e93a1.png"
+                alt="Reminder Image"
+                mx="auto"
+                mb={4}
+                borderRadius="full"
+              />
+              <Text fontSize="xl" fontWeight="bold" mb={2}>
+              Не забудьте зарегистрироваться!
+              </Text>
+              <Text color="gray.600">
+              Зарегистрируйтесь прямо сейчас, чтобы получить доступ к эксклюзивным функциям и быть в курсе наших последних новостей и предложений.
+              </Text>
+            </Box>
+          </ModalBody>
+
+          <ModalFooter display="flex" justifyContent="center">
+            <Button colorScheme="teal" mr={3} onClick={closeHendler}>
+              Закрыть
+            </Button>
+            <Button as={Link} to="/registration" colorScheme="blue">
+              Зарегистрироваться сейчас
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+
+
     </>
   );
 }

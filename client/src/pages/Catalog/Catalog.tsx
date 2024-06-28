@@ -30,10 +30,10 @@ const Catalog = () => {
 
         <div className="containerCatalog">
           <div className="map">
-            <span  >
+            <span className="first" >
               Здесь вы можете увидеть близжайшие магазины
             </span>
-
+<div className="second">
             <YMaps
               query={{
                 load: "package.full",
@@ -42,6 +42,7 @@ const Catalog = () => {
             >
               <MyMap />
             </YMaps>
+            </div>
           </div>
           <div className="chat-container">
           <div className="chat">

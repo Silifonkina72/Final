@@ -72,7 +72,7 @@ import Test from "../test";
     };
   
     const handleToCreate = () => {
-      dispatch(createOrderThunk({ user, allPrice: totalPrice, address, itemsSquare, itemsVolume }));
+      dispatch(createOrderThunk({ user, allPrice: totalPriceWithDiscount, address, itemsSquare, itemsVolume }));
       dispatch(clearBasket())
       navigate('/success');
     };
@@ -99,7 +99,7 @@ import Test from "../test";
   return (
     <Box className="delBox">
       <FormControl>
-        <FormLabel>Адрес доставки</FormLabel>
+        <FormLabel>Адрес доставки </FormLabel>
         <Input
           value={address}
           placeholder='Введите адрес доставки'
@@ -110,7 +110,7 @@ import Test from "../test";
           onClick={handleCalculateShipping}
         >
           Рассчитать стоимость доставки
-        </Button> */}
+        </Button> */}    
         
       </FormControl>
 

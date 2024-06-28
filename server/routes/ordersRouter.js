@@ -1,4 +1,5 @@
 const express = require("express");
+const nodemailer = require("nodemailer");
 const ordersRouter = express.Router();
 const {
   Order,
@@ -9,6 +10,13 @@ const {
   Patina,
   PrimerInsulator,
   Stain,
+  OrdersAcrylicPrimer,
+  OrdersGround,
+  OrdersLak,
+  OrdersPaint,
+  OrdersPatina,
+  OrdersPrimerInsulator,
+  OrdersStain,
 } = require("../db/models"); // Подключаем модель Order
 const { where, Op } = require("sequelize");
 const { User } = require("../db/models");
@@ -25,53 +33,81 @@ ordersRouter.get("/", async (req, res) => {
           model: User,
           attributes: ["login"],
         },
+        // {
+        //   model: OrdersAcrylicPrimer,
+        //   attributes: ["quantity"],
+        // },
+        // {
+        //   model: OrdersGround,
+        //   attributes: ["quantity"],
+        // },
+        // {
+        //   model: OrdersLak,
+        //   attributes: ["quantity"],
+        // },
+        // {
+        //   model: OrdersPaint,
+        //   attributes: ["quantity"],
+        // },
+        // {
+        //   model: OrdersPatina,
+        //   attributes: ["quantity"],
+        // },
+        // {
+        //   model: OrdersPrimerInsulator,
+        //   attributes: ["quantity"],
+        // },
+        // {
+        //   model: OrdersStain,
+        //   attributes: ["quantity"],
+        // },
         {
           model: Lak,
           attributes: ["name", 'img'],
           through: {
-            attributes: [],
+            attributes: ["quantity"],
           },
         },
         {
           model: AcrylicPrimer,
           attributes: ["name", 'img'],
           through: {
-            attributes: [],
+            attributes: ["quantity"],
           },
         },
         {
           model: Ground,
           attributes: ["name", 'img'],
           through: {
-            attributes: [],
+            attributes: ["quantity"],
           },
         },
         {
           model: Paint,
           attributes: ["name", 'img'],
           through: {
-            attributes: [],
+            attributes: ["quantity"],
           },
         },
         {
           model: Patina,
           attributes: ["name", 'img'],
           through: {
-            attributes: [],
+            attributes: ["quantity"],
           },
         },
         {
           model: PrimerInsulator,
           attributes: ["name", 'img'],
           through: {
-            attributes: [],
+            attributes: ["quantity"],
           },
         },
         {
           model: Stain,
           attributes: ["name", 'img'],
           through: {
-            attributes: [],
+            attributes: ["quantity"],
           },
         },
       ],
@@ -80,7 +116,7 @@ ordersRouter.get("/", async (req, res) => {
     const orders2 = orders.map((order) =>
       order.get({ plain: true, nested: true })
     );
-    // console.log(686889, orders2);
+    //  console.log(686889, orders2);
     // console.log("ple", orders2[0].Laks[0].name);
     // console.log("ple2", orders2);
     res.json(orders2);
@@ -89,23 +125,59 @@ ordersRouter.get("/", async (req, res) => {
   }
 });
 
+
+const transporter = nodemailer.createTransport({
+  host: "smtp.mail.ru",
+  port: 465,
+  secure: true,
+  auth: {
+    user: "chectb@mail.ru",
+    pass: "x2V9PHZRGh0hx5zfcsEe",
+  },
+});
+
+
+
 ordersRouter.patch("/:id", async (req, res) => {
   const { id } = req.params;
-  
-  //const { isForm, isAccept, isSent } = req.body;
+ 
   try {
     const order = await Order.findByPk(id);
-    const user = await User.findByPk(user_id);
+    // console.log('+-+-+', order.user_id);
+    const user = await User.findByPk(order.user_id);
+    // console.log('????', user);
     if (!order) {
       return res.status(404).json({ error: "Заказ не найден" });
     }
 
     if (order.isSent === false&& order.isAccept === false) {
+console.log('LOGGGGG');
       order.isSent = true;
+      await transporter.sendMail({
+        from: "chectb@mail.ru",
+        to: user.email,
+        subject: `Заказ отправлен к ${user.login}`,
+        text: `Дорогой покупатель`,
+        html: `
+         <p>Здравствуйте, <strong>${user.login}.</strong> </p>
+         <div>Ваш заказ оформлен и отправлен. <div> 
+         <div>Спасибо, что выбрали наш сервис! <div>
+         <br />
+         <br />
+         <p>С уважением,<p>
+         <p>Иван Иванов<p>
+         <p>8 (888) 888-88-88<p>
+         <p>Выгодные лакокрасочные материалы Shop Paints!<p>
+
+        `,
+      });
+
+
+
     } else  {
       order.isAccept = true;
     }
-// console.log('ORDER', order);
+console.log('ORDER', order);
     await order.save();
     res.json(order);
   } catch (error) {

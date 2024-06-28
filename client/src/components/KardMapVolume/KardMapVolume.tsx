@@ -20,16 +20,18 @@ function KardMapVolume({ id, img, model, name, priceVolume }) {
   const [count, setCount] = useState(0);
 
   const handleIncrement = () => {
-    setCount(count + 1);
+    setCount(parseFloat((count + 0.1).toFixed(1)));
     dispatch(countPriceAdd({ id: Number(id), model: model }));
   };
-
+  // item.count = parseFloat(item.count.toFixed(1));
   const handleDecrement = () => {
     if (count > 0) {
-      setCount(count - 1);
+      setCount(parseFloat((count - 0.1).toFixed(1)));
       dispatch(countPriceRem({ id: Number(id), model: model }));
     }
   };
+
+  let totalPrice = parseFloat((priceVolume * count).toFixed(1));
 
   return (
     <>
@@ -65,7 +67,8 @@ function KardMapVolume({ id, img, model, name, priceVolume }) {
               {name}
             </Box>
             <Box>
-              {priceVolume} руб/л
+           
+            ({priceVolume}) руб/л
               <Box as="span" color="gray.600" fontSize="sm"></Box>
             </Box>
 
@@ -76,10 +79,12 @@ function KardMapVolume({ id, img, model, name, priceVolume }) {
               lineHeight="tight"
               isTruncated
             >
+              
               Объем: {count}
             </Box>
             <Box>
-              {priceVolume * count} руб/л
+            {/* (parseFloat((priceVolume * count).toFixed(1))); */}
+              {totalPrice} руб/л
               <Box as="span" color="gray.600" fontSize="sm"></Box>
             </Box>
             <Button
