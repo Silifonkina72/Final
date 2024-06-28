@@ -12,13 +12,13 @@ const Catalog = () => {
     <>
       <div className="box">
         <div className="about">
-          Добро пожаловать в <span style={{ fontWeight: 'bold' }}>Paints Market!</span> <br /> Здесь мы вам поможем выбрать
-          все необходимые материалы для вашей покраски и расчитать их стоимость.{" "}
+          Добро пожаловать в <span style={{ fontWeight: 'bold' }}>Paints Market!</span> <br /> Здесь вы найдете
+          все необходимые материалы и сможете рассчитать их объем и стоимость.{" "}
           <br />
           Теперь у вас нет необходимости самостоятельно делать сложные расчеты,
           подбирая нужные материалы, Paints Market сделает всю работу за вас!{" "}
           <br />
-          Вам необходимо лишь выбрать материал с корорым вы будите работать.
+          Вам необходимо лишь выбрать материал, с которым вы будете работать.
           <Link to={"/massiv"}>
             <span style={{ fontWeight: 'bold' }}> Массив</span>
           </Link>{" "}
@@ -31,7 +31,7 @@ const Catalog = () => {
         <div className="containerCatalog">
           <div className="map">
             <span className="first" >
-              Здесь вы можете увидеть близжайшие магазины
+              Здесь вы можете увидеть близлежащие магазины
             </span>
 <div className="second">
             <YMaps
@@ -46,7 +46,7 @@ const Catalog = () => {
           </div>
           <div className="chat-container">
           <div className="chat">
-            <span className="botText">Вам нужна помощь?! Я помогу вам в этом!</span>
+            <span className="botText">Вам нужна помощь? Я отвечу на ваши вопросы!</span>
             <div className="circul"></div>
             <div className="circul2"></div>
             <ChatBot />

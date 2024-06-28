@@ -54,7 +54,7 @@ export default function Orders() {
             }}
             className="orderText"
           >
-            Заказы ожидающие отправки
+            Заказы, ожидающие отправки
           </Box>
           {orders
             .filter((order) => !order.isSent && !order.isAccept)
@@ -63,7 +63,7 @@ export default function Orders() {
                 <p>
                   {" "}
                   <span style={{ fontWeight: "bold" }}>
-                    Пользователь :
+                    Пользователь:
                   </span>{" "}
                   {order.User.login}
                 </p>
@@ -106,7 +106,7 @@ export default function Orders() {
                         }}
                       />
                       <span className="nameOrder">
-                        {order.Laks[0].name}, колличество:{" "}
+                        {order.Laks[0].name}, количество:{" "}
                         {order.Laks[0]?.OrdersLak?.quantity}л.
                       </span>
                     </div>
@@ -132,7 +132,7 @@ export default function Orders() {
                         }}
                       />
                       <span>
-                        {order.AcrylicPrimers[0].name}, колличество:{" "}
+                        {order.AcrylicPrimers[0].name}, количество:{" "}
                         {order.AcrylicPrimers[0]?.OrdersAcrylicPrimer?.quantity}
                         л.
                       </span>
@@ -159,7 +159,7 @@ export default function Orders() {
                         }}
                       />
                       <span>
-                        {order.Grounds[0].name}, колличество:{" "}
+                        {order.Grounds[0].name}, количество:{" "}
                         {order.Grounds[0]?.OrdersGround?.quantity}л.
                       </span>
 
@@ -187,7 +187,7 @@ export default function Orders() {
                         }}
                       />
                       <span>
-                        {order.Paints[0].name}, колличество:{" "}
+                        {order.Paints[0].name}, количество:{" "}
                         {order.Paints[0]?.OrdersPaint?.quantity}л.
                       </span>
                     </div>
@@ -213,7 +213,7 @@ export default function Orders() {
                         }}
                       />
                       <span>
-                        {order.Patinas[0].name}, колличество:{" "}
+                        {order.Patinas[0].name}, количество:{" "}
                         {order.Patinas[0]?.OrdersPatina?.quantity}л.
                       </span>
                     </div>
@@ -239,7 +239,7 @@ export default function Orders() {
                         }}
                       />
                       <span>
-                        {order.PrimerInsulators[0].name}, колличество:{" "}
+                        {order.PrimerInsulators[0].name}, количество:{" "}
                         {
                           order.PrimerInsulators[0]?.OrdersPrimerInsulator
                             ?.quantity
@@ -269,7 +269,7 @@ export default function Orders() {
                         }}
                       />
                       <span>
-                        {order.Stains[0].name}, колличество:{" "}
+                        {order.Stains[0].name}, количество:{" "}
                         {order.Stains[0]?.OrdersStain?.quantity}л.
                       </span>
                     </div>

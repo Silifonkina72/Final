@@ -152,7 +152,7 @@ export default function Registration() {
             </FormControl>
             <FormControl id="emailInput" mb={3}>
               <Input
-                placeholder="Введите EMAIL (обязательно)"
+                placeholder="Введите email (обязательно)"
                 onChange={changeHandler}
                 value={input.email}
                 name="email"

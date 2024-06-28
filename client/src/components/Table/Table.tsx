@@ -90,7 +90,7 @@ const AdminTable: React.FC = () => {
           color="teal"
           p={4}
         >
-          Кол-во оставшегося материала на складе:
+          Количество оставшегося материала на складе:
         </Heading>
         <TableContainer>
           <Table variant="simple" size={isLargerThan700 ? "md" : "sm"}>

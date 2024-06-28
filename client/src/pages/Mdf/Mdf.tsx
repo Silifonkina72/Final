@@ -209,9 +209,9 @@ export default function Mdf() {
       <Box className="textHeading">
         <div className="infoText">
           Если вы хотите придать поверхности эффект старения или изменения
-          оттенка, вам необходимо будет выбрать 6 компонентов: грунт-изолятор,
+          оттенка, вам нужно будет выбрать 6 компонентов: грунт-изолятор,
           заполняющий грунт, краску, акриловый грунт, патину и лак. Если такой
-          необходимости нет, то необходимо выбрать 3 компонента: грунт-изолятор,
+          необходимости нет, то следует выбрать 3 компонента: грунт-изолятор,
           заполняющий грунт и краску.
         </div>
       </Box>
@@ -240,7 +240,7 @@ export default function Mdf() {
 
         <div className="textComponent">
           * Грунтовка-изолятор – это специальная грунтовка, предназначенная для{" "}
-          <br /> изоляции поверхностей от влаги или других веществ.
+          <br /> изоляции поверхностей от влаги и других веществ.
         </div>
         <br />
 
@@ -440,7 +440,7 @@ export default function Mdf() {
           <ModalOverlay />
           <ModalContent>
             <ModalHeader>
-              Как вы хотите расчитать стоимость? Исходя из площади или из
+              Как вы хотите рассчитать стоимость? Исходя из площади или из
               объема?
             </ModalHeader>
             <ModalCloseButton />
@@ -474,10 +474,10 @@ export default function Mdf() {
 
             <ModalFooter display="flex" justifyContent="center">
               <Button colorScheme="blue" mr={3} onClick={allSquareHandler}>
-                посчитать по площади
+                Посчитать по площади
               </Button>
               <Button colorScheme="teal" mr={3} onClick={allVolumeHandler}>
-                посчитать по объему
+                Посчитать по объему
               </Button>
             </ModalFooter>
           </ModalContent>
@@ -489,7 +489,7 @@ export default function Mdf() {
           width={200}
           onClick={openModal}
         >
-          рассчитать стоимость
+          Рассчитать стоимость
         </Button>
 
         <div className="containerKardMapSquare">
@@ -528,7 +528,7 @@ export default function Mdf() {
                   className="buttonsubmitHandler"
                   onClick={submitHandler}
                 >
-                  отложить в корзину
+                  Отложить в корзину
                 </Button>
               </>
             )}
@@ -564,7 +564,7 @@ export default function Mdf() {
                   className="buttonBasket"
                   onClick={submitHandler2}
                 >
-                  отложить в корзину
+                  Отложить в корзину
                 </Button>
               </>
             )}
@@ -578,7 +578,7 @@ export default function Mdf() {
         <ModalContent>
           <ModalHeader display="flex" alignItems="center" justifyContent="center">
             <Icon as={FaRegSmile} boxSize={8} mr={2} />
-            Registration
+            Регистрация
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>

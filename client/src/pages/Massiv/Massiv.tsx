@@ -189,9 +189,9 @@ const closeModalReg = useCallback(() => {
      
         <Box className="textHeading">
           <div className="infoText">
-            Если вы хотите придать дривесине цвет, вам необходимо выбрать 3
+            Если вы хотите придать древесине цвет, вам нужно выбрать 3
             компонента: морилка, грунт и лак. Если такой необходимости нет, то
-            необходим грунт и лак.
+            используйте грунт и лак.
           </div>
         </Box>
 
@@ -299,7 +299,7 @@ const closeModalReg = useCallback(() => {
           <ModalOverlay />
           <ModalContent>
             <ModalHeader>
-              Как вы хотите расчитать стоимость? Исходя из площади или из
+              Как вы хотите рассчитать стоимость? Исходя из площади или из
               объема?
             </ModalHeader>
             <ModalCloseButton />
@@ -332,10 +332,10 @@ const closeModalReg = useCallback(() => {
             </ModalBody>
             <ModalFooter display="flex" justifyContent="center">
               <Button colorScheme="blue" mr={3} onClick={allSquareHandler}>
-                посчитать по площади
+                Посчитать по площади
               </Button>
               <Button colorScheme="teal" mr={3} onClick={allVolumeHandler}>
-                посчитать по объему
+                Посчитать по объему
               </Button>
             </ModalFooter>
           </ModalContent>
@@ -345,7 +345,7 @@ const closeModalReg = useCallback(() => {
         colorScheme="teal"
         width={200}
         onClick={openModal}
-        >рассчитать стоимость</Button>
+        >Рассчитать стоимость</Button>
 
 <div className="containerKardMapSquare">
   <div className="oneComponentKardMapSquare">
@@ -378,7 +378,7 @@ const closeModalReg = useCallback(() => {
               transform: 'scale(1.1)', 
             }}
             transition="transform 0.2s, background-color 0.2s"
-             className="buttonsubmitHandler" onClick={submitHandler}>отложить в корзину</Button>
+             className="buttonsubmitHandler" onClick={submitHandler}>Отложить в корзину</Button>
           </>
         )}
         </div>
@@ -413,7 +413,7 @@ const closeModalReg = useCallback(() => {
                transform: 'scale(1.1)', 
              }}
              transition="transform 0.2s, background-color 0.2s"
-            className="buttonBasket" onClick={submitHandler2}>отложить в корзину</Button>
+            className="buttonBasket" onClick={submitHandler2}>Отложить в корзину</Button>
           </>
         )}
       </div>
@@ -426,7 +426,7 @@ const closeModalReg = useCallback(() => {
         <ModalContent>
           <ModalHeader display="flex" alignItems="center" justifyContent="center">
             <Icon as={FaRegSmile} boxSize={8} mr={2} />
-            Registration
+            Регистрация
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>

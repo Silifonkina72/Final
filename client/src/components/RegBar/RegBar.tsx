@@ -103,7 +103,7 @@ export default function Login({ user }) {
                   id="exampleInputPassword1"
                 />
                 <div id="passwordHelp" className="form-text">
-                  Не забывай пассворд!
+                  Не забывай пароль!
                 </div>
               </div>
               <button type="submit" className="btn btn-outline-light">
